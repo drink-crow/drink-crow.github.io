@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>drink-crow Blog</title>
+        <title>drink-crow Blog - Pelican</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
         <link href="/" type="application/atom+xml" rel="alternate" title="drink-crow Blog ATOM Feed" />
@@ -28,11 +28,45 @@
                     <li ><a href="/category/pelican.html">Pelican</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
+        
+        
+        <aside id="featured" class="body"><article>
+                <h1 class="entry-title"><a href="/pelican-shi-yong-bi-ji.html">Pelican 使用笔记</a></h1> 
+<footer class="post-info">
+        <abbr class="published" title="2020-12-28T09:42:00+08:00">
+                周一 28 十二月 2020
+        </abbr>
+
+        <address class="vcard author">
+                By <a class="url fn" href="/author/drink-crow.html">drink-crow</a>
+        </address>
+<p>In <a href="/category/pelican.html">Pelican</a>. </p>
+<p>tags: <a href="/tag/pelican.html">Pelican</a><a href="/tag/blog.html">blog</a></p></p>
+</footer><!-- /.post-info -->                <p><a href="https://docs.getpelican.com/en/4.5.3/quickstart.html">Pelican官方文档</a> <br>
+Version：4.5.3 <br>
+python：3.6+   </p>
+<p><em>以下命令目录均在Pelican工程目录下</em></p>
 <ul>
-    <li>Markdown</li>
-    <li>OpenGL</li>
-    <li>Pelican</li>
+<li>带主题输出</li>
 </ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># pelican content -s pelicanconf.py -t /projects/your-site/themes/our-theme</span>
+pelican content -s pelicanconf.py -t ./theme
+</code></pre></div>
+
+
+<ul>
+<li>带主题，忽略缓存和自动重载，监听</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># pelican -l -t THEME --ignore-cache -r</span>
+pelican -l -t ./output/theme --ignore-cache -r
+</code></pre></div>
+
+
+<p><u><em>在edge中需要删除本地缓存才能刷新主题</em></u></p>
+                </article>
+                </aside><!-- /#featured -->
+</ol><!-- /#posts-list -->
+</section><!-- /#content -->
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>blogroll</h2>
