@@ -76,16 +76,24 @@
 </code></pre></div>
 
 
-<p>此时count中每一个的大小是由<a href="https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml"><code>glVertexAttribPointer</code></a>中的<code>size</code>，<code>type</code>和<code>stride</code>共同决定。如上例中，一个点的大小就是<code>2</code>个<code>float</code>的大小。要绘制完buffer中的所有内容需要<code>size / (2*sizeof(GLfloat))</code>。</p>
+<p>此时count中每一个的大小是由<a href="https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml">glVertexAttribPointer</a>中的<code>size</code>，<code>type</code>和<code>stride</code>共同决定。如上例中，一个点的大小就是<code>2</code>个<code>float</code>的大小。要绘制完buffer中的所有内容需要<code>size / (2*sizeof(GLfloat))</code>。</p>
 <h2>drawcall超出边界时会发生情况</h2>
 <p>数组越界是一个比较常见的错误。有些语言会直接抛出异常，如C/C++，有些语言则会直接访问到对应的内容，返回不确定的结果。在OpenGL里，drawcall中的越界——如<code>glDrawArrays()</code>中的<code>first</code>和<code>counts</code>指向的显存段超过当前绑定的vbo则是未定义的行为。（至少我在<a href="https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glDrawArrays.xhtml">OpenGL-Refpages</a>中没看到对应的规范） <br>
-实际上在具体应用中，同样的越界drawcall在不同显卡和操作系统表现出来的行为也是不一样。应该是由显卡驱动厂商决定越界行为的。</p>
-<h3>macOS OpenGL ES2.0 Intel Iris Plus 645</h3>
-<p>在macOS下，drawcall越界了后，越界的部分的内存的默认值通常是0，在显存使用量不高的情况下，通常不会绘制出奇怪的内容。也不会引发OpenGL错误。这和Apple下Clang编译器的行为也一致，变量默认值为0</p>
-<h3>Windows OpenGL ES2.0 Intel UHD 630</h3>
-<p>在Windows下drawcall越界同样也不会引发OpenGL错误，但是很容易绘制出奇怪的东西出来。</p>
-<h3><strong><em>Windows Angle</em></strong></h3>
-<p><strong><em>Windows下使用Angle转译glES到Dx值得特别提一下。使用Angle时，如果drawcall越界了，则会直接跳过，什么效果都没有。用RenderDoc截取帧分析会找不到越界的drawcall，显示上也没有效果。推测可能时Dx引发错误或者Angel内部记录到会有越界行为发生。</em></strong></p>
+实际上在具体应用中，同样的越界drawcall在不同显卡和操作系统表现出来的行为也是不一样。应该是由显卡驱动厂商决定越界行为的。    </p>
+<ul>
+<li>
+<p>macOS OpenGL ES2.0 Intel Iris Plus 645  <br>
+在macOS下，drawcall越界了后，越界的部分的内存的默认值通常是0，在显存使用量不高的情况下，通常不会绘制出奇怪的内容。也不会引发OpenGL错误。这和Apple下Clang编译器的行为也一致，变量默认值为0</p>
+</li>
+<li>
+<p>Windows OpenGL ES2.0 Intel UHD 630  <br>
+在Windows下drawcall越界同样也不会引发OpenGL错误，但是很容易绘制出奇怪的东西出来。</p>
+</li>
+<li>
+<p><strong><em>Windows Angle</em></strong>  <br>
+<strong><em>Windows下使用Angle转译glES到Dx值得特别提一下。使用Angle时，如果drawcall越界了，则会直接跳过，什么效果都没有。用RenderDoc截取帧分析会找不到越界的drawcall，显示上也没有效果。推测可能时Dx引发错误或者Angel内部记录到会有越界行为发生。</em></strong></p>
+</li>
+</ul>
                 </article>
                 </aside><!-- /#featured -->
 </ol><!-- /#posts-list -->
