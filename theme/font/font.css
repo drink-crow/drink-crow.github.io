@@ -5,15 +5,47 @@
 	src:
 		local('Yanone Kaffeesatz Regular'),
 		local('YanoneKaffeesatz-Regular'),
+		url('Yanone_Kaffeesatz_400.eot'),
+		url('Yanone_Kaffeesatz_400.ttf') format('truetype'),
+		url('Yanone_Kaffeesatz_400.svg') format('svg'),
 		url('Yanone_Kaffeesatz_400.woff') format('woff'),
 		url('Yanone_Kaffeesatz_400.woff2') format('woff2');
 }
 
 @font-face {
 	font-family: 'Consola';
+	font-weight: 400;
+	src:
+		local('Consola'),
+		url('consola.ttf') format('truetype'),
+		url('consolab.ttf') format('truetype'),
+		url('consolai.ttf') format('truetype'),
+		url('consolaz.ttf') format('truetype');
+}
+
+/* @font-face {
+	font-family: 'Consola';
 	font-style: normal;
 	font-weight: 400;
 	src:
 		local('Consola'),
-		url('consola.tff') format('tff')
+		url('consola.ttf') format('truetype');
 }
+
+@font-face {
+	font-family: 'Consola';
+	font-style: italic;
+	font-weight: 400;
+	src:
+		local('Consola'),
+		url('consolai.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Consola';
+	font-style: oblique;
+	font-weight: 400;
+	src:
+		local('Consola'),
+		url('consolaz.ttf') format('truetype');
+} */
