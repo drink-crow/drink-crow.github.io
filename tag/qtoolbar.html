@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>drink-crow Blog - Pelican</title>
+        <title>drink-crow Blog - QToolBar</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
         <link href="/" type="application/atom+xml" rel="alternate" title="drink-crow Blog ATOM Feed" />
@@ -25,46 +25,39 @@
                 <nav><ul>
                     <li ><a href="/category/markdown.html">Markdown</a></li>
                     <li ><a href="/category/opengl.html">OpenGL</a></li>
-                    <li class="active"><a href="/category/pelican.html">Pelican</a></li>
+                    <li ><a href="/category/pelican.html">Pelican</a></li>
                     <li ><a href="/category/qt.html">Qt</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
         
         
         <aside id="featured" class="body"><article>
-                <h1 class="entry-title"><a href="/pelican-shi-yong-bi-ji.html">Pelican 使用笔记</a></h1> 
+                <h1 class="entry-title"><a href="/qtoolbarzeng-jia-spacer.html">QToolBar增加spacer</a></h1> 
 <footer class="post-info">
-        <abbr class="published" title="2020-12-28T09:42:00+08:00">
-                周一 28 十二月 2020
+        <abbr class="published" title="2020-12-19T16:41:00+08:00">
+                周六 19 十二月 2020
         </abbr>
 
         <address class="vcard author">
                 By <a class="url fn" href="/author/drink-crow.html">drink-crow</a>
         </address>
-<p>In <a href="/category/pelican.html">Pelican</a>. </p>
-<p>tags: <a href="/tag/pelican.html">Pelican</a><a href="/tag/blog.html">blog</a></p></p>
-</footer><!-- /.post-info -->                <p><a href="https://docs.getpelican.com/en/4.5.3/quickstart.html">Pelican官方文档</a> <br>
-Version：4.5.3 <br>
-python：3.6+   </p>
-<p><em>以下命令目录均在Pelican工程目录下</em></p>
-<ul>
-<li>带主题输出</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="c1"># pelican content -s pelicanconf.py -t /projects/your-site/themes/our-theme</span>
-pelican content -s pelicanconf.py -t ./theme
+<p>In <a href="/category/qt.html">Qt</a>. </p>
+<p>tags: <a href="/tag/qt.html">Qt</a><a href="/tag/qtoolbar.html">QToolBar</a><a href="/tag/spacer.html">spacer</a></p></p>
+</footer><!-- /.post-info -->                <p>通过一个空的QWidget设置SizePolicy来代替QSpacerItem</p>
+<div class="highlight"><pre><span></span><code><span class="n">QWidget</span><span class="o">*</span> <span class="n">spacer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">QWidget</span><span class="p">();</span>
+<span class="n">spacer</span><span class="o">-&gt;</span><span class="n">setSizePolicy</span><span class="p">(</span><span class="n">QSizePolicy</span><span class="o">::</span><span class="n">Expanding</span><span class="p">,</span> <span class="n">SizePolicy</span><span class="o">::</span><span class="n">Expanding</span><span class="p">);</span>
+
+<span class="k">auto</span> <span class="n">tb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">QToolBar</span><span class="p">;</span>
+<span class="p">...</span>
+<span class="n">tb</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(...);</span>
+<span class="p">...</span>
+
+<span class="n">tb</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">spacer</span><span class="p">);</span>
+
+<span class="p">...</span>
+<span class="n">tb</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(...);</span>
+<span class="p">...</span>
 </code></pre></div>
-
-
-<ul>
-<li>带主题，忽略缓存和自动重载，监听</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="c1"># pelican -l -t THEME --ignore-cache -r</span>
-<span class="c1"># THEME指的是主题模板所在</span>
-pelican -l -t ./theme --ignore-cache -r
-</code></pre></div>
-
-
-<p><u><em>在edge中需要删除本地缓存才能刷新主题</em></u></p>
                 </article>
                 </aside><!-- /#featured -->
 </ol><!-- /#posts-list -->
