@@ -203,6 +203,8 @@
 
 <span class="n">QLayoutItem</span><span class="o">*</span> <span class="n">OverlapLayout</span><span class="o">::</span><span class="n">takeAt</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">)</span>
 <span class="p">{</span>
+    <span class="n">invalidate</span><span class="p">();</span>
+
     <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">next</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">things</span><span class="p">)</span>
@@ -210,6 +212,7 @@
         <span class="n">next</span> <span class="o">=</span> <span class="n">num</span> <span class="o">+</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">count</span><span class="p">();</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">&lt;</span> <span class="n">next</span><span class="p">)</span>
         <span class="p">{</span>
+            <span class="n">e</span><span class="o">-&gt;</span><span class="n">invalidate</span><span class="p">();</span>
             <span class="k">return</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">takeAt</span><span class="p">(</span><span class="n">index</span> <span class="o">-</span> <span class="n">num</span><span class="p">);</span>
         <span class="p">}</span>
         <span class="n">num</span> <span class="o">=</span> <span class="n">next</span><span class="p">;</span>
@@ -220,13 +223,12 @@
 
 <span class="kt">void</span> <span class="n">OverlapLayout</span><span class="o">::</span><span class="n">setGeometry</span><span class="p">(</span><span class="k">const</span> <span class="n">QRect</span><span class="o">&amp;</span> <span class="n">r</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="n">QLayout</span><span class="o">::</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">r</span><span class="p">);</span>
-
     <span class="k">if</span> <span class="p">(</span><span class="n">things</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
         <span class="k">return</span><span class="p">;</span>
 
     <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">things</span><span class="p">)</span>
     <span class="p">{</span>
+        <span class="n">e</span><span class="o">-&gt;</span><span class="n">invalidate</span><span class="p">();</span>
         <span class="n">e</span><span class="o">-&gt;</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">r</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
@@ -235,8 +237,10 @@
 <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
     <span class="p">{</span>
+        <span class="n">invalidate</span><span class="p">();</span>
         <span class="n">things</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">layout</span><span class="p">);</span>
         <span class="n">addChildLayout</span><span class="p">(</span><span class="n">layout</span><span class="p">);</span>
+        <span class="n">layout</span><span class="o">-&gt;</span><span class="n">invalidate</span><span class="p">();</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -246,7 +250,10 @@
 <h2>Usage / 使用方法</h2>
 <p>使用的方法也非常简单。父窗口的<code>layout</code>设置为<code>OverlapLayout</code>对象，把每一层的布局设置好，按顺序使用<code>OverlapLayout::AddLayout()</code>添加到多层布局里就好</p>
 <h2>Doubts / 疑点</h2>
-<p>目前没有发现问题但是存在的一个疑问是————如何保证每一层的顺序呢。从官方例子中的<code>CardLayout::setGeometry</code>中看到的表现是，最后设置geometry的<code>QLayoutItem</code>在最上层，在<code>OverlapLayout</code>实际体验中也是如此表现，但是目前还不确定一定会如此</p>
+<p>目前存在的一个疑问是————如何保证每一层的顺序呢。从官方例子中的<code>CardLayout::setGeometry</code>中看到的表现是，最后设置geometry的<code>QLayoutItem</code>在最上层，在<code>OverlapLayout</code>实际体验中也是如此表现，但是目前还不确定一定会如此</p>
+<p>使用中发现和层序有关的问题，在<code>QScrollBar</code>第一次触发hover事件的时候，<code>QScrollBar</code>会提到最上面刷新一下，又回到原来的层次，但是有些控件会被挡住。触发下被挡住的控件将恢复正常，且不再出现异常</p>
+<h2>Update 1 / 更新1</h2>
+<p>在使用中发现了控件改变后不能做出有效更新的问题。翻看了<code>QBoxLayout</code>等的源代码后发现里面多处使用到了<code>invalidate()</code>来标记重新计算布局。在源代码中增加其调用后表现正常</p>
                 </article>
                 </aside><!-- /#featured -->
 </ol><!-- /#posts-list -->

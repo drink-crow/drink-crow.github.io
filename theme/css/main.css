@@ -16,7 +16,7 @@
 /***** Global *****/
 /* Body */
 body {
-    background: #F5F4EF url('../images/bg.png');
+    background: #F5F4EF;
     background-repeat: repeat-x;
     color: #000305;
     font-size: 87.5%; /* Base font size: 14px */
@@ -27,6 +27,17 @@ body {
     text-align: left;
 }
 
+other {
+	background: #F5F4EF;
+    background-repeat: repeat-x;
+    color: #000305;
+    font-size: 87.5%; /* Base font size: 14px */
+    font-family: 'Trebuchet MS', Trebuchet, 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    line-height: 1.429;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
 
 
 /* Headings */
@@ -97,7 +108,7 @@ ol {
     margin-bottom: 1px;
 }
 
-.readmore { float: right }
+.readmore { float: left }
 
 dl {margin: 0 0 1.5em 0;}
 dt {font-weight: bold;}
@@ -145,6 +156,7 @@ iframe {
 
 /***** Layout *****/
 .body {clear: both; margin: 0 auto; width: 800px;}
+.other {clear: both; margin: 0 auto; width: 800px;}
 img.right figure.right {float: right; margin: 0 0 2em 2em;}
 img.left, figure.left {float: right; margin: 0 0 2em 2em;}
 
@@ -249,7 +261,7 @@ img.left, figure.left {float: right; margin: 0 0 2em 2em;}
 	Body
 *****************/
 #content {
-	background: #F5F4EF;
+	background: #FFF;
 	margin-bottom: 2em;
 	overflow: hidden;
 	padding: 20px 20px;
@@ -389,11 +401,13 @@ li:last-child .hentry, #content > .hentry {border: 0; margin: 0;}
 	#posts-list .hentry {padding-left: 10px; position: relative;}
 	
 	#posts-list footer {
-		left: 10px;
-		position: relative;
-        float: left;
-		top: 0.5em;
-		width: 190px;
+		/* display: inline-block; */
+		/* right: 10px; */
+		/* position: static; */
+		text-align: right;
+        float: right;
+		/* top: 0.5em; */
+		/* width: 150px; */
 	}
 	
 	/* About the Author */
