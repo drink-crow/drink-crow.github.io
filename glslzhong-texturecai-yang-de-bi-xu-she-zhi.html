@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>drink-crow Blog - Multilayer Layout</title>
+        <title>glsl中texture采样的必需设置</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
         <link href="/" type="application/atom+xml" rel="alternate" title="drink-crow Blog ATOM Feed" />
@@ -30,38 +30,43 @@
                 </ul></nav>
         </header><!-- /#banner -->
         
-    <section class="other">
-        <h1>All articles</h1>
-        <hr />
-        <ol id="posts-list" class="hfeed">
-        
-            <li><article class="hentry">    
-                <div class="entry-content">
+<section id="content" class="body">    
+<article>
+        <header> <h1 class="entry-title"><a href="glslzhong-texturecai-yang-de-bi-xu-she-zhi.html"
+        rel="bookmark" title="Permalink to glsl中texture采样的必需设置">glsl中texture采样的必需设置</a></h1>   </header>
+        <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2021-01-05T15:50:00+08:00">
-                周二 05 一月 2021
+        <abbr class="published" title="2021-01-08T10:44:00+08:00">
+                周五 08 一月 2021
         </abbr>
 
         <address class="vcard author">
                 By <a class="url fn" href="/author/drink-crow.html">drink-crow</a>
         </address>
-<p>In <a href="/category/qt.html">Qt</a>. </p>
-<p>tags: <a href="/tag/qt.html">Qt</a><a href="/tag/layout.html">Layout</a><a href="/tag/overlap.html">Overlap</a><a href="/tag/multilayer-layout.html">Multilayer Layout</a><a href="/tag/custom-qlayout.html">Custom QLayout</a></p></p>
-</footer><!-- /.post-info -->              
-                    <header>
-                            <h1><a href="/qtshi-xian-duo-ceng-bu-ju.html" rel="bookmark" title="Permalink to Qt实现多层布局">Qt实现多层布局</a></h1>
-                    </header>
-                    
-                    <p>通过实现一个自定义QLayout, 在Qt中多层自定义布局。类似于QStackLayout，与其不同的是————事件能够转发到第一次遇到的控件(不论在哪一层)，而不是只能转发到最上层的控件。</p>
-                    <a class="readmore" href="/qtshi-xian-duo-ceng-bu-ju.html">read more</a>
-                </div>
-            </article></li>
-        </ol><!-- /#posts-list -->
-        <br />
-        <hr />
-        <br />   
-        <br />  
-    </section><!-- /#content -->
+<p>In <a href="/category/opengl.html">OpenGL</a>. </p>
+<p>tags: <a href="/tag/opengl.html">OpenGL</a><a href="/tag/opengl-es.html">OpenGL ES</a><a href="/tag/texture.html">texture</a><a href="/tag/glsl.html">GLSL</a></p></p>
+</footer><!-- /.post-info -->        <p>glsl中设置了贴图采样，代码中设置贴图一般需要以下步骤</p>
+<div class="highlight"><pre><span></span><code><span class="n">glGenTextures</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">texture</span><span class="p">);</span>
+<span class="n">glBindTexture</span><span class="p">(</span><span class="n">GL_TEXTURE_2D</span><span class="p">,</span> <span class="n">texture</span><span class="p">);</span>
+
+<span class="n">glTexImage2D</span><span class="p">(...);</span> 
+
+<span class="c1">// 设置环绕和过滤设置</span>
+<span class="n">glTexParameteri</span><span class="p">(</span><span class="n">GL_TEXTURE_2D</span><span class="p">,</span> <span class="n">GL_TEXTURE_WRAP_S</span><span class="p">,</span> <span class="n">GL_REPEAT</span><span class="p">);</span>
+<span class="n">glTexParameteri</span><span class="p">(</span><span class="n">GL_TEXTURE_2D</span><span class="p">,</span> <span class="n">GL_TEXTURE_WRAP_T</span><span class="p">,</span> <span class="n">GL_REPEAT</span><span class="p">);</span>
+<span class="n">glTexParameteri</span><span class="p">(</span><span class="n">GL_TEXTURE_2D</span><span class="p">,</span> <span class="n">GL_TEXTURE_MIN_FILTER</span><span class="p">,</span> <span class="n">GL_LINEAR</span><span class="p">);</span>
+<span class="n">glTexParameteri</span><span class="p">(</span><span class="n">GL_TEXTURE_2D</span><span class="p">,</span> <span class="n">GL_TEXTURE_MAG_FILTER</span><span class="p">,</span> <span class="n">GL_LINEAR</span><span class="p">);</span>
+
+<span class="c1">// 自动生成mipmap</span>
+<span class="c1">//glGenerateMipmap(GL_TEXTURE_2D);</span>
+</code></pre></div>
+
+
+<p><code>mipmap</code>和<code>环绕过滤</code>设置至少要有一个，或者<code>glTexImage2D()</code>中设置了mipmap。按照经验，<code>OpenGL</code>，<code>OpenGL ES</code> 中均需要这样设置</p>
+        </div><!-- /.entry-content -->
+
+</article>
+</section>
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>blogroll</h2>

@@ -21,7 +21,7 @@
 
 <body id="index" class="home">
         <header id="banner" class="body">
-                <h1><a href="">drink-crow Blog </a></h1>
+                <h1><a href="/index.html">drink-crow Blog </a></h1>
                 <nav><ul>
                     <li ><a href="/category/markdown.html">Markdown</a></li>
                     <li ><a href="/category/opengl.html">OpenGL</a></li>
@@ -30,9 +30,13 @@
                 </ul></nav>
         </header><!-- /#banner -->
         
+    <section class="other">
+        <h1>All articles</h1>
+        <hr />
+        <ol id="posts-list" class="hfeed">
         
-        <aside id="featured" class="body"><article>
-                <h1 class="entry-title"><a href="/qtoolbarzeng-jia-spacer.html">QToolBar增加spacer</a></h1> 
+            <li><article class="hentry">    
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2020-12-19T16:41:00+08:00">
                 周六 19 十二月 2020
@@ -43,25 +47,21 @@
         </address>
 <p>In <a href="/category/qt.html">Qt</a>. </p>
 <p>tags: <a href="/tag/qt.html">Qt</a><a href="/tag/qtoolbar.html">QToolBar</a><a href="/tag/spacer.html">spacer</a></p></p>
-</footer><!-- /.post-info -->                <p>通过一个空的QWidget设置SizePolicy来代替QSpacerItem</p>
-<div class="highlight"><pre><span></span><code><span class="n">QWidget</span><span class="o">*</span> <span class="n">spacer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">QWidget</span><span class="p">();</span>
-<span class="n">spacer</span><span class="o">-&gt;</span><span class="n">setSizePolicy</span><span class="p">(</span><span class="n">QSizePolicy</span><span class="o">::</span><span class="n">Expanding</span><span class="p">,</span> <span class="n">SizePolicy</span><span class="o">::</span><span class="n">Expanding</span><span class="p">);</span>
-
-<span class="k">auto</span> <span class="n">tb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">QToolBar</span><span class="p">;</span>
-<span class="p">...</span>
-<span class="n">tb</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(...);</span>
-<span class="p">...</span>
-
-<span class="n">tb</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">spacer</span><span class="p">);</span>
-
-<span class="p">...</span>
-<span class="n">tb</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(...);</span>
-<span class="p">...</span>
-</code></pre></div>
-                </article>
-                </aside><!-- /#featured -->
-</ol><!-- /#posts-list -->
-</section><!-- /#content -->
+</footer><!-- /.post-info -->              
+                    <header>
+                            <h1><a href="/qtoolbarzeng-jia-spacer.html" rel="bookmark" title="Permalink to QToolBar增加spacer">QToolBar增加spacer</a></h1>
+                    </header>
+                    
+                    <p>运用带QSizePolicy::Expanding的空QWidget为QToolBar增加spacer</p>
+                    <a class="readmore" href="/qtoolbarzeng-jia-spacer.html">read more</a>
+                </div>
+            </article></li>
+        </ol><!-- /#posts-list -->
+        <br />
+        <hr />
+        <br />   
+        <br />  
+    </section><!-- /#content -->
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>blogroll</h2>
