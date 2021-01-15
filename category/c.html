@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>QToolBar增加spacer</title>
+        <title>drink-crow Blog - C++</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
         <link href="/" type="application/atom+xml" rel="alternate" title="drink-crow Blog ATOM Feed" />
@@ -24,7 +24,7 @@
                 <h1><a href="/index.html">drink-crow Blog </a></h1>
                 <nav><ul>
                     <li ><a href="/category/algorithm.html">Algorithm</a></li>
-                    <li ><a href="/category/c.html">C++</a></li>
+                    <li class="active"><a href="/category/c.html">C++</a></li>
                     <li ><a href="/category/markdown.html">Markdown</a></li>
                     <li ><a href="/category/opengl.html">OpenGL</a></li>
                     <li ><a href="/category/pelican.html">Pelican</a></li>
@@ -32,40 +32,37 @@
                 </ul></nav>
         </header><!-- /#banner -->
         
-<section id="content" class="body">    
-<article>
-        <header> <h1 class="entry-title"><a href="qtoolbarzeng-jia-spacer.html"
-        rel="bookmark" title="Permalink to QToolBar增加spacer">QToolBar增加spacer</a></h1>   </header>
-        <div class="entry-content">
+    <section class="other">
+        <h1>All articles</h1>
+        <hr />
+        <ol id="posts-list" class="hfeed">
+        
+            <li><article class="hentry">    
+                <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2020-12-19T16:41:00+08:00">
-                周六 19 十二月 2020
+        <abbr class="published" title="2021-01-11T10:16:00+08:00">
+                周一 11 一月 2021
         </abbr>
 
         <address class="vcard author">
                 By <a class="url fn" href="/author/drink-crow.html">drink-crow</a>
         </address>
-<p>In <a href="/category/qt.html">Qt</a>. </p>
-<p>tags: <a href="/tag/qt.html">Qt</a><a href="/tag/qtoolbar.html">QToolBar</a><a href="/tag/spacer.html">spacer</a></p></p>
-</footer><!-- /.post-info -->        <p>通过一个空的QWidget设置SizePolicy来代替QSpacerItem</p>
-<div class="highlight"><pre><span></span><code><span class="n">QWidget</span><span class="o">*</span> <span class="n">spacer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">QWidget</span><span class="p">();</span>
-<span class="n">spacer</span><span class="o">-&gt;</span><span class="n">setSizePolicy</span><span class="p">(</span><span class="n">QSizePolicy</span><span class="o">::</span><span class="n">Expanding</span><span class="p">,</span> <span class="n">SizePolicy</span><span class="o">::</span><span class="n">Expanding</span><span class="p">);</span>
-
-<span class="k">auto</span> <span class="n">tb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">QToolBar</span><span class="p">;</span>
-<span class="p">...</span>
-<span class="n">tb</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(...);</span>
-<span class="p">...</span>
-
-<span class="n">tb</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">spacer</span><span class="p">);</span>
-
-<span class="p">...</span>
-<span class="n">tb</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(...);</span>
-<span class="p">...</span>
-</code></pre></div>
-        </div><!-- /.entry-content -->
-
-</article>
-</section>
+<p>In <a href="/category/c.html">C++</a>. </p>
+<p>tags: <a href="/tag/c.html">C++</a><a href="/tag/freetype.html">Freetype</a><a href="/tag/bitmap.html">Bitmap</a></p></p>
+</footer><!-- /.post-info -->              
+                    <header>
+                            <h1><a href="/freetypezhong-bitmapde-bufferde-shu-ju-shun-xu.html" rel="bookmark" title="Permalink to FreeType中bitmap的buffer的数据顺序">FreeType中bitmap的buffer的数据顺序</a></h1>
+                    </header>
+                    
+                    <p>FreeType的bitmap中，buffer的第一个数据代表左上角，从左到右处理，最后一个数据代表右下角。</p>
+                </div>
+            </article></li>
+        </ol><!-- /#posts-list -->
+        <br />
+        <hr />
+        <br />   
+        <br />  
+    </section><!-- /#content -->
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>blogroll</h2>

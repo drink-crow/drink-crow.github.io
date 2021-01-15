@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>QToolBar增加spacer</title>
+        <title>二维矩形排样/Rectangle Packing</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
         <link href="/" type="application/atom+xml" rel="alternate" title="drink-crow Blog ATOM Feed" />
@@ -34,34 +34,36 @@
         
 <section id="content" class="body">    
 <article>
-        <header> <h1 class="entry-title"><a href="qtoolbarzeng-jia-spacer.html"
-        rel="bookmark" title="Permalink to QToolBar增加spacer">QToolBar增加spacer</a></h1>   </header>
+        <header> <h1 class="entry-title"><a href="er-wei-ju-xing-pai-yang-rectangle-packing.html"
+        rel="bookmark" title="Permalink to 二维矩形排样/Rectangle Packing">二维矩形排样/Rectangle Packing</a></h1>   </header>
         <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2020-12-19T16:41:00+08:00">
-                周六 19 十二月 2020
+        <abbr class="published" title="2021-01-13T16:46:00+08:00">
+                周三 13 一月 2021
         </abbr>
 
         <address class="vcard author">
                 By <a class="url fn" href="/author/drink-crow.html">drink-crow</a>
         </address>
-<p>In <a href="/category/qt.html">Qt</a>. </p>
-<p>tags: <a href="/tag/qt.html">Qt</a><a href="/tag/qtoolbar.html">QToolBar</a><a href="/tag/spacer.html">spacer</a></p></p>
-</footer><!-- /.post-info -->        <p>通过一个空的QWidget设置SizePolicy来代替QSpacerItem</p>
-<div class="highlight"><pre><span></span><code><span class="n">QWidget</span><span class="o">*</span> <span class="n">spacer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">QWidget</span><span class="p">();</span>
-<span class="n">spacer</span><span class="o">-&gt;</span><span class="n">setSizePolicy</span><span class="p">(</span><span class="n">QSizePolicy</span><span class="o">::</span><span class="n">Expanding</span><span class="p">,</span> <span class="n">SizePolicy</span><span class="o">::</span><span class="n">Expanding</span><span class="p">);</span>
-
-<span class="k">auto</span> <span class="n">tb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">QToolBar</span><span class="p">;</span>
-<span class="p">...</span>
-<span class="n">tb</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(...);</span>
-<span class="p">...</span>
-
-<span class="n">tb</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">spacer</span><span class="p">);</span>
-
-<span class="p">...</span>
-<span class="n">tb</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(...);</span>
-<span class="p">...</span>
-</code></pre></div>
+<p>In <a href="/category/algorithm.html">Algorithm</a>. </p>
+<p>tags: <a href="/tag/rectangle-packing.html">Rectangle Packing</a></p></p>
+</footer><!-- /.post-info -->        <p><strong><em><u>现在的确是没时间研究。先把项目的进度推进了。记录研究过程回过头有时间再看看</u></em></strong></p>
+<p>研究的起因在做图形引擎里的文字绘制功能，准备把字符纹理填充到一张、多张纹理，以减少drawcall。搜索了一番，发现事情并不简单，这个关于空间利用效率的算法有很多应用场所————计算机纹理打包，板材切割，集装箱打包货物等等。</p>
+<p>简单的搜索了下，用中文基本没搜出啥有用的信息，用的关键字————矩形打包算法、排料算法 <br>
+知网找了写有关的，比较新的论文看了下    </p>
+<ul>
+<li><a href="https://kns.cnki.net/kcms/detail/detail.aspx?dbcode=CJFD&amp;dbname=CJFDAUTO&amp;filename=DYJE202012011&amp;v=w1jssesbP2jiFm3%25mmd2BrHJJuxe5mFZEgs4YZnsboPjSMgzSr%25mmd2BTqlZ0H%25mmd2Fwwt51KVRCGg">曾晓亮,吴琼,袁旭华.二维矩形件排样问题的自适应多岛遗传算法优化[J].锻压技术,2020,45(12):53-58.</a>   </li>
+</ul>
+<p><strong><em><u>中文基本确定只有知网里没看过的文章值得再看看，搜索引擎的不用浪费时间</u></em></strong></p>
+<p>英文搜索了下，关键字基本可以锁定在<code>packing</code>、<code>nesting</code>。先找了写有关的页面看了下</p>
+<ul>
+<li><a href="https://www.david-colson.com/2020/03/10/exploring-rect-packing.html">David Colson, Exploring rectangle packing algorithms</a> <br>
+   这篇博文的作者的研究动机和我非常像，打包字符的纹理到同一张贴图中</li>
+</ul>
+<p><strong><em><u>英文的没怎么细看，随便搜搜看了下，有用的信息不少，可以花时间搜索细看</u></em></strong></p>
+<h2>一步到胃</h2>
+<p>知名的C算法库<a href="https://github.com/nothings/stb">stb</a>/<code>stb_rect_pack.h</code>，无私奉献的公共领域许可。  <br>
+看了下介绍，效果不太好。不过现在只需要一个大概能用的就行。</p>
         </div><!-- /.entry-content -->
 
 </article>
