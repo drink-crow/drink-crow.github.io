@@ -50,11 +50,13 @@
 </footer><!-- /.post-info -->        <p>FreeType的bitmap中的数据顺序和屏幕坐标顺序一致，与OpenGL中texture的数据Y轴反转。第一个数据代表左上角，从左到右处理，最后一个数据代表右下角C++</p>
         </div><!-- /.entry-content -->
 
-        <!--引入-->
+        <!-- 引入-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
         <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
         <!-- 添加一个容器-->
         <div id="gitalk-container"></div>
+        <!-- 加载MD5-->
+        <script src="/theme/md5.min.js"></script>
         <!-- 生成 gitalk 插件-->
         <script>
           var gitalk = new Gitalk({
@@ -65,7 +67,7 @@
             repo: 'blogtalk',
             owner: 'drink-crow',
             admin: ['drink-crow'],
-            id: location.href,
+            id: md5(location.pathname),
             distractionFreeMode: false
           })
 

@@ -71,11 +71,13 @@ pelican -l -t ./theme --ignore-cache -r
 <p><u><em>在edge中需要删除本地缓存才能刷新主题</em></u></p>
         </div><!-- /.entry-content -->
 
-        <!--引入-->
+        <!-- 引入-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
         <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
         <!-- 添加一个容器-->
         <div id="gitalk-container"></div>
+        <!-- 加载MD5-->
+        <script src="/theme/md5.min.js"></script>
         <!-- 生成 gitalk 插件-->
         <script>
           var gitalk = new Gitalk({
@@ -86,7 +88,7 @@ pelican -l -t ./theme --ignore-cache -r
             repo: 'blogtalk',
             owner: 'drink-crow',
             admin: ['drink-crow'],
-            id: location.href,
+            id: md5(location.pathname),
             distractionFreeMode: false
           })
 
