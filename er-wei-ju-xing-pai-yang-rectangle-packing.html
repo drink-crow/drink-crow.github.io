@@ -66,6 +66,28 @@
 看了下介绍，效果不太好。不过现在只需要一个大概能用的就行。</p>
         </div><!-- /.entry-content -->
 
+        <!--引入-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+        <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+        <!-- 添加一个容器-->
+        <div id="gitalk-container"></div>
+        <!-- 生成 gitalk 插件-->
+        <script>
+          var gitalk = new Gitalk({
+            clientID: '8a955d31dec288dd32e0',
+
+            clientSecret: '3411fa4f5dd7716ae37fa44622f1526caa1f92a3',
+
+            repo: 'gitalk-blog',
+            owner: 'drink-crow',
+            admin: ['drink-crow'],
+            id: location.href,
+            distractionFreeMode: false
+          })
+
+          gitalk.render('gitalk-container')
+        </script>
+        
 </article>
 </section>
         <section id="extras" class="body">
