@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>CMake输出Xcode工程设置</title>
+        <title>编译Qt</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
         <link href="/" type="application/atom+xml" rel="alternate" title="drink-crow Blog ATOM Feed" />
@@ -25,7 +25,6 @@
                 <nav><ul>
                     <li ><a href="/category/algorithm.html">Algorithm</a></li>
                     <li ><a href="/category/c.html">C++</a></li>
-                    <li ><a href="/category/cmake.html">CMake</a></li>
                     <li ><a href="/category/markdown.html">Markdown</a></li>
                     <li ><a href="/category/opengl.html">OpenGL</a></li>
                     <li ><a href="/category/pelican.html">Pelican</a></li>
@@ -35,27 +34,30 @@
         
 <section id="content" class="body">    
 <article>
-        <header> <h1 class="entry-title"><a href="cmakeshu-chu-xcodegong-cheng-she-zhi.html"
-        rel="bookmark" title="Permalink to CMake输出Xcode工程设置">CMake输出Xcode工程设置</a></h1>   </header>
+        <header> <h1 class="entry-title"><a href="bian-yi-qt.html"
+        rel="bookmark" title="Permalink to 编译Qt">编译Qt</a></h1>   </header>
         <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2021-01-29T15:01:00+08:00">
-                Fri 29 January 2021
+        <abbr class="published" title="2021-02-04T17:21:00+08:00">
+                周四 04 二月 2021
         </abbr>
 
         <address class="vcard author">
                 By <a class="url fn" href="/author/drink-crow.html">drink-crow</a>
         </address>
-<p>In <a href="/category/cmake.html">CMake</a>. </p>
-<p>tags: <a href="/tag/cmake.html">CMake</a><a href="/tag/xcode.html">Xcode</a></p></p>
-</footer><!-- /.post-info -->        <p>例如</p>
-<div class="highlight"><pre><span></span><code>cmake -G Xcode -DCMAKE_C_COMPILER<span class="o">=</span>clang -DCMAKE_CXX_COMPILER<span class="o">=</span>clang
-</code></pre></div>
-
-
-<p>否则报错</p>
-<div class="highlight"><pre><span></span><code>No CMAKE_C_COMPILER could be found.
-No DCMAKE_CXX_COMPILER could be found.
+<p>In <a href="/category/qt.html">Qt</a>. </p>
+<p>tags: <a href="/tag/qt.html">Qt</a></p></p>
+</footer><!-- /.post-info -->        <h2>成功案例</h2>
+<ul>
+<li>Qt 6.0.1   </li>
+<li>Window 10 18363.1316   </li>
+<li>C/C++ Optimizing Compiler Version 19.28.29336 for x86   </li>
+<li>CMake version 3.19.4    <strong><em>CMake 需要大于3.18.3，否则输出Ninja工程文件时无法同时配置debug和release</em></strong>     </li>
+<li>Python 3.9.1   </li>
+<li>ruby 2.7.2p137 (2020-10-01 revision 5445e04352) [x64-mingw32]    </li>
+<li>perl 5, version 32, subversion 1 (v5.32.1) built for MSWin32-x64-multi-thread   </li>
+</ul>
+<div class="highlight"><pre><span></span><code> c:<span class="se">\C</span>ode<span class="se">\q</span>src&gt;configure -opensource -confirm-license -prefix C:<span class="se">\Q</span>t<span class="se">\6</span>.0.1<span class="se">\m</span>svc2019 -debug-and-release
 </code></pre></div>
         </div><!-- /.entry-content -->
 
