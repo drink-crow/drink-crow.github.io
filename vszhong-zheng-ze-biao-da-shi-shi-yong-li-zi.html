@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>drink-crow Blog - Rectangle Packing</title>
+        <title>VS中正则表达式使用例子</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
         <link href="/" type="application/atom+xml" rel="alternate" title="drink-crow Blog ATOM Feed" />
@@ -32,13 +32,11 @@
                 </ul></nav>
         </header><!-- /#banner -->
         
-    <section class="other">
-        <h1>All articles</h1>
-        <hr />
-        <ol id="posts-list" class="hfeed">
-        
-            <li><article class="hentry">    
-                <div class="entry-content">
+<section id="content" class="body">    
+<article>
+        <header> <h1 class="entry-title"><a href="vszhong-zheng-ze-biao-da-shi-shi-yong-li-zi.html"
+        rel="bookmark" title="Permalink to VS中正则表达式使用例子">VS中正则表达式使用例子</a></h1>   </header>
+        <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2021-01-13T16:46:00+08:00">
                 周三 13 一月 2021
@@ -49,41 +47,39 @@
         </address>
 <p>In <a href="/category/algorithm.html">Algorithm</a>. </p>
 <p>tags: <a href="/tag/rectangle-packing.html">Rectangle Packing</a></p></p>
-</footer><!-- /.post-info -->              
-                    <header>
-                            <h1><a href="/er-wei-ju-xing-pai-yang-rectangle-packing.html" rel="bookmark" title="Permalink to 二维矩形排样/Rectangle Packing">二维矩形排样/Rectangle Packing</a></h1>
-                    </header>
-                    
-                    <p>研究矩形打包算法</p>
-                </div>
-            </article></li>
-        
-            <li><article class="hentry">    
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2021-01-13T16:46:00+08:00">
-                周三 13 一月 2021
-        </abbr>
+</footer><!-- /.post-info -->        <div class="highlight"><pre><span></span><code><span class="err">SetFlag\((?&lt;var&gt;.*),(?&lt;value&gt;.*)\)</span>
+</code></pre></div>
 
-        <address class="vcard author">
-                By <a class="url fn" href="/author/drink-crow.html">drink-crow</a>
-        </address>
-<p>In <a href="/category/algorithm.html">Algorithm</a>. </p>
-<p>tags: <a href="/tag/rectangle-packing.html">Rectangle Packing</a></p></p>
-</footer><!-- /.post-info -->              
-                    <header>
-                            <h1><a href="/vszhong-zheng-ze-biao-da-shi-shi-yong-li-zi.html" rel="bookmark" title="Permalink to VS中正则表达式使用例子">VS中正则表达式使用例子</a></h1>
-                    </header>
-                    
-                    <p>举例了VS中常见的几种正则表达式替换方法</p>
-                </div>
-            </article></li>
-        </ol><!-- /#posts-list -->
-        <br />
-        <hr />
-        <br />   
-        <br />  
-    </section><!-- /#content -->
+
+<p>选择了SetFlag(A,B)中的并以${var}和${value}储存，值得注意的是，无嵌套能力，如果AB的表达式中有逗号，则不能正确的分组</p>
+        </div><!-- /.entry-content -->
+
+        <!-- 引入-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+        <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+        <!-- 添加一个容器-->
+        <div id="gitalk-container"></div>
+        <!-- 加载MD5-->
+        <script src="/theme/md5.min.js"></script>
+        <!-- 生成 gitalk 插件-->
+        <script>
+          var gitalk = new Gitalk({
+            clientID: '8a955d31dec288dd32e0',
+
+            clientSecret: '3411fa4f5dd7716ae37fa44622f1526caa1f92a3',
+
+            repo: 'blogtalk',
+            owner: 'drink-crow',
+            admin: ['drink-crow'],
+            id: md5(location.pathname),
+            distractionFreeMode: false
+          })
+
+          gitalk.render('gitalk-container')
+        </script>
+        
+</article>
+</section>
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>blogroll</h2>
