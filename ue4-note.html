@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>QToolBar增加spacer</title>
+        <title>UE4 Note</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
         <link href="/" type="application/atom+xml" rel="alternate" title="drink-crow Blog ATOM Feed" />
@@ -35,34 +35,44 @@
         
 <section id="content" class="body">    
 <article>
-        <header> <h1 class="entry-title"><a href="qtoolbarzeng-jia-spacer.html"
-        rel="bookmark" title="Permalink to QToolBar增加spacer">QToolBar增加spacer</a></h1>   </header>
+        <header> <h1 class="entry-title"><a href="ue4-note.html"
+        rel="bookmark" title="Permalink to UE4 Note">UE4 Note</a></h1>   </header>
         <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2020-12-19T16:41:00+08:00">
-                周六 19 十二月 2020
+        <abbr class="published" title="2021-06-01T14:21:00+08:00">
+                周二 01 六月 2021
         </abbr>
 
         <address class="vcard author">
                 By <a class="url fn" href="/author/drink-crow.html">drink-crow</a>
         </address>
-<p>In <a href="/category/qt.html">Qt</a>. </p>
-<p>tags: <a href="/tag/qt.html">Qt</a><a href="/tag/qtoolbar.html">QToolBar</a><a href="/tag/spacer.html">spacer</a></p></p>
-</footer><!-- /.post-info -->        <p>通过一个空的QWidget设置SizePolicy来代替QSpacerItem</p>
-<div class="highlight"><pre><span></span><code><span class="n">QWidget</span><span class="o">*</span> <span class="n">spacer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">QWidget</span><span class="p">();</span>
-<span class="n">spacer</span><span class="o">-&gt;</span><span class="n">setSizePolicy</span><span class="p">(</span><span class="n">QSizePolicy</span><span class="o">::</span><span class="n">Expanding</span><span class="p">,</span> <span class="n">SizePolicy</span><span class="o">::</span><span class="n">Expanding</span><span class="p">);</span>
-
-<span class="k">auto</span> <span class="n">tb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">QToolBar</span><span class="p">;</span>
-<span class="p">...</span>
-<span class="n">tb</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(...);</span>
-<span class="p">...</span>
-
-<span class="n">tb</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">spacer</span><span class="p">);</span>
-
-<span class="p">...</span>
-<span class="n">tb</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(...);</span>
-<span class="p">...</span>
+<p>In <a href="/category/ue4.html">UE4</a>. </p>
+<p>tags: <a href="/tag/c.html">C++</a><a href="/tag/note.html">Note</a></p></p>
+</footer><!-- /.post-info -->        <ul>
+<li>Charactor 中开启物理模拟(Simulate Physics)后会使Movement component失效</li>
+</ul>
+<h1>UE4 attach 调试流程</h1>
+<ol>
+<li>VS IDE中选择的工程配置要和Editor中要一直，鼠标在UE Editor左上角项目名字悬停看弹出的配置信息，一般都是Development</li>
+<li>VS中不用编译，直接attach到UE Editor</li>
+<li>在UE Editor中点编译，多点几次，有时候代码可能会没有热更新上去</li>
+<li>运行时就能命中VS中设置的断点了</li>
+</ol>
+<h1>C++ 读取蓝图类</h1>
+<ul>
+<li>非静态加载</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">//GameplayAbilityBlueprint&#39;/Game/Ability/MeleeBase_BP.MeleeBase_BP是在UE Editor中对对应蓝图类右键选择copy reference获得的，还需要强制加上 &quot;_C&quot;后缀</span>
+<span class="k">auto</span> <span class="n">ability</span> <span class="o">=</span> <span class="n">LoadClass</span><span class="o">&lt;</span><span class="n">UGameplayAbility</span><span class="o">&gt;</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;GameplayAbilityBlueprint&#39;/Game/Ability/MeleeBase_BP.MeleeBase_BP_C&#39;&quot;</span><span class="p">));</span>
 </code></pre></div>
+
+
+<h1>以C++为基类的蓝图类</h1>
+<ul>
+<li>当C++基类发生改变时，切记要把对应得蓝图子类切换下父类再切换回来才能应用到正确的数据</li>
+</ul>
+<h1>代码热更新问题</h1>
+<p>有很多类别都不能在C++代码编译后与立刻而更新到编辑器，比如Enum，函数返回参数等，在代码接口改变后，推荐关闭编辑器重新编译代码再打开</p>
         </div><!-- /.entry-content -->
 
         <!-- 引入-->
