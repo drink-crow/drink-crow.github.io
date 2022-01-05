@@ -195,7 +195,7 @@
       <link href="/Freetype_bitmap_buffer_order/"/>
       <url>/Freetype_bitmap_buffer_order/</url>
       
-        <content type="html"><![CDATA[<p>Summary:FreeType的bitmap中，buffer的第一个数据代表左上角，从左到右处理，最后一个数据代表右下角。</p><p>FreeType的bitmap中的数据顺序和屏幕坐标顺序一致，与OpenGL中texture的数据Y轴反转。第一个数据代表左上角，从左到右处理，最后一个数据代表右下角C++</p>]]></content>
+        <content type="html"><![CDATA[<p>description:FreeType的bitmap中，buffer的第一个数据代表左上角，从左到右处理，最后一个数据代表右下角。</p><p>FreeType的bitmap中的数据顺序和屏幕坐标顺序一致，与OpenGL中texture的数据Y轴反转。第一个数据代表左上角，从左到右处理，最后一个数据代表右下角C++</p>]]></content>
       
       
       <categories>
