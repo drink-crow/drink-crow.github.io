@@ -17,9 +17,8 @@
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"drink-crow.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"drink-crow.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 <meta name="description" content="buffer数据时size的大小在 OpenGL buffer数据一般都是以const void *加size的C语言风格传递数据。例如下面非常经典的void glBufferData( GLenum target, GLsizeiptr size, const void * data, GLenum usage)有下面用法 123456&#x2F;&#x2F; 数据来源std::vector&lt;float&amp;gt">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OpenGL drawcall 边界越界问题">
@@ -55,7 +54,7 @@
   </noscript>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+<body itemscope itemtype="http://schema.org/WebPage">
   <div class="headband"></div>
 
   <main class="main">
@@ -269,17 +268,19 @@
     <div class="post-body" itemprop="articleBody">
         <h2 id="buffer数据时size的大小"><a href="#buffer数据时size的大小" class="headerlink" title="buffer数据时size的大小"></a>buffer数据时size的大小</h2><p>在 OpenGL buffer数据一般都是以const void *加size的C语言风格传递数据。例如下面非常经典的<br><a target="_blank" rel="noopener" href="https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glBufferData.xhtml">void glBufferData( GLenum target, GLsizeiptr size, const void * data, GLenum usage)</a><br>有下面用法</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数据来源</span></span><br><span class="line">std::vector&lt;<span class="keyword">float</span>&gt; dataContainer &#123;···&#125;;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 也就是 dataContainer.size() * sizeof (float)</span></span><br><span class="line">GLsizeiptr size = dataContainer.<span class="built_in">size</span>() * <span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">decltype</span> (dataContainer)::value_type);</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">void</span>* data = <span class="keyword">static_cast</span>&lt;<span class="keyword">const</span> <span class="keyword">void</span>*&gt;(dataContainer.<span class="built_in">data</span>());</span><br></pre></td></tr></table></figure>
+
 <p>可以看到，这里的<code>size</code>是以字节为单位，而且<code>size</code>的类型为 <code>GLsizeiptr</code> 。</p>
-<h2 id="drawcall时count的大小"><a href="#drawcall时count的大小" class="headerlink" title="drawcall时count的大小"></a>drawcall时count的大小</h2><p>同样是非常经典的<br><a target="_blank" rel="noopener" href="https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glDrawArrays.xhtml">void glDrawArrays( GLenum mode, GLint first, GLsizei count);</a>   </p>
+<h2 id="drawcall时count的大小"><a href="#drawcall时count的大小" class="headerlink" title="drawcall时count的大小"></a>drawcall时count的大小</h2><p>同样是非常经典的<br><a target="_blank" rel="noopener" href="https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glDrawArrays.xhtml">void glDrawArrays( GLenum mode, GLint first, GLsizei count);</a></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;<span class="keyword">float</span>&gt; dataContainer &#123;···&#125;;</span><br><span class="line">GLsizeiptr size = dataContainer.<span class="built_in">size</span>() * <span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">decltype</span> (dataContainer)::value_type);</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">void</span>* data = <span class="keyword">static_cast</span>&lt;<span class="keyword">const</span> <span class="keyword">void</span>*&gt;(dataContainer.<span class="built_in">data</span>());</span><br><span class="line"></span><br><span class="line">GLuint vbo;</span><br><span class="line"><span class="built_in">glGenBuffers</span>(<span class="number">1</span>, &amp;vbo);</span><br><span class="line"><span class="built_in">glBindBuffer</span>(GL_ARRAY_BUFFER, vbo);</span><br><span class="line"><span class="built_in">glBufferData</span>(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);</span><br><span class="line"><span class="built_in">glVertexAttribPointer</span>(<span class="number">0</span>, <span class="number">2</span>, GL_FLOAT, GL_FALSE, <span class="number">2</span>*<span class="built_in"><span class="keyword">sizeof</span></span>(GLfloat), <span class="literal">nullptr</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">GLsizei counts = size / (<span class="number">2</span>*<span class="built_in"><span class="keyword">sizeof</span></span>(GLfloat));</span><br><span class="line"><span class="built_in">glDrawArrays</span>(GL_LINES, <span class="number">0</span>, counts);</span><br></pre></td></tr></table></figure>
+
 <p>此时count中每一个的大小是由<a target="_blank" rel="noopener" href="https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml">glVertexAttribPointer</a>中的<code>size</code>，<code>type</code>和<code>stride</code>共同决定。如上例中，一个点的大小就是<code>2</code>个<code>float</code>的大小。要绘制完buffer中的所有内容需要<code>size / (2*sizeof(GLfloat))</code>。</p>
-<h2 id="drawcall超出边界时会发生情况"><a href="#drawcall超出边界时会发生情况" class="headerlink" title="drawcall超出边界时会发生情况"></a>drawcall超出边界时会发生情况</h2><p>数组越界是一个比较常见的错误。有些语言会直接抛出异常，如C/C++，有些语言则会直接访问到对应的内容，返回不确定的结果。在OpenGL里，drawcall中的越界——如<code>glDrawArrays()</code>中的<code>first</code>和<code>counts</code>指向的显存段超过当前绑定的vbo则是未定义的行为。（至少我在<a target="_blank" rel="noopener" href="https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glDrawArrays.xhtml">OpenGL-Refpages</a>中没看到对应的规范）<br>实际上在具体应用中，同样的越界drawcall在不同显卡和操作系统表现出来的行为也是不一样。应该是由显卡驱动厂商决定越界行为的。    </p>
+<h2 id="drawcall超出边界时会发生情况"><a href="#drawcall超出边界时会发生情况" class="headerlink" title="drawcall超出边界时会发生情况"></a>drawcall超出边界时会发生情况</h2><p>数组越界是一个比较常见的错误。有些语言会直接抛出异常，如C/C++，有些语言则会直接访问到对应的内容，返回不确定的结果。在OpenGL里，drawcall中的越界——如<code>glDrawArrays()</code>中的<code>first</code>和<code>counts</code>指向的显存段超过当前绑定的vbo则是未定义的行为。（至少我在<a target="_blank" rel="noopener" href="https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glDrawArrays.xhtml">OpenGL-Refpages</a>中没看到对应的规范）<br>实际上在具体应用中，同样的越界drawcall在不同显卡和操作系统表现出来的行为也是不一样。应该是由显卡驱动厂商决定越界行为的。</p>
 <ul>
 <li><p>macOS OpenGL ES2.0 Intel Iris Plus 645<br>在macOS下，drawcall越界了后，越界的部分的内存的默认值通常是0，在显存使用量不高的情况下，通常不会绘制出奇怪的内容。也不会引发OpenGL错误。这和Apple下Clang编译器的行为也一致，变量默认值为0</p>
 </li>
 <li><p>Windows OpenGL ES2.0 Intel UHD 630<br>在Windows下drawcall越界同样也不会引发OpenGL错误，但是很容易绘制出奇怪的东西出来。</p>
 </li>
-<li><p><em><strong>Windows Angle</strong></em>    </p>
+<li><p><em><strong>Windows Angle</strong></em></p>
 </li>
 <li><p><strong>Windows下使用Angle转译glES到Dx值得特别提一下。使用Angle时，如果drawcall越界了，则会直接跳过，什么效果都没有。用RenderDoc截取帧分析会找不到越界的drawcall，显示上也没有效果。推测可能时Dx引发错误或者Angel内部记录到会有越界行为发生。</strong>*</p>
 </li>
@@ -345,7 +346,7 @@
 
   
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
 
   
 <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>

@@ -17,9 +17,8 @@
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"drink-crow.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"drink-crow.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 <meta property="og:type" content="website">
 <meta property="og:title" content="drink-crow Blog">
 <meta property="og:url" content="https://drink-crow.github.io/page/2/index.html">
@@ -48,7 +47,7 @@
   </noscript>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+<body itemscope itemtype="http://schema.org/WebPage">
   <div class="headband"></div>
 
   <main class="main">
@@ -251,8 +250,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>gles程序遇到了一个在Windows 10 UHD630 下能正确运行却在 macOS 10.15.7 Iris 645却效果不对的问题。macOS下 OpenGL不能抓帧分析，经过了一番努力才发现了问题所在。   </p>
-<p>问题在于vertex shader中有好几个attribute, 在glVertexAttribPointer()按照了声明顺序默认了他们的索引。实际上 macOS 下attribute的默认顺序可能是倒过来了。使用了glGetAttribLocation()获取实际索引后，显示效果就正常了。    </p>
+          <p>gles程序遇到了一个在Windows 10 UHD630 下能正确运行却在 macOS 10.15.7 Iris 645却效果不对的问题。macOS下 OpenGL不能抓帧分析，经过了一番努力才发现了问题所在。</p>
+<p>问题在于vertex shader中有好几个attribute, 在glVertexAttribPointer()按照了声明顺序默认了他们的索引。实际上 macOS 下attribute的默认顺序可能是倒过来了。使用了glGetAttribLocation()获取实际索引后，显示效果就正常了。</p>
 <p>在GL3+的时候习惯了在vs中加上layout强制布局。在GLES中没有layout这回事，习惯性地沿用了以前做法，没想到真的出了问题</p>
 
       
@@ -333,16 +332,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="Question-问题"><a href="#Question-问题" class="headerlink" title="Question / 问题"></a>Question / 问题</h2><p>按照需求，需要在一些底层控件上叠加一些UI。比如底层是CAD的绘制页面或者视频播放页面，上面要放一些Label或者Button。上层需要添加的小空间往往不好直接加在最底层的控件上(底层已经有特殊的布局了)   </p>
+          <h2 id="Question-问题"><a href="#Question-问题" class="headerlink" title="Question / 问题"></a>Question / 问题</h2><p>按照需求，需要在一些底层控件上叠加一些UI。比如底层是CAD的绘制页面或者视频播放页面，上面要放一些Label或者Button。上层需要添加的小空间往往不好直接加在最底层的控件上(底层已经有特殊的布局了)</p>
 <h2 id="Search-研究过程"><a href="#Search-研究过程" class="headerlink" title="Search / 研究过程"></a>Search / 研究过程</h2><p>中英文都搜索了不少页面，大多是下面几种方法</p>
 <ul>
 <li>建立两个控件，最上层设置透明背景，属性设置<code>ToolTip</code>一类来实现<ul>
 <li>属性设置的过程很复杂，先后顺序有特定要求</li>
-<li>跨平台有问题 </li>
+<li>跨平台有问题</li>
 </ul>
 </li>
 <li>利用<code>QGridLayout</code>布局，两个控件按先后顺序添加在同一个格子里</li>
-<li>使用<code>QStackLayout</code>。    </li>
+<li>使用<code>QStackLayout</code>。</li>
 <li>使用类似与Popup Menu的方法<ul>
 <li><code>Popup</code>属性的窗口失去焦点后就会自动隐藏</li>
 </ul>
@@ -350,7 +349,7 @@
 </ul>
 <p>除了特别列出来的问题，这些方法都有一个根本的问题————<u><strong>所有的消息都会被最上层的Widget拦截</strong></u>。例如鼠标指针跨过透明背景点击了底层的控件，消息仍会被最上层的控件拦截。  </p>
 <ul>
-<li>有些热心的开发者指出可以在最顶层的控件安装事件过滤器和转发器来实现消息可以合理的转发到底层。    <ul>
+<li>有些热心的开发者指出可以在最顶层的控件安装事件过滤器和转发器来实现消息可以合理的转发到底层。<ul>
 <li>过滤和转发所有的事件会带来巨大的工作量，代码复用性几乎没有</li>
 </ul>
 </li>
@@ -362,13 +361,13 @@
 </ul>
 <h2 id="Solution-解决方案"><a href="#Solution-解决方案" class="headerlink" title="Solution / 解决方案"></a>Solution / 解决方案</h2><p>最后Qt的官方文档<a target="_blank" rel="noopener" href="https://doc.qt.io/qt-6/layout.html">Layout Management</a>给了我启发。示例实现了个Qt没有自带而Java中有的布局<code>CardLayout</code></p>
 <blockquote>
-<p>The <code>CardLayout</code> class is inspired by the Java layout manager of the same name.    </p>
+<p>The <code>CardLayout</code> class is inspired by the Java layout manager of the same name.</p>
 </blockquote>
-<p>其中设置子控件geometry部分的代码可以看到    </p>
+<p>其中设置子控件geometry部分的代码可以看到</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">CardLayout::setGeometry</span><span class="params">(<span class="keyword">const</span> QRect &amp;r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    QLayout::<span class="built_in">setGeometry</span>(r);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (m_items.<span class="built_in">size</span>() == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> w = r.<span class="built_in">width</span>() - (m_items.<span class="built_in">count</span>() - <span class="number">1</span>) * <span class="built_in">spacing</span>();</span><br><span class="line">    <span class="keyword">int</span> h = r.<span class="built_in">height</span>() - (m_items.<span class="built_in">count</span>() - <span class="number">1</span>) * <span class="built_in">spacing</span>();</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; m_items.<span class="built_in">size</span>()) &#123;</span><br><span class="line">        QLayoutItem *o = m_items.<span class="built_in">at</span>(i);</span><br><span class="line">        <span class="function">QRect <span class="title">geom</span><span class="params">(r.x() + i * spacing(), r.y() + i * spacing(), w, h)</span></span>;</span><br><span class="line">        o-&gt;<span class="built_in">setGeometry</span>(geom);</span><br><span class="line">        ++i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>其中最关键的一句是<code>o-&gt;setGeometry(geom);</code>。这表明<code>Layout</code>的本质是自动设置子控件的大小和位置。而我直接利用Qt原有的布局功能来计算每一层控件的大小和位置，再根据计算的结果来手动设置每个控件的大小的位置。不就能优雅地达到目的了吗。 </p>
-<p>实现起来比想象中的要更简单。先贴出代码<br><strong>OverlapLayout.h</strong>    </p>
+<p>其中最关键的一句是<code>o-&gt;setGeometry(geom);</code>。这表明<code>Layout</code>的本质是自动设置子控件的大小和位置。而我直接利用Qt原有的布局功能来计算每一层控件的大小和位置，再根据计算的结果来手动设置每个控件的大小的位置。不就能优雅地达到目的了吗。</p>
+<p>实现起来比想象中的要更简单。先贴出代码<br><strong>OverlapLayout.h</strong></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QLayout&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QList&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OverlapLayout</span> :</span> <span class="keyword">public</span> QLayout</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">OverlapLayout</span>(QWidget* parent = <span class="literal">nullptr</span>);</span><br><span class="line">    ~<span class="built_in">OverlapLayout</span>() = <span class="keyword">default</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">    <span class="comment">/// 新增的Item会转发到最后一层layout的addItem()</span></span><br><span class="line">    <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">    <span class="comment">/// &lt;param name=&quot;item&quot;&gt;&lt;/param&gt;</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span>         <span class="title">addItem</span><span class="params">(QLayoutItem* item)</span>     <span class="keyword">override</span></span>;</span><br><span class="line">    <span class="function">QSize        <span class="title">sizeHint</span><span class="params">()</span>               <span class="keyword">const</span> <span class="keyword">override</span></span>;</span><br><span class="line">    <span class="function">QSize        <span class="title">minimumSize</span><span class="params">()</span>            <span class="keyword">const</span> <span class="keyword">override</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">int</span>          <span class="title">count</span><span class="params">()</span>                  <span class="keyword">const</span> <span class="keyword">override</span></span>;</span><br><span class="line">    <span class="function">QLayoutItem* <span class="title">itemAt</span><span class="params">(<span class="keyword">int</span>)</span>              <span class="keyword">const</span> <span class="keyword">override</span></span>;</span><br><span class="line">    <span class="function">QLayoutItem* <span class="title">takeAt</span><span class="params">(<span class="keyword">int</span>)</span>                    <span class="keyword">override</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span>         <span class="title">setGeometry</span><span class="params">(<span class="keyword">const</span> QRect&amp; rect)</span> <span class="keyword">override</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">AddLayout</span><span class="params">(QLayout*)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    QList&lt;QLayout*&gt; things;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p><strong>OverlapLayout.cpp</strong></p>
@@ -524,13 +523,22 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><a target="_blank" rel="noopener" href="https://docs.getpelican.com/en/4.5.3/quickstart.html">Pelican官方文档</a><br>Version：4.5.3<br>python：3.6+   </p>
-<p><em>以下命令目录均在Pelican工程目录下</em></p>
+          <p><a target="_blank" rel="noopener" href="https://docs.getpelican.com/en/4.5.3/quickstart.html">Pelican官方文档</a></p>
 <ul>
-<li>带主题输出<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> pelican content -s pelicanconf.py -t /projects/your-site/themes/our-theme</span></span><br><span class="line">pelican content -s pelicanconf.py -t ./theme</span><br></pre></td></tr></table></figure></li>
-<li>带主题，忽略缓存和自动重载，监听<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> pelican -l -t THEME --ignore-cache -r</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> THEME指的是主题模板所在</span></span><br><span class="line">pelican -l -t ./theme --ignore-cache -r</span><br></pre></td></tr></table></figure>
-<u><em>在edge中需要删除本地缓存才能刷新主题</em></u></li>
+<li><p>Version：4.5.3</p>
+</li>
+<li><p>python：3.6+</p>
+<p><em>以下命令目录均在Pelican工程目录下</em></p>
+</li>
+<li><p>带主题输出</p>
+</li>
 </ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> pelican content -s pelicanconf.py -t /projects/your-site/themes/our-theme</span></span><br><span class="line">pelican content -s pelicanconf.py -t ./theme</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>带主题，忽略缓存和自动重载，监听</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> pelican -l -t THEME --ignore-cache -r</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> THEME指的是主题模板所在</span></span><br><span class="line">pelican -l -t ./theme --ignore-cache -r</span><br><span class="line"><span class="meta">#</span><span class="bash"> 在edge中需要删除本地缓存才能刷新主题</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -612,17 +620,19 @@
     <div class="post-body" itemprop="articleBody">
           <h2 id="buffer数据时size的大小"><a href="#buffer数据时size的大小" class="headerlink" title="buffer数据时size的大小"></a>buffer数据时size的大小</h2><p>在 OpenGL buffer数据一般都是以const void *加size的C语言风格传递数据。例如下面非常经典的<br><a target="_blank" rel="noopener" href="https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glBufferData.xhtml">void glBufferData( GLenum target, GLsizeiptr size, const void * data, GLenum usage)</a><br>有下面用法</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数据来源</span></span><br><span class="line">std::vector&lt;<span class="keyword">float</span>&gt; dataContainer &#123;···&#125;;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 也就是 dataContainer.size() * sizeof (float)</span></span><br><span class="line">GLsizeiptr size = dataContainer.<span class="built_in">size</span>() * <span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">decltype</span> (dataContainer)::value_type);</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">void</span>* data = <span class="keyword">static_cast</span>&lt;<span class="keyword">const</span> <span class="keyword">void</span>*&gt;(dataContainer.<span class="built_in">data</span>());</span><br></pre></td></tr></table></figure>
+
 <p>可以看到，这里的<code>size</code>是以字节为单位，而且<code>size</code>的类型为 <code>GLsizeiptr</code> 。</p>
-<h2 id="drawcall时count的大小"><a href="#drawcall时count的大小" class="headerlink" title="drawcall时count的大小"></a>drawcall时count的大小</h2><p>同样是非常经典的<br><a target="_blank" rel="noopener" href="https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glDrawArrays.xhtml">void glDrawArrays( GLenum mode, GLint first, GLsizei count);</a>   </p>
+<h2 id="drawcall时count的大小"><a href="#drawcall时count的大小" class="headerlink" title="drawcall时count的大小"></a>drawcall时count的大小</h2><p>同样是非常经典的<br><a target="_blank" rel="noopener" href="https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glDrawArrays.xhtml">void glDrawArrays( GLenum mode, GLint first, GLsizei count);</a></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;<span class="keyword">float</span>&gt; dataContainer &#123;···&#125;;</span><br><span class="line">GLsizeiptr size = dataContainer.<span class="built_in">size</span>() * <span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">decltype</span> (dataContainer)::value_type);</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">void</span>* data = <span class="keyword">static_cast</span>&lt;<span class="keyword">const</span> <span class="keyword">void</span>*&gt;(dataContainer.<span class="built_in">data</span>());</span><br><span class="line"></span><br><span class="line">GLuint vbo;</span><br><span class="line"><span class="built_in">glGenBuffers</span>(<span class="number">1</span>, &amp;vbo);</span><br><span class="line"><span class="built_in">glBindBuffer</span>(GL_ARRAY_BUFFER, vbo);</span><br><span class="line"><span class="built_in">glBufferData</span>(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);</span><br><span class="line"><span class="built_in">glVertexAttribPointer</span>(<span class="number">0</span>, <span class="number">2</span>, GL_FLOAT, GL_FALSE, <span class="number">2</span>*<span class="built_in"><span class="keyword">sizeof</span></span>(GLfloat), <span class="literal">nullptr</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">GLsizei counts = size / (<span class="number">2</span>*<span class="built_in"><span class="keyword">sizeof</span></span>(GLfloat));</span><br><span class="line"><span class="built_in">glDrawArrays</span>(GL_LINES, <span class="number">0</span>, counts);</span><br></pre></td></tr></table></figure>
+
 <p>此时count中每一个的大小是由<a target="_blank" rel="noopener" href="https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml">glVertexAttribPointer</a>中的<code>size</code>，<code>type</code>和<code>stride</code>共同决定。如上例中，一个点的大小就是<code>2</code>个<code>float</code>的大小。要绘制完buffer中的所有内容需要<code>size / (2*sizeof(GLfloat))</code>。</p>
-<h2 id="drawcall超出边界时会发生情况"><a href="#drawcall超出边界时会发生情况" class="headerlink" title="drawcall超出边界时会发生情况"></a>drawcall超出边界时会发生情况</h2><p>数组越界是一个比较常见的错误。有些语言会直接抛出异常，如C/C++，有些语言则会直接访问到对应的内容，返回不确定的结果。在OpenGL里，drawcall中的越界——如<code>glDrawArrays()</code>中的<code>first</code>和<code>counts</code>指向的显存段超过当前绑定的vbo则是未定义的行为。（至少我在<a target="_blank" rel="noopener" href="https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glDrawArrays.xhtml">OpenGL-Refpages</a>中没看到对应的规范）<br>实际上在具体应用中，同样的越界drawcall在不同显卡和操作系统表现出来的行为也是不一样。应该是由显卡驱动厂商决定越界行为的。    </p>
+<h2 id="drawcall超出边界时会发生情况"><a href="#drawcall超出边界时会发生情况" class="headerlink" title="drawcall超出边界时会发生情况"></a>drawcall超出边界时会发生情况</h2><p>数组越界是一个比较常见的错误。有些语言会直接抛出异常，如C/C++，有些语言则会直接访问到对应的内容，返回不确定的结果。在OpenGL里，drawcall中的越界——如<code>glDrawArrays()</code>中的<code>first</code>和<code>counts</code>指向的显存段超过当前绑定的vbo则是未定义的行为。（至少我在<a target="_blank" rel="noopener" href="https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glDrawArrays.xhtml">OpenGL-Refpages</a>中没看到对应的规范）<br>实际上在具体应用中，同样的越界drawcall在不同显卡和操作系统表现出来的行为也是不一样。应该是由显卡驱动厂商决定越界行为的。</p>
 <ul>
 <li><p>macOS OpenGL ES2.0 Intel Iris Plus 645<br>在macOS下，drawcall越界了后，越界的部分的内存的默认值通常是0，在显存使用量不高的情况下，通常不会绘制出奇怪的内容。也不会引发OpenGL错误。这和Apple下Clang编译器的行为也一致，变量默认值为0</p>
 </li>
 <li><p>Windows OpenGL ES2.0 Intel UHD 630<br>在Windows下drawcall越界同样也不会引发OpenGL错误，但是很容易绘制出奇怪的东西出来。</p>
 </li>
-<li><p><em><strong>Windows Angle</strong></em>    </p>
+<li><p><em><strong>Windows Angle</strong></em></p>
 </li>
 <li><p><strong>Windows下使用Angle转译glES到Dx值得特别提一下。使用Angle时，如果drawcall越界了，则会直接跳过，什么效果都没有。用RenderDoc截取帧分析会找不到越界的drawcall，显示上也没有效果。推测可能时Dx引发错误或者Angel内部记录到会有越界行为发生。</strong>*</p>
 </li>
@@ -701,6 +711,7 @@
     <div class="post-body" itemprop="articleBody">
           <p>通过一个空的QWidget设置SizePolicy来代替QSpacerItem</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">QWidget* spacer = <span class="keyword">new</span> <span class="built_in">QWidget</span>();</span><br><span class="line">spacer-&gt;<span class="built_in">setSizePolicy</span>(QSizePolicy::Expanding, SizePolicy::Expanding);</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> tb = <span class="keyword">new</span> QToolBar;</span><br><span class="line">...</span><br><span class="line">tb-&gt;<span class="built_in">addAction</span>(...);</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">tb-&gt;<span class="built_in">addWidget</span>(spacer);</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">tb-&gt;<span class="built_in">addAction</span>(...);</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -745,7 +756,7 @@
 
   
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
 
   
 <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
