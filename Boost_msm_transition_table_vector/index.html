@@ -268,11 +268,16 @@
 <blockquote>
 <p>Question: Why do I get a very long compile error when I define more than 20 rows in the transition table?  </p>
 <p>Answer: MSM uses Boost.MPL under the hood and this is the default maximum size. Please define the following 3 macros before including any MSM headers:  </p>
-<p>$~~~~$#define BOOST_MPL_CFG_NO_PREPROCESSED_HEADERS<br>$~~~~$#define BOOST_MPL_LIMIT_VECTOR_SIZE 30 // or whatever you need<br>$~~~~$#define BOOST_MPL_LIMIT_MAP_SIZE 30 // or whatever you need  </p>
+<pre><code>#define BOOST_MPL_CFG_NO_PREPROCESSED_HEADERS  
+#define BOOST_MPL_LIMIT_VECTOR_SIZE 30 // or whatever you need  
+#define BOOST_MPL_LIMIT_MAP_SIZE 30 // or whatever you need  
+</code></pre>
 <p>Question: Why do I get this error: ”error C2977: ‘boost::mpl::vector’ : too many template arguments”?  </p>
 <p>Answer: The first possibility is that you defined a transition table as, say, vector17 and have 18 entries. The second is that you have 17 entries and have a composite state. Under the hood, MSM adds a row for every event in the composite transition table. The third one is that you used a mpl::vector without the number of entries but are close to the MPL default of 50 and have a composite, thus pushing you above 50. Then you need mpl/vector60/70….hpp and a mpl/map60/70….hpp  </p>
 <p>Question: Why do I get a very long compile error when I define more than 10 states in a state machine?  </p>
 <p>Answer: MSM uses Boost.Fusion under the hood and this is the default maximum size. Please define the following macro before including any MSM headers:  </p>
+<pre><code>#define FUSION_MAX_VECTOR_SIZE 20 // or whatever you need 
+</code></pre>
 </blockquote>
 <p>在不预定义宏的情况下无法修改。而且哪怕定义了，也是支撑不起大规模的状态机的（需要自己实现mpl/map60等等）  </p>
 <ul>
