@@ -281,7 +281,7 @@
 </blockquote>
 <p>在不预定义宏的情况下无法修改。而且哪怕定义了，也是支撑不起大规模的状态机的（需要自己实现mpl/map60等等）  </p>
 <ul>
-<li><strong>或许可以用<code>fusion.C++11</code>快速实现？</strong></li>
+<li><del><strong>或许可以用<code>fusion.C++11</code>快速实现？</strong></del><br>仍然需要使用上述宏定义，修改超出预定义的上限(50)后, 会访问例如<code>&quot;boost/mpl/vector/vector90.hpp&quot;</code>目录，不修改Boost工程的情况下无法实现，不利于团队代码协作</li>
 </ul>
 <h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><p>近来项目里大量的用到了状态机，Boost里面有两个状态机库，一个是<code>StateChart</code>，一个是<code>Meta State Machine</code>。<code>StateChart</code>没怎么了解过，主要用的是MSM。实践下来还是比较好用的，能够比较直观的组织代码和提高稳定性。<br>到后面写得状态机越来越复杂时，发现示例代码里面<code>transition_table</code>所继承的<code>mpl::vector</code>容量非常有限。Boost.MPL是个很早版本的元编程库（C++03年代），这个mpl里的vector能够承载的数量是靠手写模板一个个实现的。<br>查阅了下，MSM的文档里面提到了用了<code>Fusion</code>（另一个Boost模板库，同样的库还有Boost.Hana)来保存表  </p>
 <blockquote>
@@ -292,7 +292,7 @@
 <p>For C++11 compilers, the variadic function interface has no upper bound.<br>For C++03 compilers, the The variadic form accepts 0 to FUSION_MAX_VECTOR_SIZE elements, where FUSION_MAX_VECTOR_SIZE is a user definable predefined maximum that defaults to 10. Example:  </p>
 </blockquote>
 <p>C++11中扩展了可变参数模板，可以解放以前手动定义n个模板参数的重复劳动。<br>唯一疑惑的是MSM使用了Fusion，示例代码里面却用了旧的mpl库，使用Fusion能够无缝替换</p>
-<h3 id="Updated-2022-01-06"><a href="#Updated-2022-01-06" class="headerlink" title="Updated 2022-01-06"></a>Updated 2022-01-06</h3><p>从<a target="_blank" rel="noopener" href="https://www.boost.org/doc/libs/1_78_0/libs/msm/doc/HTML/ch08.html#d0e3355">Boost文档</a>里可以看到<code>MSM.v2</code>推出的时候是<code>Boost 1.44</code>，<a target="_blank" rel="noopener" href="https://www.boost.org/users/history/version_1_44_0.html">August 13th, 2010 17:00 GMT</a>，那时候<code>C++11</code>还没正式推出，使用了大量的MPL代码，这部分无法修改。<br>而MPL呢，则更老了, <code>Boost 1.32</code>，时间是<a target="_blank" rel="noopener" href="https://www.boost.org/users/history/version_1_32_0.html">November 19th, 2004 12:00 GMT</a>，是<code>c++03</code>的版本</p>
+<h3 id="Updated-2022-01-06"><a href="#Updated-2022-01-06" class="headerlink" title="Updated 2022-01-06"></a>Updated 2022-01-06</h3><p>从<a target="_blank" rel="noopener" href="https://www.boost.org/doc/libs/1_78_0/libs/msm/doc/HTML/ch08.html#d0e3355">Boost文档</a>里可以看到<code>MSM.v2</code>推出的时候是<code>Boost 1.44</code>，<a target="_blank" rel="noopener" href="https://www.boost.org/users/history/version_1_44_0.html">August 13th, 2010 17:00 GMT</a>，那时候<code>C++11</code>还没正式推出，使用了大量的MPL代码，这部分无法修改。<br>而MPL呢，则更老了, <code>Boost 1.32</code>，时间是<a target="_blank" rel="noopener" href="https://www.boost.org/users/history/version_1_32_0.html">November 19th, 2004 12:00 GMT</a>，是<code>c++03</code>的版本<br>这两个库都是在<code>C++11</code>正式推出之前就已经发布了，采用了大量<code>c++03</code>模板元编程代码，有一定的局限性（正上文已经提到过）  </p>
 
     </div>
 
