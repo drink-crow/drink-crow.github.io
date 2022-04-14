@@ -22,7 +22,7 @@
 <meta name="description" content="记录UE4中使用EnhancedInput Plugin中需要多次运行才能使用的问题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Enhanced Input 的初始化后无法使用的问题">
-<meta property="og:url" content="https://drink-crow.github.io/UE4EnhancedInputBug/index.html">
+<meta property="og:url" content="https://drink-crow.github.io/UE4_EnhancedInput/index.html">
 <meta property="og:site_name" content="drink-crow Blog">
 <meta property="og:description" content="记录UE4中使用EnhancedInput Plugin中需要多次运行才能使用的问题">
 <meta property="og:locale" content="zh_CN">
@@ -33,11 +33,11 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://drink-crow.github.io/UE4EnhancedInputBug/">
+<link rel="canonical" href="https://drink-crow.github.io/UE4_EnhancedInput/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://drink-crow.github.io/UE4EnhancedInputBug/","path":"UE4EnhancedInputBug/","title":"Enhanced Input 的初始化后无法使用的问题"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://drink-crow.github.io/UE4_EnhancedInput/","path":"UE4_EnhancedInput/","title":"Enhanced Input 的初始化后无法使用的问题"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>Enhanced Input 的初始化后无法使用的问题 | drink-crow Blog</title>
@@ -159,7 +159,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -170,7 +170,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">35</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -209,7 +209,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://drink-crow.github.io/UE4EnhancedInputBug/">
+    <link itemprop="mainEntityOfPage" href="https://drink-crow.github.io/UE4_EnhancedInput/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -256,7 +256,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>环境: UE4.27.2 win10 x64 VS2019<br>问题: EnhancedInput在首次使用中会失效, 如果是在编辑器中运行, 第二次运行后就可以使用. 在打包的程序, 或以独立窗口运行都会失效. 奇怪的是, 在EnhancedInput失效的时候,是能正常访问EnhancedInput System Interface 的, 而且绑定也没有出问题<br>解决方法: 在角色蓝图中应用 EnhancedInput System Interface, EnhancedInput的代码里写到蓝图里的函数很多都是只有外表接口,没有实际作用的.但是在蓝图里显式引用了下EnhancedInput System Local Player Interface后的确在首次运行了也可以正常使用EnhancedInput了.<br>原因: 尚未找到确切原因, 推测是UObject的引用问题, 或者首次运行,在设置了EnhancedInput之后, 引擎有部分逻辑错误又将InputSystem初始化了</p>
+        <ul>
+<li>环境:<br>UE4.27.2 win10 x64 VS2019</li>
+<li>问题:<br>EnhancedInput在首次使用中会失效, 如果是在编辑器中运行, 第二次运行后就可以使用. 在打包的程序, 或以独立窗口运行都会失效. 奇怪的是, 在EnhancedInput失效的时候,是能正常访问EnhancedInput System Interface 的, 而且绑定也没有出问题  </li>
+<li>解决方法:<br>在角色蓝图中应用 EnhancedInput System Interface, EnhancedInput的代码里写到蓝图里的函数很多都是只有外表接口,没有实际作用的.但是在蓝图里显式引用了下EnhancedInput System Local Player Interface后的确在首次运行了也可以正常使用EnhancedInput了.</li>
+<li>原因:<br>尚未找到确切原因, 推测是UObject的引用问题, 或者首次运行,在设置了EnhancedInput之后, 引擎有部分逻辑错误又将InputSystem初始化了</li>
+</ul>
 
     </div>
 
@@ -273,8 +278,8 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/Multi_Dimension_Compare/" rel="prev" title="多维比较算法">
-                  <i class="fa fa-chevron-left"></i> 多维比较算法
+                <a href="/UE4_Object_Init/" rel="prev" title="UObject PostInit 问题">
+                  <i class="fa fa-chevron-left"></i> UObject PostInit 问题
                 </a>
             </div>
             <div class="post-nav-item">

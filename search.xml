@@ -5,10 +5,10 @@
     
     <entry>
       <title>Enhanced Input 的初始化后无法使用的问题</title>
-      <link href="/UE4EnhancedInputBug/"/>
-      <url>/UE4EnhancedInputBug/</url>
+      <link href="/UE4_EnhancedInput/"/>
+      <url>/UE4_EnhancedInput/</url>
       
-        <content type="html"><![CDATA[<p>环境: UE4.27.2 win10 x64 VS2019<br>问题: EnhancedInput在首次使用中会失效, 如果是在编辑器中运行, 第二次运行后就可以使用. 在打包的程序, 或以独立窗口运行都会失效. 奇怪的是, 在EnhancedInput失效的时候,是能正常访问EnhancedInput System Interface 的, 而且绑定也没有出问题<br>解决方法: 在角色蓝图中应用 EnhancedInput System Interface, EnhancedInput的代码里写到蓝图里的函数很多都是只有外表接口,没有实际作用的.但是在蓝图里显式引用了下EnhancedInput System Local Player Interface后的确在首次运行了也可以正常使用EnhancedInput了.<br>原因: 尚未找到确切原因, 推测是UObject的引用问题, 或者首次运行,在设置了EnhancedInput之后, 引擎有部分逻辑错误又将InputSystem初始化了</p>]]></content>
+        <content type="html"><![CDATA[<ul><li>环境:<br>UE4.27.2 win10 x64 VS2019</li><li>问题:<br>EnhancedInput在首次使用中会失效, 如果是在编辑器中运行, 第二次运行后就可以使用. 在打包的程序, 或以独立窗口运行都会失效. 奇怪的是, 在EnhancedInput失效的时候,是能正常访问EnhancedInput System Interface 的, 而且绑定也没有出问题  </li><li>解决方法:<br>在角色蓝图中应用 EnhancedInput System Interface, EnhancedInput的代码里写到蓝图里的函数很多都是只有外表接口,没有实际作用的.但是在蓝图里显式引用了下EnhancedInput System Local Player Interface后的确在首次运行了也可以正常使用EnhancedInput了.</li><li>原因:<br>尚未找到确切原因, 推测是UObject的引用问题, 或者首次运行,在设置了EnhancedInput之后, 引擎有部分逻辑错误又将InputSystem初始化了</li></ul>]]></content>
       
       
       <categories>
@@ -21,6 +21,31 @@
         <tags>
             
             <tag> Enhanced Input </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>UObject PostInit 问题</title>
+      <link href="/UE4_Object_Init/"/>
+      <url>/UE4_Object_Init/</url>
+      
+        <content type="html"><![CDATA[<p>由于UE4的反射系统，应当慎重把握UObject对象的游戏性初始化时机。例如一个UObject对象，需要创建另一个UObject并持续引用时，则不应再PostInit中创建。这样会导致继承该UObject的蓝图，在保存时会运行一次PostInit，从而试图保存一个动态创建的UObject。<br>从另外一个角度来说，在UE4 editor中，由于代码热加载/编辑器多次运行地图，对象有可能在任何时候进行调用设置的游戏性初始化设置。而一般的设想中，这些游戏性初始化的顺序都是按照编写的逻辑线性运行，而这里由于为了实现编辑器的动态加载功能，有很多初始化将会被多次运行，但UOBject并不是完全重新初始化。所以需要仔细安排进入和退出代码。同时在网络环境，也会出现这种时序不对的问题，所以代码逻辑不能按照一般的线性逻辑去编写</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> UE4 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> UObject </tag>
             
         </tags>
       
