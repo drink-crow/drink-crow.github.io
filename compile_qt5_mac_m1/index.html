@@ -265,6 +265,7 @@
 <li>icu<br>目前macOS使用vcpkg安装icu有些问题，没有自动依赖或指出需要的环境，需要手动安装<code>autoconf</code>,<code>automake</code>,<code>autoconf-archive</code>  </li>
 <li>XXX-NOTFOUND<br>编译时qmake command还出现了XXX-NOTFOUND的字段，实质是依赖某个库但是没有正确找到。本次编译过程中出现了 <code>ZSTD-XXX-NOTFOUND</code> 和 <code>LZMA_DEBUG-NOTFOUND</code>, vcpkg 中重新安装<code>zstd</code>和<code>liblzma</code>后解决了问题，推测这两个包应该是被文件加密系统影响没有正确的安装。</li>
 <li>OSX_DEPLOYMENT_TARGET<br>使用默认arm64 triplet(arm64-osx)时，系统最小版本会设置为当前macOS SDK的版本(本次编译为12.1)，而qt5.15.4 的最高设置的版本为 10.15, vcpkg 会自动设置为10.15(实际编译提示的好像是11.0), 而 M1 芯片支持的最低操作系统也是11.0 big sur。<br>若直接指定为10.13，则有一个依赖库pcre2会报错 <code>&quot;Must target Big Sur or newer&quot;</code></li>
+<li>Cleaning before build xxx<br>这一步非常慢，但是也不占用cpu、内存、硬盘，需要耐性等待，每次至少30分钟，耐心等待。  </li>
 </ul>
 <h2 id="自行编译"><a href="#自行编译" class="headerlink" title="自行编译"></a>自行编译</h2><p>源代码为Qt在线安装器中的5.15.2<br>尝试使用以下指令</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./configure -prefix /Users/Shared/Qt/5.15.2/macos -release -opensource -nomake tests -confirm-license QMAKE_APPLE_DEVICE_ARCHS=arm64 QMAKE_MACOSX_DEPLOYMENT_TARGET=10.13</span><br><span class="line">make -j16</span><br><span class="line">make install </span><br></pre></td></tr></table></figure>
