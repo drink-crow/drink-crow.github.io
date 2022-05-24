@@ -224,7 +224,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Dependent names
+          Dependent names<a href="https://github.com/drink-crow/blog/edit/master/source/_posts/Dependent_name.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
         </h1>
 
         <div class="post-meta-container">
@@ -262,6 +262,8 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将boost::geometry中的box转换成自定义的Boundary</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> NumType = <span class="keyword">double</span>&gt;</span><br><span class="line">    Boundary&lt;NumType, <span class="number">2</span>&gt; <span class="built_in">fromBoost</span>(</span><br><span class="line">        <span class="keyword">const</span> boost::geometry::model::box&lt;boost::geometry::model::point&lt;NumType, <span class="number">2</span>,boost::geometry::cs::cartesian&gt;&gt;&amp; box)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> Boundary&lt;NumType, <span class="number">2</span>&gt;(Vec&lt;NumType,<span class="number">2</span>&gt;(box.<span class="built_in">min_corner</span>().get&lt;<span class="number">0</span>&gt;(), box.<span class="built_in">min_corner</span>().get&lt;<span class="number">1</span>&gt;()),</span><br><span class="line">            Vec&lt;NumType, <span class="number">2</span>&gt;(box.<span class="built_in">max_corner</span>().get&lt;<span class="number">0</span>&gt;(), box.<span class="built_in">max_corner</span>().get&lt;<span class="number">1</span>&gt;()));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
 <p>这段代码在 VS2019 C++17 的标准下能编译过了，但是在 Apple Clang 下检查时，<code>box.min_corner().get&lt;0&gt;()</code> 等函数却报了一个第一次见的错误</p>
+<span id="more"></span>
+
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">missing &#x27;template&#x27; keyword prior to dependent template name &#x27;get&#x27;</span><br></pre></td></tr></table></figure>
 
 <p>查询了一下，发现是 C++ 模板里面的内容<a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/language/dependent_name">Dependent names</a>，内容有不少，大致的概括下就是代码在语法解析时，有时候可以同时表示多种意思，这时候编译器需要手工添加的一些标识来确认需要的是什么意思（特别是在模板中）。例如下面模板代码中</p>

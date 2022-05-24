@@ -243,6 +243,7 @@
   
 </div>
 
+            <div class="post-description">记录在macOS M1 上编译 arm64 qt5.15</div>
         </div>
       </header>
 
@@ -250,10 +251,14 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>记录在macOS M1 上编译 arm64 qt5.15</p>
+          <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>system: macOS 12.4 (21F79)<br>cpu: Apple M1<br>Xcode 13.2.1<br>macOS SDK 12.1  </p>
+<h2 id="使用vcpkg编译安装arm64版"><a href="#使用vcpkg编译安装arm64版" class="headerlink" title="使用vcpkg编译安装arm64版"></a>使用vcpkg编译安装arm64版</h2><p>指令：<code>vcpkg install qt5:arm64-osx</code>, 本次安装的版本为 5.15.4  </p>
+<ul>
+<li>icu<br>目前macOS使用vcpkg安装icu有些问题，没有自动依赖或指出需要的环境，需要手动安装<code>autoconf</code>,<code>automake</code>,<code>autoconf-archive</code>  </li>
+<li>XXX-NOTFOUND<br>编译时qmake command还出现了XXX-NOTFOUND的字段，实质是依赖某个库但是没有正确找到。本次编译过程中出现了 <code>ZSTD-XXX-NOTFOUND</code> 和 <code>LZMA_DEBUG-NOTFOUND</code>, vcpkg 中重新安装<code>zstd</code>和<code>liblzma</code>后解决了问题，推测这两个包应该是被文件加密系统影响没有正确的安装。
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/compile_qt5_mac_m1/">
+              <a class="btn" href="/compile_qt5_mac_m1/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -323,6 +328,7 @@
   
 </div>
 
+            <div class="post-description">记录UE4中使用EnhancedInput Plugin中需要多次运行才能使用的问题</div>
         </div>
       </header>
 
@@ -330,15 +336,13 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>记录UE4中使用EnhancedInput Plugin中需要多次运行才能使用的问题</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/UE4_EnhancedInput/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <ul>
+<li>环境:<br>UE4.27.2 win10 x64 VS2019</li>
+<li>问题:<br>EnhancedInput在首次使用中会失效, 如果是在编辑器中运行, 第二次运行后就可以使用. 在打包的程序, 或以独立窗口运行都会失效. 奇怪的是, 在EnhancedInput失效的时候,是能正常访问EnhancedInput System Interface 的, 而且绑定也没有出问题  </li>
+<li>解决方法:<br>在角色蓝图中应用 EnhancedInput System Interface, EnhancedInput的代码里写到蓝图里的函数很多都是只有外表接口,没有实际作用的.但是在蓝图里显式引用了下EnhancedInput System Local Player Interface后的确在首次运行了也可以正常使用EnhancedInput了.</li>
+<li>原因:<br>尚未找到确切原因, 推测是UObject的引用问题, 或者首次运行,在设置了EnhancedInput之后, 引擎有部分逻辑错误又将InputSystem初始化了</li>
+</ul>
+
       
     </div>
 
@@ -403,6 +407,7 @@
   
 </div>
 
+            <div class="post-description">记录UE4中UObject初始化注意的问题</div>
         </div>
       </header>
 
@@ -410,15 +415,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>记录UE4中UObject初始化注意的问题</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/UE4_Object_Init/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <p>由于UE4的反射系统，应当慎重把握UObject对象的游戏性初始化时机。例如一个UObject对象，需要创建另一个UObject并持续引用时，则不应再PostInit中创建。这样会导致继承该UObject的蓝图，在保存时会运行一次PostInit，从而试图保存一个动态创建的UObject。<br>从另外一个角度来说，在UE4 editor中，由于代码热加载/编辑器多次运行地图，对象有可能在任何时候进行调用设置的游戏性初始化设置。而一般的设想中，这些游戏性初始化的顺序都是按照编写的逻辑线性运行，而这里由于为了实现编辑器的动态加载功能，有很多初始化将会被多次运行，但UOBject并不是完全重新初始化。所以需要仔细安排进入和退出代码。同时在网络环境，也会出现这种时序不对的问题，所以代码逻辑不能按照一般的线性逻辑去编写</p>
+
       
     </div>
 
@@ -483,6 +481,7 @@
   
 </div>
 
+            <div class="post-description">记录一个自己想的多维比较算法。</div>
         </div>
       </header>
 
@@ -490,10 +489,14 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>记录一个自己想的多维比较算法。</p>
+          <p>使用set/map需要一个对储存元素比较大小的算法，很多时候会用上向量、矩阵的储存。一般来说是这样  </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">vec4</span> &#123;</span></span><br><span class="line">    <span class="keyword">double</span> x,y,z,w;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(cosnt vec4&amp; r) <span class="keyword">const</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(x &lt; r.x) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(x &gt; r.x) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(y &lt; r.y) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(y &gt; r.y) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(z &lt; r.z) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(z &gt; r.z) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(w &lt; r.x) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>需要多次比较，对CPU来说不够友好，特别是通常来说一次查找需要多次比较<br><code>Boost</code>里面给出的方法是<a target="_blank" rel="noopener" href="https://www.boost.org/doc/libs/1_76_0/doc/html/hash/reference.html">多次hash</a>，而且不保证严格正确  </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">size_t</span> seed = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(; first != last; ++first)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">hash_combine</span>(seed, *first);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> seed;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/Multi_Dimension_Compare/">
+              <a class="btn" href="/Multi_Dimension_Compare/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -563,6 +566,7 @@
   
 </div>
 
+            <div class="post-description">记录了一个遇到的 Dependent name 的问题。Dependent name 通常出现在模板里面，源于代码语法释义时，字符所代表的含义依赖于上下文，所以需要显示标记类型</div>
         </div>
       </header>
 
@@ -570,10 +574,13 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>记录了一个遇到的 Dependent name 的问题。Dependent name 通常出现在模板里面，源于代码语法释义时，字符所代表的含义依赖于上下文，所以需要显示标记类型</p>
+          <p>编译下述代码时遇到了第一次遇到的问题  </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将boost::geometry中的box转换成自定义的Boundary</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> NumType = <span class="keyword">double</span>&gt;</span><br><span class="line">    Boundary&lt;NumType, <span class="number">2</span>&gt; <span class="built_in">fromBoost</span>(</span><br><span class="line">        <span class="keyword">const</span> boost::geometry::model::box&lt;boost::geometry::model::point&lt;NumType, <span class="number">2</span>,boost::geometry::cs::cartesian&gt;&gt;&amp; box)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> Boundary&lt;NumType, <span class="number">2</span>&gt;(Vec&lt;NumType,<span class="number">2</span>&gt;(box.<span class="built_in">min_corner</span>().get&lt;<span class="number">0</span>&gt;(), box.<span class="built_in">min_corner</span>().get&lt;<span class="number">1</span>&gt;()),</span><br><span class="line">            Vec&lt;NumType, <span class="number">2</span>&gt;(box.<span class="built_in">max_corner</span>().get&lt;<span class="number">0</span>&gt;(), box.<span class="built_in">max_corner</span>().get&lt;<span class="number">1</span>&gt;()));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这段代码在 VS2019 C++17 的标准下能编译过了，但是在 Apple Clang 下检查时，<code>box.min_corner().get&lt;0&gt;()</code> 等函数却报了一个第一次见的错误</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/Dependent_name/">
+              <a class="btn" href="/Dependent_name/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -643,6 +650,7 @@
   
 </div>
 
+            <div class="post-description">记录一个特定参数生成的SSH key无法被Github Action使用的问题</div>
         </div>
       </header>
 
@@ -650,15 +658,14 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>记录一个特定参数生成的SSH key无法被Github Action使用的问题</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/GitHub_Action_ssh_key/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <p>在blog切换到<code>Hexo</code>同时使用Github Actions来实现CI/CD时，遇到了一个奇怪的问题。<br>使用下面代码生成的ssh Key无法被Github Actions使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096 -C <span class="string">&quot;Hexo Deploy Key&quot;</span> -f github-deploy-key -N <span class="string">&quot;namespace&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>下面代码生成的Key则可以</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 要保持passphase为空</span></span><br><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;username@example.com&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>暂不清除是<code>passphase</code>的问题还是<code>-b -N</code>等参数带来的问题</p>
+
       
     </div>
 
@@ -730,6 +737,7 @@
   
 </div>
 
+            <div class="post-description">Boost.MSM中使用了模板元编程中的mpl::vector来记录事件表。示例代码中使用的mpl::vector是比较老的代码，有数量限制，使用Boost::Fusion::vector来解除限制</div>
         </div>
       </header>
 
@@ -737,10 +745,25 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>Boost.MSM中使用了模板元编程中的mpl::vector来记录事件表。示例代码中使用的mpl::vector是比较老的代码，有数量限制，使用Boost::Fusion::vector来解除限制</p>
+          <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p><del>示例代码里的<code>struct transition_table : mpl::vector</code>改为继承<code>boost::fusion::vector</code></del><br><del>在C++11的标准下就能解放vector容量上限</del><br><a target="_blank" rel="noopener" href="https://www.boost.org/doc/libs/1_78_0/libs/msm/doc/HTML/ch05.html">根据Boost中的解释</a>  </p>
+<blockquote>
+<p>Question: Why do I get a very long compile error when I define more than 20 rows in the transition table?  </p>
+<p>Answer: MSM uses Boost.MPL under the hood and this is the default maximum size. Please define the following 3 macros before including any MSM headers:  </p>
+<pre><code>#define BOOST_MPL_CFG_NO_PREPROCESSED_HEADERS  
+#define BOOST_MPL_LIMIT_VECTOR_SIZE 30 // or whatever you need  
+#define BOOST_MPL_LIMIT_MAP_SIZE 30 // or whatever you need  
+</code></pre>
+<p>Question: Why do I get this error: ”error C2977: ‘boost::mpl::vector’ : too many template arguments”?  </p>
+<p>Answer: The first possibility is that you defined a transition table as, say, vector17 and have 18 entries. The second is that you have 17 entries and have a composite state. Under the hood, MSM adds a row for every event in the composite transition table. The third one is that you used a mpl::vector without the number of entries but are close to the MPL default of 50 and have a composite, thus pushing you above 50. Then you need mpl/vector60/70….hpp and a mpl/map60/70….hpp  </p>
+<p>Question: Why do I get a very long compile error when I define more than 10 states in a state machine?  </p>
+<p>Answer: MSM uses Boost.Fusion under the hood and this is the default maximum size. Please define the following macro before including any MSM headers:  </p>
+<pre><code>#define FUSION_MAX_VECTOR_SIZE 20 // or whatever you need 
+</code></pre>
+</blockquote>
+<p>在不预定义宏的情况下无法修改。而且哪怕定义了，也是支撑不起大规模的状态机的（需要自己实现mpl/map60等等）  </p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/Boost_msm_transition_table_vector/">
+              <a class="btn" href="/Boost_msm_transition_table_vector/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -817,6 +840,7 @@
   
 </div>
 
+            <div class="post-description">记录使用UE4中的Gameplay Abilities插件</div>
         </div>
       </header>
 
@@ -824,10 +848,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>记录使用UE4中的Gameplay Abilities插件</p>
+          <h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><h3 id="editor-设置"><a href="#editor-设置" class="headerlink" title="editor 设置"></a>editor 设置</h3><ul>
+<li>插件启用Gameplay Abilities和GameplayTagsEditor</li>
+</ul>
+<h3 id="Native代码设置"><a href="#Native代码设置" class="headerlink" title="Native代码设置"></a>Native代码设置</h3><ul>
+<li>要使用此系统的全部功能，添加”GameplayAbilities”、”GameplayTags”和”GameplayTasks”到项目的”(ProjectName).Build.cs”文件中的 PublicDependencyModuleNames 中。</li>
+<li>继承实现一个<code>UAttributeSet</code>作为属性集</li>
+<li>继承自<code>ACharacter</code>或<code>APown</code>之类的角色文件要同样继承接口<code>IAbilitySystemInterface</code>并添加组件<code>UAbilitySysrtemComponent</code>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/UE4_Gameplay_Abilities_plugin/">
+              <a class="btn" href="/UE4_Gameplay_Abilities_plugin/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -904,6 +934,7 @@
   
 </div>
 
+            <div class="post-description">记录使用UE4中的坑</div>
         </div>
       </header>
 
@@ -911,15 +942,26 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>记录使用UE4中的坑</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/UE4_note/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <ul>
+<li>Charactor 中开启物理模拟(Simulate Physics)后会使Movement component失效</li>
+</ul>
+<h2 id="UE4-attach-调试流程"><a href="#UE4-attach-调试流程" class="headerlink" title="UE4 attach 调试流程"></a>UE4 attach 调试流程</h2><ol>
+<li>VS IDE中选择的工程配置要和Editor中要一直，鼠标在UE Editor左上角项目名字悬停看弹出的配置信息，一般都是Development</li>
+<li>VS中不用编译，直接attach到UE Editor</li>
+<li>在UE Editor中点编译，多点几次，有时候代码可能会没有热更新上去</li>
+<li>运行时就能命中VS中设置的断点了</li>
+<li>如果还是无法命中代码，尝试在无法命中的地方随便修改下代码，然后再在UE编辑器里编译</li>
+</ol>
+<h2 id="C-读取蓝图类"><a href="#C-读取蓝图类" class="headerlink" title="C++ 读取蓝图类"></a>C++ 读取蓝图类</h2><ul>
+<li>非静态加载</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//GameplayAbilityBlueprint&#x27;/Game/Ability/MeleeBase_BP.MeleeBase_BP是在UE Editor中对对应蓝图类右键选择copy reference获得的，还需要强制加上 &quot;_C&quot;后缀</span></span><br><span class="line"><span class="keyword">auto</span> ability = LoadClass&lt;UGameplayAbility&gt;(<span class="literal">NULL</span>, <span class="built_in">TEXT</span>(<span class="string">&quot;GameplayAbilityBlueprint&#x27;/Game/Ability/MeleeBase_BP.MeleeBase_BP_C&#x27;&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+<h2 id="以C-为基类的蓝图类"><a href="#以C-为基类的蓝图类" class="headerlink" title="以C++为基类的蓝图类"></a>以C++为基类的蓝图类</h2><ul>
+<li>当C++基类发生改变时，切记要把对应得蓝图子类切换下父类再切换回来才能应用到正确的数据</li>
+</ul>
+<h2 id="代码热更新问题"><a href="#代码热更新问题" class="headerlink" title="代码热更新问题"></a>代码热更新问题</h2><p>有很多类别都不能在C++代码编译后与立刻而更新到编辑器，比如Enum，函数返回参数等，在代码接口改变后，推荐关闭编辑器重新编译代码再打开</p>
+
       
     </div>
 
@@ -984,6 +1026,7 @@
   
 </div>
 
+            <div class="post-description">阐述如何使用QVariant等改造QModelIndex和对应的Model/View框架使其获得更好的数据抽象能力</div>
         </div>
       </header>
 
@@ -991,15 +1034,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>阐述如何使用QVariant等改造QModelIndex和对应的Model/View框架使其获得更好的数据抽象能力</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Qt_ModelIndex_typeerase/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <h2 id="Model-View-Framework"><a href="#Model-View-Framework" class="headerlink" title="Model/View Framework"></a>Model/View Framework</h2><p>Qt中的<code>QTableWidget</code>、<code>QListWidget</code>、<code>QTreeWidge</code>等背后都是一套常见的<code>Model/View</code>架构用户分离显示和数据。一般的自定义<code>View/Model</code>都可以通过继承<code>QAbstractItemView</code>和<code>QAbstractItemModel</code>来快速实现。</p>
+<h2 id="ModelIndex"><a href="#ModelIndex" class="headerlink" title="ModelIndex"></a>ModelIndex</h2><p><code>View/Model</code>中通过<code>ModelIndex</code>来索引，<code>ModelIndex</code>中通过<code>row</code>、<code>col</code>和<code>internalPointer</code>来索引到具体的数据。能够适配到绝大分数据结构。<br>但是也存在很大的问题，就在于<code>internalPointer</code>的类型是一个<code>const void *</code>，会丢失原有类型信息，这就要求<code>internalPointer</code>指向统一中数据结构。但是很多时候是无法把要显示的数据的数据结构都做成同一个虚基类（比如是修改不了的不同的外部连接库的类）。<br>通过传入类型擦除后的数据结构的指针，或者建立一个map表来索引<code>internalPointer</code>到具体的类型信息可以解决一部分问题，但是还有一些致命的问题————无法自动释放<code>internalPointer</code>指向类型擦除数据结构或者即使的清空map表，随着时间的迁移，内存占用会越来越庞大，或者引入了非常复杂的自动释放机制。</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>解决的办法很简单，将<code>internalPointer</code>的类型从<code>const void *</code>替换为<code>QVariant</code>等即可，以<code>QVariant</code>储存类型擦除后的数据结构，不需要修改任何逻辑。<br>不过这样则需要复制下<code>QAbstractItemView</code>、<code>QAbstractItemModel</code>、<code>ModelIndex</code>的源代码，重新构建下应用<code>QVariant</code>的<code>ModelIndex</code>的<code>Model/View</code>框架。</p>
+
       
     </div>
 

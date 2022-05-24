@@ -223,7 +223,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Boost.MSM中transition_table和state_flod的容量问题
+          Boost.MSM中transition_table和state_flod的容量问题<a href="https://github.com/drink-crow/blog/edit/master/source/_posts/Boost_msm_transition_table_vector.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
         </h1>
 
         <div class="post-meta-container">
@@ -280,6 +280,8 @@
 </code></pre>
 </blockquote>
 <p>在不预定义宏的情况下无法修改。而且哪怕定义了，也是支撑不起大规模的状态机的（需要自己实现mpl/map60等等）  </p>
+<span id="more"></span>
+
 <ul>
 <li><del><strong>或许可以用<code>fusion.C++11</code>快速实现？</strong></del><br>仍然需要使用上述宏定义，修改超出预定义的上限(50)后, 会访问例如<code>&quot;boost/mpl/vector/vector90.hpp&quot;</code>目录，不修改Boost工程的情况下无法实现，不利于团队代码协作</li>
 </ul>
