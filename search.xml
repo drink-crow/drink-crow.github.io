@@ -37,7 +37,7 @@
       <link href="/UE4_EnhancedInput/"/>
       <url>/UE4_EnhancedInput/</url>
       
-        <content type="html"><![CDATA[<ul><li>环境:<br>UE4.27.2 win10 x64 VS2019</li><li>问题:<br>EnhancedInput在首次使用中会失效, 如果是在编辑器中运行, 第二次运行后就可以使用. 在打包的程序, 或以独立窗口运行都会失效. 奇怪的是, 在EnhancedInput失效的时候,是能正常访问EnhancedInput System Interface 的, 而且绑定也没有出问题  </li><li>解决方法:<br>在角色蓝图中应用 EnhancedInput System Interface, EnhancedInput的代码里写到蓝图里的函数很多都是只有外表接口,没有实际作用的.但是在蓝图里显式引用了下EnhancedInput System Local Player Interface后的确在首次运行了也可以正常使用EnhancedInput了.</li><li>原因:<br>尚未找到确切原因, 推测是UObject的引用问题, 或者首次运行,在设置了EnhancedInput之后, 引擎有部分逻辑错误又将InputSystem初始化了</li></ul>]]></content>
+        <content type="html"><![CDATA[<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>  UE4.27.2 win10 x64 VS2019</p><h2 id="问题"><a href="#问题" class="headerlink" title="问题:"></a>问题:</h2><p>  EnhancedInput在首次使用中会失效, 如果是在编辑器中运行, 第二次运行后就可以使用. 在打包的程序, 或以独立窗口运行都会失效. 奇怪的是, 在EnhancedInput失效的时候,是能正常访问EnhancedInput System Interface 的, 而且绑定也没有出问题  </p><h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法:"></a>解决方法:</h2><p>在角色蓝图中应用 EnhancedInput System Interface, EnhancedInput的代码里写到蓝图里的函数很多都是只有外表接口,没有实际作用的.但是在蓝图里显式引用了下EnhancedInput System Local Player Interface后的确在首次运行了也可以正常使用EnhancedInput了.</p><h2 id="原因"><a href="#原因" class="headerlink" title="原因:"></a>原因:</h2><p>  尚未找到确切原因, 推测是UObject的引用问题, 或者首次运行,在设置了EnhancedInput之后, 引擎有部分逻辑错误又将InputSystem初始化了</p>]]></content>
       
       
       <categories>
