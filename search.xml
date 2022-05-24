@@ -13,7 +13,7 @@
       
       <categories>
           
-          <category> Qt </category>
+          <category> Programing </category>
           
       </categories>
       
@@ -42,14 +42,16 @@
       
       <categories>
           
-          <category> UE4 </category>
+          <category> Programing </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> Enhanced Input </tag>
+            <tag> C++ </tag>
+            
+            <tag> UE4 </tag>
             
         </tags>
       
@@ -67,14 +69,16 @@
       
       <categories>
           
-          <category> UE4 </category>
+          <category> Programing </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> UObject </tag>
+            <tag> C++ </tag>
+            
+            <tag> UE4 </tag>
             
         </tags>
       
@@ -117,7 +121,7 @@
       
       <categories>
           
-          <category> C++ </category>
+          <category> Programing </category>
           
       </categories>
       
@@ -146,7 +150,7 @@
       
       <categories>
           
-          <category> Git </category>
+          <category> Note </category>
           
       </categories>
       
@@ -165,7 +169,7 @@
       
       <categories>
           
-          <category> C++ </category>
+          <category> Programing </category>
           
       </categories>
       
@@ -184,7 +188,7 @@
       
       <categories>
           
-          <category> UE4 </category>
+          <category> Programing </category>
           
       </categories>
       
@@ -193,9 +197,7 @@
             
             <tag> C++ </tag>
             
-            <tag> GAS </tag>
-            
-            <tag> Gameplay Abilities </tag>
+            <tag> UE4 </tag>
             
         </tags>
       
@@ -213,7 +215,7 @@
       
       <categories>
           
-          <category> UE4 </category>
+          <category> Programing </category>
           
       </categories>
       
@@ -222,7 +224,7 @@
             
             <tag> C++ </tag>
             
-            <tag> Note </tag>
+            <tag> UE4 </tag>
             
         </tags>
       
@@ -240,18 +242,16 @@
       
       <categories>
           
-          <category> Qt </category>
+          <category> Programing </category>
           
       </categories>
       
       
         <tags>
             
+            <tag> C++ </tag>
+            
             <tag> Qt </tag>
-            
-            <tag> QModelIndex </tag>
-            
-            <tag> type earse </tag>
             
         </tags>
       
@@ -269,7 +269,7 @@
       
       <categories>
           
-          <category> C++ </category>
+          <category> Programing </category>
           
       </categories>
       
@@ -296,12 +296,14 @@
       
       <categories>
           
-          <category> Qt </category>
+          <category> Programing </category>
           
       </categories>
       
       
         <tags>
+            
+            <tag> C++ </tag>
             
             <tag> Qt </tag>
             
@@ -371,7 +373,7 @@
       
       <categories>
           
-          <category> C++ </category>
+          <category> Programing </category>
           
       </categories>
       
@@ -400,7 +402,7 @@
       
       <categories>
           
-          <category> OpenGL </category>
+          <category> Computer Graphics </category>
           
       </categories>
       
@@ -429,7 +431,7 @@
       
       <categories>
           
-          <category> OpenGL </category>
+          <category> Computer Graphics </category>
           
       </categories>
       
@@ -460,7 +462,7 @@
       
       <categories>
           
-          <category> OpenGL </category>
+          <category> Computer Graphics </category>
           
       </categories>
       
@@ -489,22 +491,16 @@
       
       <categories>
           
-          <category> Qt </category>
+          <category> Programing </category>
           
       </categories>
       
       
         <tags>
             
+            <tag> C++ </tag>
+            
             <tag> Qt </tag>
-            
-            <tag> Layout </tag>
-            
-            <tag> Overlap </tag>
-            
-            <tag> Multilayer Layout </tag>
-            
-            <tag> Custom QLayout </tag>
             
         </tags>
       
@@ -522,7 +518,7 @@
       
       <categories>
           
-          <category> Markdown </category>
+          <category> Note </category>
           
       </categories>
       
@@ -549,7 +545,7 @@
       
       <categories>
           
-          <category> Pelican </category>
+          <category> Note </category>
           
       </categories>
       
@@ -576,7 +572,7 @@
       
       <categories>
           
-          <category> OpenGL </category>
+          <category> Computer Graphics </category>
           
       </categories>
       
@@ -607,18 +603,16 @@
       
       <categories>
           
-          <category> Qt </category>
+          <category> Programing </category>
           
       </categories>
       
       
         <tags>
             
+            <tag> C++ </tag>
+            
             <tag> Qt </tag>
-            
-            <tag> QToolBar </tag>
-            
-            <tag> spacer </tag>
             
         </tags>
       
