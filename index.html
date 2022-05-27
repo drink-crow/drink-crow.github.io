@@ -157,7 +157,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -205,6 +205,90 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://drink-crow.github.io/function_warp_template/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon.ico">
+      <meta itemprop="name" content="drink-crow">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="drink-crow Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/function_warp_template/" class="post-title-link" itemprop="url">函数包装模板</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-05-27 14:27:00 / 修改时间：15:18:00" itemprop="dateCreated datePublished" datetime="2022-05-27T14:27:00+08:00">2022-05-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programing/" itemprop="url" rel="index"><span itemprop="name">Programing</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="普通函数"><a href="#普通函数" class="headerlink" title="普通函数"></a>普通函数</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;utility&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Fn, Fn fn, <span class="keyword">typename</span>... Args&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func_wraper</span><span class="params">(Args... args)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/*do some thing*/</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;hello, &quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">fn</span>(std::forward&lt;Args&gt;(args)...);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*do some thing*/</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot; bye.&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> WRAPER(FUNC) func_wraper<span class="meta-string">&lt;decltype(&amp;FUNC), &amp;FUNC&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func_a</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">    <span class="comment">/*do some thing*/</span> std::cout&lt;&lt;<span class="string">&quot;func_a(&quot;</span>&lt;&lt;i&lt;&lt;<span class="string">&quot;)&quot;</span>;</span><br><span class="line">     &#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">WRAPER</span>(func_a)(<span class="built_in"><span class="keyword">int</span></span>(<span class="number">0</span>));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hello, func_a(0) <span class="built_in">bye</span>.</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/function_warp_template/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -969,82 +1053,6 @@
 <li>当C++基类发生改变时，切记要把对应得蓝图子类切换下父类再切换回来才能应用到正确的数据</li>
 </ul>
 <h2 id="代码热更新问题"><a href="#代码热更新问题" class="headerlink" title="代码热更新问题"></a>代码热更新问题</h2><p>有很多类别都不能在C++代码编译后与立刻而更新到编辑器，比如Enum，函数返回参数等，在代码接口改变后，推荐关闭编辑器重新编译代码再打开</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://drink-crow.github.io/Qt_ModelIndex_typeerase/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/favicon.ico">
-      <meta itemprop="name" content="drink-crow">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="drink-crow Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Qt_ModelIndex_typeerase/" class="post-title-link" itemprop="url">在Qt的ModelIndex中增加数据擦除</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-04-07 11:06:00" itemprop="dateCreated datePublished" datetime="2021-04-07T11:06:00+08:00">2021-04-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Programing/" itemprop="url" rel="index"><span itemprop="name">Programing</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-            <div class="post-description">阐述如何使用QVariant等改造QModelIndex和对应的Model/View框架使其获得更好的数据抽象能力</div>
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="Model-View-Framework"><a href="#Model-View-Framework" class="headerlink" title="Model/View Framework"></a>Model/View Framework</h2><p>Qt中的<code>QTableWidget</code>、<code>QListWidget</code>、<code>QTreeWidge</code>等背后都是一套常见的<code>Model/View</code>架构用户分离显示和数据。一般的自定义<code>View/Model</code>都可以通过继承<code>QAbstractItemView</code>和<code>QAbstractItemModel</code>来快速实现。</p>
-<h2 id="ModelIndex"><a href="#ModelIndex" class="headerlink" title="ModelIndex"></a>ModelIndex</h2><p><code>View/Model</code>中通过<code>ModelIndex</code>来索引，<code>ModelIndex</code>中通过<code>row</code>、<code>col</code>和<code>internalPointer</code>来索引到具体的数据。能够适配到绝大分数据结构。<br>但是也存在很大的问题，就在于<code>internalPointer</code>的类型是一个<code>const void *</code>，会丢失原有类型信息，这就要求<code>internalPointer</code>指向统一中数据结构。但是很多时候是无法把要显示的数据的数据结构都做成同一个虚基类（比如是修改不了的不同的外部连接库的类）。<br>通过传入类型擦除后的数据结构的指针，或者建立一个map表来索引<code>internalPointer</code>到具体的类型信息可以解决一部分问题，但是还有一些致命的问题————无法自动释放<code>internalPointer</code>指向类型擦除数据结构或者即使的清空map表，随着时间的迁移，内存占用会越来越庞大，或者引入了非常复杂的自动释放机制。</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>解决的办法很简单，将<code>internalPointer</code>的类型从<code>const void *</code>替换为<code>QVariant</code>等即可，以<code>QVariant</code>储存类型擦除后的数据结构，不需要修改任何逻辑。<br>不过这样则需要复制下<code>QAbstractItemView</code>、<code>QAbstractItemModel</code>、<code>ModelIndex</code>的源代码，重新构建下应用<code>QVariant</code>的<code>ModelIndex</code>的<code>Model/View</code>框架。</p>
 
       
     </div>

@@ -157,7 +157,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -205,6 +205,82 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://drink-crow.github.io/Qt_ModelIndex_typeerase/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon.ico">
+      <meta itemprop="name" content="drink-crow">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="drink-crow Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Qt_ModelIndex_typeerase/" class="post-title-link" itemprop="url">在Qt的ModelIndex中增加数据擦除</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-04-07 11:06:00" itemprop="dateCreated datePublished" datetime="2021-04-07T11:06:00+08:00">2021-04-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programing/" itemprop="url" rel="index"><span itemprop="name">Programing</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">阐述如何使用QVariant等改造QModelIndex和对应的Model/View框架使其获得更好的数据抽象能力</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="Model-View-Framework"><a href="#Model-View-Framework" class="headerlink" title="Model/View Framework"></a>Model/View Framework</h2><p>Qt中的<code>QTableWidget</code>、<code>QListWidget</code>、<code>QTreeWidge</code>等背后都是一套常见的<code>Model/View</code>架构用户分离显示和数据。一般的自定义<code>View/Model</code>都可以通过继承<code>QAbstractItemView</code>和<code>QAbstractItemModel</code>来快速实现。</p>
+<h2 id="ModelIndex"><a href="#ModelIndex" class="headerlink" title="ModelIndex"></a>ModelIndex</h2><p><code>View/Model</code>中通过<code>ModelIndex</code>来索引，<code>ModelIndex</code>中通过<code>row</code>、<code>col</code>和<code>internalPointer</code>来索引到具体的数据。能够适配到绝大分数据结构。<br>但是也存在很大的问题，就在于<code>internalPointer</code>的类型是一个<code>const void *</code>，会丢失原有类型信息，这就要求<code>internalPointer</code>指向统一中数据结构。但是很多时候是无法把要显示的数据的数据结构都做成同一个虚基类（比如是修改不了的不同的外部连接库的类）。<br>通过传入类型擦除后的数据结构的指针，或者建立一个map表来索引<code>internalPointer</code>到具体的类型信息可以解决一部分问题，但是还有一些致命的问题————无法自动释放<code>internalPointer</code>指向类型擦除数据结构或者即使的清空map表，随着时间的迁移，内存占用会越来越庞大，或者引入了非常复杂的自动释放机制。</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>解决的办法很简单，将<code>internalPointer</code>的类型从<code>const void *</code>替换为<code>QVariant</code>等即可，以<code>QVariant</code>储存类型擦除后的数据结构，不需要修改任何逻辑。<br>不过这样则需要复制下<code>QAbstractItemView</code>、<code>QAbstractItemModel</code>、<code>ModelIndex</code>的源代码，重新构建下应用<code>QVariant</code>的<code>ModelIndex</code>的<code>Model/View</code>框架。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -959,80 +1035,6 @@
 <h2 id="Doubts-疑点"><a href="#Doubts-疑点" class="headerlink" title="Doubts / 疑点"></a>Doubts / 疑点</h2><p>目前存在的一个疑问是————如何保证每一层的顺序呢。从官方例子中的<code>CardLayout::setGeometry</code>中看到的表现是，最后设置geometry的<code>QLayoutItem</code>在最上层，在<code>OverlapLayout</code>实际体验中也是如此表现，但是目前还不确定一定会如此</p>
 <p>使用中发现和层序有关的问题，在<code>QScrollBar</code>第一次触发hover事件的时候，<code>QScrollBar</code>会提到最上面刷新一下，又回到原来的层次，但是有些控件会被挡住。触发下被挡住的控件将恢复正常，且不再出现异常</p>
 <h2 id="Update-1-更新1"><a href="#Update-1-更新1" class="headerlink" title="Update 1 / 更新1"></a>Update 1 / 更新1</h2><p>在使用中发现了控件改变后不能做出有效更新的问题。翻看了<code>QBoxLayout</code>等的源代码后发现里面多处使用到了<code>invalidate()</code>来标记重新计算布局。在源代码中增加其调用后表现正常</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://drink-crow.github.io/Markdown_use_hint/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/favicon.ico">
-      <meta itemprop="name" content="drink-crow">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="drink-crow Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Markdown_use_hint/" class="post-title-link" itemprop="url">不要在Markdown中进行缩进排版</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-12-28 10:50:00" itemprop="dateCreated datePublished" datetime="2020-12-28T10:50:00+08:00">2020-12-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-            <div class="post-description">不要在Markdown中进行缩进排版</div>
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Markdown 中没有排版的概念，所有不要试图花费大力气去进行缩进等排版。各个Markdown渲染对缩进表达各不相同。</p>
 
       
     </div>
