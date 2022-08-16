@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"drink-crow.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="20220812培训会议主讲记录，记录了过程和主讲心得">
+<meta property="og:type" content="article">
+<meta property="og:title" content="培训会议主讲记录20220812">
+<meta property="og:url" content="https://drink-crow.github.io/2022-08-12%E5%9F%B9%E8%AE%AD%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="drink-crow Blog">
+<meta property="og:description" content="20220812培训会议主讲记录，记录了过程和主讲心得">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-16T02:41:00.000Z">
+<meta property="article:modified_time" content="2022-08-16T02:41:00.000Z">
+<meta property="article:author" content="drink-crow">
+<meta property="article:tag" content="Training">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://drink-crow.github.io/2022-08-12%E5%9F%B9%E8%AE%AD%E8%AE%B0%E5%BD%95/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://drink-crow.github.io/2022-08-12%E5%9F%B9%E8%AE%AD%E8%AE%B0%E5%BD%95/","path":"2022-08-12培训记录/","title":"培训会议主讲记录20220812"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>培训会议主讲记录20220812 | drink-crow Blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">drink-crow Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">苟日新 日日新 又日新</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E6%94%B9%E8%BF%9B"><span class="nav-number">1.</span> <span class="nav-text">方法改进</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%B9%E8%AE%AD%E5%86%85%E5%AE%B9"><span class="nav-number">2.</span> <span class="nav-text">培训内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%88%E6%9E%9C%E5%92%8C%E5%BF%83%E5%BE%97"><span class="nav-number">3.</span> <span class="nav-text">效果和心得</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B9%E8%BF%9B"><span class="nav-number">3.1.</span> <span class="nav-text">改进</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%84%E6%96%87"><span class="nav-number">4.</span> <span class="nav-text">附文</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="drink-crow"
+      src="/images/favicon.ico">
+  <p class="site-author-name" itemprop="name">drink-crow</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/drink-crow" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;drink-crow" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:weibaoziisthebest@outlook.com" title="E-Mail → mailto:weibaoziisthebest@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://drink-crow.github.io/2022-08-12%E5%9F%B9%E8%AE%AD%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon.ico">
+      <meta itemprop="name" content="drink-crow">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="drink-crow Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          培训会议主讲记录20220812<a href="https://github.com/drink-crow/blog/edit/master/source/_posts/2022-08-12%E5%9F%B9%E8%AE%AD%E8%AE%B0%E5%BD%95.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-08-16 10:41:00" itemprop="dateCreated datePublished" datetime="2022-08-16T10:41:00+08:00">2022-08-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Training/" itemprop="url" rel="index"><span itemprop="name">Training</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">20220812培训会议主讲记录，记录了过程和主讲心得</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>近一两年来在公司主讲代码培训差不多进行了二三十次，但是感觉效果都不是很好。很难调动起气氛，事后也看不到同事的代码水平有什么提升。深刻的体会到了大学时老师在台上声嘶力竭得讲，看着台下一片混混欲睡的学生是什么感觉</p>
+<h2 id="方法改进"><a href="#方法改进" class="headerlink" title="方法改进"></a>方法改进</h2><p>为了提升培训的效果，本次培训采用了新的方式，以工作中的一个实际问题为例，逐步的讲解如何进行处理。本次的培训分为两部分，一是解决问题的流程以及实战演练，二是进一步深化，讲解设计代码的思路</p>
+<h2 id="培训内容"><a href="#培训内容" class="headerlink" title="培训内容"></a>培训内容</h2><p>解决问题的流程</p>
+<ul>
+<li>首先是找到问题所在</li>
+<li>如何找到对应功能的代码</li>
+<li>如何分析运作的机理</li>
+<li>修改时应当注意的问题/影响范围</li>
+<li>从表面的原因分析出深层的原因</li>
+</ul>
+<p>并从这些实际的例子中，抛砖引玉插入代码设计、编写中的思路技巧经验和注意事项</p>
+<p>然后是深化培训的内容，进一步讲解如何设计优化一项功能</p>
+<ul>
+<li>例举所有的需求</li>
+<li>提出基本的实现流程</li>
+<li>从多个角度去分析、归类需求</li>
+<li>按照分析和归类去整理出总的要求</li>
+<li>设计数据结构</li>
+<li>根据具体的实现去优化迭代设计</li>
+</ul>
+<h2 id="效果和心得"><a href="#效果和心得" class="headerlink" title="效果和心得"></a>效果和心得</h2><p>虽然培训会议持续了足足三个小时，但是总体的效果看起来比以前要好很多。通过<strong>现场演练，和加强提问的互动环节</strong>，听起来总算没那么干巴巴了的。而且根据现场反馈，这样一点点的讲，能够更好的掌握项目原有代码的思路，之前只是对着设计说明书一顿输出，听着云里雾里的，效果不好。</p>
+<p>可能一两次培训难以立刻提升与会人员的代码设计能力和分析水平，毕竟演练中的实际问题作为主讲的我轻描淡写地就解决了，其实背后需要大量的积累。但是至少这个功能，都大概掌握了。</p>
+<p>而且在过程中，像附文那样现场创建一个文档将内容边讲解边记录下来，起到了一个像板书一样的效果，也可以帮助现场理解和集中注意力。同时有一个现场的记录方便回忆和巩固。</p>
+<p>总结上，这次的方式可以延续下来。</p>
+<h3 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h3><ul>
+<li><p>要准备一个更好的电脑。现场演练需要实时地编译代码，这次使用的 mbp 的低压 i5 实在是慢，过慢的编译速度浪费了不少时间和频繁打断了讲解。</p>
+</li>
+<li><p>换上实际的开发环境。这次使用的 vs code，无法满足大型工程的语法智能分析，没有很好跳转代码，浪费了不少时间。</p>
+</li>
+</ul>
+<h2 id="附文"><a href="#附文" class="headerlink" title="附文"></a>附文</h2><p>附当场的主讲记录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">/*******************************************************************************</span><br><span class="line">2022年8月12号星期五15点—18点</span><br><span class="line">与会：全体软件平台组10人</span><br><span class="line">主题：从节点捕捉功能为实例讲述问题解决和代码设计</span><br><span class="line">*******************************************************************************/</span><br><span class="line">节点捕捉到自身</span><br><span class="line">节点捕捉的功能单一，比较简单</span><br><span class="line"></span><br><span class="line">+ 找到代码在哪里</span><br><span class="line">	+ 直接问设计的人，远古代码，领导很忙</span><br><span class="line">	+ 设计文档，文档不全，很难看懂</span><br><span class="line">	+ 自己找</span><br><span class="line">		+ 分析功能的入口，mouseMove</span><br><span class="line">		+ 断点：循环事件每次都触发，无法筛选</span><br><span class="line"></span><br><span class="line">+ 分析运作的机理</span><br><span class="line">	+ 合理的运用断点</span><br><span class="line">	+ 相关的文档</span><br><span class="line">	+ 代码有足够注释</span><br><span class="line">	+ 代码合理的名字和结构是更好的注释</span><br><span class="line"></span><br><span class="line">	qt mouseMoveEvent-》setMouseAutoCapture</span><br><span class="line">	-〉View::AutoCapture-&gt;View::CaptureQuery</span><br><span class="line">	-&gt; 1.Scene::CaptureQuery 2.Mode::CaptureQuery</span><br><span class="line">		在空间索引里面查找，筛选的条件不够</span><br><span class="line">	-&gt; Item::CaptureQuery 线索断了</span><br><span class="line"></span><br><span class="line">	根据 Item::CaptureQuery 的结果来绘制和设置数据</span><br><span class="line">	设置到 VMouseEvent </span><br><span class="line">		</span><br><span class="line">+ 开始修改</span><br><span class="line">	+ Scene::CaptureQuery简单的修改了（增加 IsSelected()的判断）</span><br><span class="line">		带来影响几乎是全局的</span><br><span class="line"></span><br><span class="line">	+ 有别的地方和这里有同样的问题（面向对象，基类子类继承）</span><br><span class="line">	+ 改动会不会影响到别的不需要的地方，带来新的问题</span><br><span class="line"></span><br><span class="line">	+ 应该在 ViewMode 里面改</span><br><span class="line"></span><br><span class="line">	Mode，Scene，管辖的范围重合，</span><br><span class="line">	</span><br><span class="line">	需求：</span><br><span class="line">		+ 针对不同的情况，可以进行特化，且互不影响</span><br><span class="line">	问题</span><br><span class="line">		+ 处理范围重合（返回的情况过于单一，只用一个bool变量进行标示，只能标记有没有查询到</span><br><span class="line">			+ 已经处理，但是没找到需要捕捉到点</span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">	CaptureData 有效的利用起来-》修正流程兼容更多的情况。captureItem也要根据对应的属性重新绘制</span><br><span class="line"></span><br><span class="line">+ 节点、圆心、中点的捕捉</span><br><span class="line">+ 栅格的捕捉</span><br><span class="line">+ 交点、垂点、切点、最近点的捕捉</span><br><span class="line"></span><br><span class="line">+ 程序：</span><br><span class="line">	-》 输入：鼠标位置，捕捉范围</span><br><span class="line"></span><br><span class="line">	（最简单）—》捕捉的范围做空间查询-》对应图形-》（如果是路径对象-》对应线段</span><br><span class="line"></span><br><span class="line">	《- 输出：捕捉的点，捕捉的类型（扩展图像输出）</span><br><span class="line"></span><br><span class="line">分类需求（可以从很多角度去区分）：</span><br><span class="line">	输入需求的角度：</span><br><span class="line">		只需要鼠标点和捕捉范围的（隐藏的意义：剩下所需的属性只需要有对象本身提供）</span><br><span class="line">			节点、圆心、中点、栅格、已有交点的捕捉，只需要 Item::CaptureQuery 自己实现</span><br><span class="line">		需要只是额外的交互对象的：</span><br><span class="line">			交点、垂点、切点、最近点的捕捉（可以指示/储存额外对象）（any，type enum）</span><br><span class="line"></span><br><span class="line">	交互的需求：</span><br><span class="line">		需要提前指示的：圆心（不会一直显示的属性点）-》需要修改流程（多步合作）</span><br><span class="line"></span><br><span class="line">	实现难度：</span><br><span class="line">		交点（同一个图形之间的交点，不同图形之间的交点（不同的子类的））（只做单一对象的交点</span><br><span class="line">			运算速度，设计结构</span><br><span class="line"></span><br><span class="line">数据结构</span><br><span class="line">	CaptureData</span><br><span class="line"></span><br><span class="line">算法，需求，功能</span><br><span class="line">	——》分析好需求-》设计数据结构-》实现调整</span><br><span class="line">	分类。</span><br><span class="line"></span><br><span class="line">课后思考：</span><br><span class="line">	1. 怎么插入栅格的捕捉</span><br><span class="line">	2. 找出这里栅格的实现过程，插入自动的捕捉</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Training/" rel="tag"># Training</a>
+              <a href="/tags/C/" rel="tag"># C++</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/function_warp_template/" rel="prev" title="函数包装模板">
+                  <i class="fa fa-chevron-left"></i> 函数包装模板
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">drink-crow</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
