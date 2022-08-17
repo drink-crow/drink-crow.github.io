@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>合并静态链接库</title>
+      <link href="/%E5%90%88%E5%B9%B6%E9%9D%99%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93/"/>
+      <url>/%E5%90%88%E5%B9%B6%E9%9D%99%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93/</url>
+      
+        <content type="html"><![CDATA[<p>在项目中总会遇到使用很多第三方库库的时候，在CMake中，链接静态库会将依赖添加到使用的新项目中，结果导致输出的静态库需要附上依赖一起使用。</p><p>摘抄了一些搜索得到的记录，还没进行具体实验</p><p>Because a static lib is not much more than an archive of object files, you may be able to extract the object code from each lib and recombine them with ar</p><p>Combining static libraries<br><a href="https://stackoverflow.com/questions/665752/combining-static-libraries">https://stackoverflow.com/questions/665752/combining-static-libraries</a></p><p>Combining several static libraries into one using CMake<br><a href="https://stackoverflow.com/questions/37924383/combining-several-static-libraries-into-one-using-cmake">https://stackoverflow.com/questions/37924383/combining-several-static-libraries-into-one-using-cmake</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Programing </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C++ </tag>
+            
+            <tag> Programing </tag>
+            
+            <tag> Static Library </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>培训会议主讲记录20220812</title>
       <link href="/2022-08-12%E5%9F%B9%E8%AE%AD%E8%AE%B0%E5%BD%95/"/>
       <url>/2022-08-12%E5%9F%B9%E8%AE%AD%E8%AE%B0%E5%BD%95/</url>

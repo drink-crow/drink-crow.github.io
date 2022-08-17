@@ -157,7 +157,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -168,7 +168,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -205,6 +205,100 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://drink-crow.github.io/UE4_Gameplay_Abilities_plugin/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon.ico">
+      <meta itemprop="name" content="drink-crow">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="drink-crow Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/UE4_Gameplay_Abilities_plugin/" class="post-title-link" itemprop="url">UE4 Gameplay Abilities Plugin</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-06-01 14:21:00" itemprop="dateCreated datePublished" datetime="2021-06-01T14:21:00+08:00">2021-06-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-06-05 10:46:00" itemprop="dateModified" datetime="2021-06-05T10:46:00+08:00">2021-06-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programing/" itemprop="url" rel="index"><span itemprop="name">Programing</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">记录使用UE4中的Gameplay Abilities插件</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><h3 id="editor-设置"><a href="#editor-设置" class="headerlink" title="editor 设置"></a>editor 设置</h3><ul>
+<li>插件启用Gameplay Abilities和GameplayTagsEditor</li>
+</ul>
+<h3 id="Native代码设置"><a href="#Native代码设置" class="headerlink" title="Native代码设置"></a>Native代码设置</h3><ul>
+<li>要使用此系统的全部功能，添加”GameplayAbilities”、”GameplayTags”和”GameplayTasks”到项目的”(ProjectName).Build.cs”文件中的 PublicDependencyModuleNames 中。</li>
+<li>继承实现一个<code>UAttributeSet</code>作为属性集</li>
+<li>继承自<code>ACharacter</code>或<code>APown</code>之类的角色文件要同样继承接口<code>IAbilitySystemInterface</code>并添加组件<code>UAbilitySysrtemComponent</code>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/UE4_Gameplay_Abilities_plugin/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -932,82 +1026,6 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">glGenTextures</span>(<span class="number">1</span>, &amp;texture);</span><br><span class="line"><span class="built_in">glBindTexture</span>(GL_TEXTURE_2D, texture);</span><br><span class="line"></span><br><span class="line"><span class="built_in">glTexImage2D</span>(...); </span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置环绕和过滤设置</span></span><br><span class="line"><span class="built_in">glTexParameteri</span>(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);</span><br><span class="line"><span class="built_in">glTexParameteri</span>(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);</span><br><span class="line"><span class="built_in">glTexParameteri</span>(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);</span><br><span class="line"><span class="built_in">glTexParameteri</span>(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自动生成mipmap</span></span><br><span class="line"><span class="comment">//glGenerateMipmap(GL_TEXTURE_2D);</span></span><br></pre></td></tr></table></figure>
 
 <p><code>mipmap</code>和<code>环绕过滤</code>设置至少要有一个，或者<code>glTexImage2D()</code>中设置了mipmap。按照经验，<code>OpenGL</code>，<code>OpenGL ES</code> 中均需要这样设置</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://drink-crow.github.io/GLES_attribute_default_location/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/favicon.ico">
-      <meta itemprop="name" content="drink-crow">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="drink-crow Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/GLES_attribute_default_location/" class="post-title-link" itemprop="url">GLES中attribute中默认位置</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-01-08 10:27:00" itemprop="dateCreated datePublished" datetime="2021-01-08T10:27:00+08:00">2021-01-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Computer-Graphics/" itemprop="url" rel="index"><span itemprop="name">Computer Graphics</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-            <div class="post-description">不同显卡驱动中GLES中attribute的默认位置不相同，使用glGetAttribLocation()确保glVertexAttribPointer()中参数传入正确的位置</div>
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>gles程序遇到了一个在Windows 10 UHD630 下能正确运行却在 macOS 10.15.7 Iris 645却效果不对的问题。macOS下 OpenGL不能抓帧分析，经过了一番努力才发现了问题所在。</p>
-<p>问题在于vertex shader中有好几个attribute, 在glVertexAttribPointer()按照了声明顺序默认了他们的索引。实际上 macOS 下attribute的默认顺序可能是倒过来了。使用了glGetAttribLocation()获取实际索引后，显示效果就正常了。</p>
-<p>在GL3+的时候习惯了在vs中加上layout强制布局。在GLES中没有layout这回事，习惯性地沿用了以前做法，没想到真的出了问题</p>
 
       
     </div>
