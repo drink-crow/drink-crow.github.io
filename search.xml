@@ -4,6 +4,62 @@
   
     
     <entry>
+      <title>代码文件编码设定</title>
+      <link href="/%E4%BB%A3%E7%A0%81%E6%96%87%E4%BB%B6%E7%BC%96%E7%A0%81%E8%AE%BE%E5%AE%9A/"/>
+      <url>/%E4%BB%A3%E7%A0%81%E6%96%87%E4%BB%B6%E7%BC%96%E7%A0%81%E8%AE%BE%E5%AE%9A/</url>
+      
+        <content type="html"><![CDATA[<p>近期同事问到了这个问题，顺便记录一下。首先代码文件的编码和两个地方有关，一是文件本身的编码，二是编译器设置接受的编码。这里两个地方只要对应起来就可以了。</p><p>文件本身编码好处理，在不同的 IDE 中新建的文件默认的编码格式可能各有不同，只要记得检查并改成需要的编码就可以了。另一是处理已有的代码，可以使用脚本自动处理成想要的编码。</p><p>TODO: 补上对应的 python 代码</p><p>另外一个是编译器的编码设置。不同编译器有不同设置，Linux 和 UNIX 基本都是使用 utf-8 作为系统默认编码，相应的 gcc, clang 等也是使用 utf-8 作为默认编码的。在不跨平台的情况下，这两个系统一般是不会遇到文件编码问题的。</p><p>需要注意的是 Windows 下。MSVC 使用的编码设置是系统设定的本地语言和 utf-8 bom。虽然Windows的机内码是 utf-16 le。顾及是为了兼容早期程序和全球化吧，表层的编码使用的是本地编码。例如中国地区用的是 gbk。这时候如果代码文件本身是 utf-8编码的，就有可能出现错误，因为 utf-8 的范围比 gbk 大，有识别不了的字符。而代码文件是 utf-8 bom 开头的就没问题，因为 utf-8 bom 编码的文件，文件开头有固定的标示符，可以直接识别出来，gbk 和 utf-8 就不能直接区分开来。</p><p>在跨平台的情况下，应该采取代码统一用 utf-8 编码，然后工程设置里指定编译器使用 utf-8 编码。例如 CMakeLists.txt 中输出目标为 MSVC 时应该增加 <code>add_compile_options(/utf-8)</code></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Programing </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Programing </tag>
+            
+            <tag> Encoding </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>vscode配置clangd</title>
+      <link href="/vscode%E9%85%8D%E7%BD%AEclangd/"/>
+      <url>/vscode%E9%85%8D%E7%BD%AEclangd/</url>
+      
+        <content type="html"><![CDATA[<p>vscode配置clangd注意事项</p><ul><li>需要clang++和安装clangd，可以让vscode 拓展自动下载</li><li>无法找到 qt 目录<br>搭配 CMake 使用会省去很多麻烦,在 clangd.arguments 里面增加 “–compile-commands-dir=${workspaceFolder}/build”<br>具体的目录是配置的compile_commands.json所在的目录，这样就可以自动的配置好qt目录<br>CMake 有些输出目标不会生成 compile_commands.json，可以手动制定</li><li>无法找到stl目录<br>clangd.arguments 增加 “–query-driver=/usr/bin/clang++” 手动置顶编译器目录来解决<br><a href="https://clangd.llvm.org/troubleshooting.html">官网相关链接</a><br>有些bug，好像需要编译一次才能找到标准库目录</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Programing </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C++ </tag>
+            
+            <tag> Programing </tag>
+            
+            <tag> clangd </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>合并静态链接库</title>
       <link href="/%E5%90%88%E5%B9%B6%E9%9D%99%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93/"/>
       <url>/%E5%90%88%E5%B9%B6%E9%9D%99%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93/</url>

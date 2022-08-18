@@ -157,7 +157,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -168,7 +168,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -205,6 +205,164 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://drink-crow.github.io/%E4%BB%A3%E7%A0%81%E6%96%87%E4%BB%B6%E7%BC%96%E7%A0%81%E8%AE%BE%E5%AE%9A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon.ico">
+      <meta itemprop="name" content="drink-crow">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="drink-crow Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/%E4%BB%A3%E7%A0%81%E6%96%87%E4%BB%B6%E7%BC%96%E7%A0%81%E8%AE%BE%E5%AE%9A/" class="post-title-link" itemprop="url">代码文件编码设定</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-08-18 10:45:00" itemprop="dateCreated datePublished" datetime="2022-08-18T10:45:00+08:00">2022-08-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programing/" itemprop="url" rel="index"><span itemprop="name">Programing</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">记录代码文件中的编码设置</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>近期同事问到了这个问题，顺便记录一下。首先代码文件的编码和两个地方有关，一是文件本身的编码，二是编译器设置接受的编码。这里两个地方只要对应起来就可以了。</p>
+<p>文件本身编码好处理，在不同的 IDE 中新建的文件默认的编码格式可能各有不同，只要记得检查并改成需要的编码就可以了。另一是处理已有的代码，可以使用脚本自动处理成想要的编码。</p>
+<p>TODO: 补上对应的 python 代码</p>
+<p>另外一个是编译器的编码设置。不同编译器有不同设置，Linux 和 UNIX 基本都是使用 utf-8 作为系统默认编码，相应的 gcc, clang 等也是使用 utf-8 作为默认编码的。在不跨平台的情况下，这两个系统一般是不会遇到文件编码问题的。</p>
+<p>需要注意的是 Windows 下。MSVC 使用的编码设置是系统设定的本地语言和 utf-8 bom。虽然Windows的机内码是 utf-16 le。顾及是为了兼容早期程序和全球化吧，表层的编码使用的是本地编码。例如中国地区用的是 gbk。这时候如果代码文件本身是 utf-8编码的，就有可能出现错误，因为 utf-8 的范围比 gbk 大，有识别不了的字符。而代码文件是 utf-8 bom 开头的就没问题，因为 utf-8 bom 编码的文件，文件开头有固定的标示符，可以直接识别出来，gbk 和 utf-8 就不能直接区分开来。</p>
+<p>在跨平台的情况下，应该采取代码统一用 utf-8 编码，然后工程设置里指定编译器使用 utf-8 编码。例如 CMakeLists.txt 中输出目标为 MSVC 时应该增加 <code>add_compile_options(/utf-8)</code></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://drink-crow.github.io/vscode%E9%85%8D%E7%BD%AEclangd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon.ico">
+      <meta itemprop="name" content="drink-crow">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="drink-crow Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/vscode%E9%85%8D%E7%BD%AEclangd/" class="post-title-link" itemprop="url">vscode配置clangd</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-08-18 10:40:00" itemprop="dateCreated datePublished" datetime="2022-08-18T10:40:00+08:00">2022-08-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programing/" itemprop="url" rel="index"><span itemprop="name">Programing</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">记录 vscode 配置 clangd 的一些注意事项</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>vscode配置clangd注意事项</p>
+<ul>
+<li>需要clang++和安装clangd，可以让vscode 拓展自动下载</li>
+<li>无法找到 qt 目录<br>搭配 CMake 使用会省去很多麻烦,在 clangd.arguments 里面增加 “–compile-commands-dir=${workspaceFolder}/build”<br>具体的目录是配置的compile_commands.json所在的目录，这样就可以自动的配置好qt目录<br>CMake 有些输出目标不会生成 compile_commands.json，可以手动制定</li>
+<li>无法找到stl目录<br>clangd.arguments 增加 “–query-driver=/usr/bin/clang++” 手动置顶编译器目录来解决<br><a target="_blank" rel="noopener" href="https://clangd.llvm.org/troubleshooting.html">官网相关链接</a><br>有些bug，好像需要编译一次才能找到标准库目录</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -863,189 +1021,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/Dependent_name/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://drink-crow.github.io/GitHub_Action_ssh_key/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/favicon.ico">
-      <meta itemprop="name" content="drink-crow">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="drink-crow Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/GitHub_Action_ssh_key/" class="post-title-link" itemprop="url">记录一个SSH key无法被Github Action使用的问题</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-01-05 14:22:00" itemprop="dateCreated datePublished" datetime="2022-01-05T14:22:00+08:00">2022-01-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-            <div class="post-description">记录一个特定参数生成的SSH key无法被Github Action使用的问题</div>
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在blog切换到<code>Hexo</code>同时使用Github Actions来实现CI/CD时，遇到了一个奇怪的问题。<br>使用下面代码生成的ssh Key无法被Github Actions使用</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096 -C <span class="string">&quot;Hexo Deploy Key&quot;</span> -f github-deploy-key -N <span class="string">&quot;namespace&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>下面代码生成的Key则可以</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 要保持passphase为空</span></span><br><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;username@example.com&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>暂不清除是<code>passphase</code>的问题还是<code>-b -N</code>等参数带来的问题</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://drink-crow.github.io/Boost_msm_transition_table_vector/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/favicon.ico">
-      <meta itemprop="name" content="drink-crow">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="drink-crow Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Boost_msm_transition_table_vector/" class="post-title-link" itemprop="url">Boost.MSM中transition_table和state_flod的容量问题</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-01-05 13:44:00" itemprop="dateCreated datePublished" datetime="2022-01-05T13:44:00+08:00">2022-01-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-01-06 11:38:00" itemprop="dateModified" datetime="2022-01-06T11:38:00+08:00">2022-01-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Programing/" itemprop="url" rel="index"><span itemprop="name">Programing</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-            <div class="post-description">Boost.MSM中使用了模板元编程中的mpl::vector来记录事件表。示例代码中使用的mpl::vector是比较老的代码，有数量限制，使用Boost::Fusion::vector来解除限制</div>
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p><del>示例代码里的<code>struct transition_table : mpl::vector</code>改为继承<code>boost::fusion::vector</code></del><br><del>在C++11的标准下就能解放vector容量上限</del><br><a target="_blank" rel="noopener" href="https://www.boost.org/doc/libs/1_78_0/libs/msm/doc/HTML/ch05.html">根据Boost中的解释</a>  </p>
-<blockquote>
-<p>Question: Why do I get a very long compile error when I define more than 20 rows in the transition table?  </p>
-<p>Answer: MSM uses Boost.MPL under the hood and this is the default maximum size. Please define the following 3 macros before including any MSM headers:  </p>
-<pre><code>#define BOOST_MPL_CFG_NO_PREPROCESSED_HEADERS  
-#define BOOST_MPL_LIMIT_VECTOR_SIZE 30 // or whatever you need  
-#define BOOST_MPL_LIMIT_MAP_SIZE 30 // or whatever you need  
-</code></pre>
-<p>Question: Why do I get this error: ”error C2977: ‘boost::mpl::vector’ : too many template arguments”?  </p>
-<p>Answer: The first possibility is that you defined a transition table as, say, vector17 and have 18 entries. The second is that you have 17 entries and have a composite state. Under the hood, MSM adds a row for every event in the composite transition table. The third one is that you used a mpl::vector without the number of entries but are close to the MPL default of 50 and have a composite, thus pushing you above 50. Then you need mpl/vector60/70….hpp and a mpl/map60/70….hpp  </p>
-<p>Question: Why do I get a very long compile error when I define more than 10 states in a state machine?  </p>
-<p>Answer: MSM uses Boost.Fusion under the hood and this is the default maximum size. Please define the following macro before including any MSM headers:  </p>
-<pre><code>#define FUSION_MAX_VECTOR_SIZE 20 // or whatever you need 
-</code></pre>
-</blockquote>
-<p>在不预定义宏的情况下无法修改。而且哪怕定义了，也是支撑不起大规模的状态机的（需要自己实现mpl/map60等等）  </p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Boost_msm_transition_table_vector/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
