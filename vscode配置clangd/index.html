@@ -271,8 +271,8 @@
         <p>vscode配置clangd注意事项</p>
 <ul>
 <li>需要clang++和安装clangd，可以让vscode 拓展自动下载</li>
-<li>无法找到 qt 目录<br>搭配 CMake 使用会省去很多麻烦,在 clangd.arguments 里面增加 “–compile-commands-dir=${workspaceFolder}/build”<br>具体的目录是配置的compile_commands.json所在的目录，这样就可以自动的配置好qt目录<br>CMake 有些输出目标不会生成 compile_commands.json，可以手动制定</li>
-<li>无法找到stl目录<br>clangd.arguments 增加 “–query-driver=/usr/bin/clang++” 手动置顶编译器目录来解决<br><a target="_blank" rel="noopener" href="https://clangd.llvm.org/troubleshooting.html">官网相关链接</a><br>有些bug，好像需要编译一次才能找到标准库目录</li>
+<li>无法找到 qt 目录<br>搭配 CMake 使用会省去很多麻烦,在 clangd.arguments 里面增加 <code>&quot;--compile-commands-dir=$&#123;workspaceFolder&#125;/build&quot;</code><br>具体的目录是配置的compile_commands.json所在的目录，这样就可以自动的配置好qt目录<br>CMake 有些输出目标不会生成 compile_commands.json，可以手动制定</li>
+<li>无法找到stl目录<br>clangd.arguments 增加 <code>&quot;--query-driver=/usr/bin/clang++&quot;</code> 手动置顶编译器目录来解决<br><a target="_blank" rel="noopener" href="https://clangd.llvm.org/troubleshooting.html">官网相关链接</a><br>有些bug，好像需要编译一次才能找到标准库目录</li>
 </ul>
 
     </div>
