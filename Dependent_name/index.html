@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.0.0">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
@@ -16,10 +15,11 @@
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2/css/all.min.css" integrity="sha256-xejo6yLi6vGtAjcMIsY8BHdKsLg7QynVlFMzdQgUuy8=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"drink-crow.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="记录了一个遇到的 Dependent name 的问题。Dependent name 通常出现在模板里面，源于代码语法释义时，字符所代表的含义依赖于上下文，所以需要显示标记类型">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"drink-crow.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.3","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="记录了一个遇到的 Dependent name 的问题。Dependent name 通常出现在模板里面，源于代码语法释义时，字符所代表的含义依赖于上下文，所以需要显示标记类型">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Dependent names">
 <meta property="og:url" content="https://drink-crow.github.io/Dependent_name/index.html">
@@ -44,6 +44,8 @@
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>Dependent names | drink-crow Blog</title>
   
+
+
 
 
 
@@ -87,12 +89,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -163,7 +160,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -174,7 +171,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -226,11 +223,16 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/favicon.ico">
       <meta itemprop="name" content="drink-crow">
-      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="drink-crow Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Dependent names | drink-crow Blog">
+      <meta itemprop="description" content="记录了一个遇到的 Dependent name 的问题。Dependent name 通常出现在模板里面，源于代码语法释义时，字符所代表的含义依赖于上下文，所以需要显示标记类型">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -269,18 +271,18 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>编译下述代码时遇到了第一次遇到的问题  </p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将boost::geometry中的box转换成自定义的Boundary</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> NumType = <span class="keyword">double</span>&gt;</span><br><span class="line">    Boundary&lt;NumType, <span class="number">2</span>&gt; <span class="built_in">fromBoost</span>(</span><br><span class="line">        <span class="keyword">const</span> boost::geometry::model::box&lt;boost::geometry::model::point&lt;NumType, <span class="number">2</span>,boost::geometry::cs::cartesian&gt;&gt;&amp; box)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> Boundary&lt;NumType, <span class="number">2</span>&gt;(Vec&lt;NumType,<span class="number">2</span>&gt;(box.<span class="built_in">min_corner</span>().get&lt;<span class="number">0</span>&gt;(), box.<span class="built_in">min_corner</span>().get&lt;<span class="number">1</span>&gt;()),</span><br><span class="line">            Vec&lt;NumType, <span class="number">2</span>&gt;(box.<span class="built_in">max_corner</span>().get&lt;<span class="number">0</span>&gt;(), box.<span class="built_in">max_corner</span>().get&lt;<span class="number">1</span>&gt;()));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将boost::geometry中的box转换成自定义的Boundary</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> NumType = <span class="type">double</span>&gt;</span><br><span class="line">    Boundary&lt;NumType, <span class="number">2</span>&gt; <span class="built_in">fromBoost</span>(</span><br><span class="line">        <span class="type">const</span> boost::geometry::model::box&lt;boost::geometry::model::point&lt;NumType, <span class="number">2</span>,boost::geometry::cs::cartesian&gt;&gt;&amp; box)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Boundary</span>&lt;NumType, <span class="number">2</span>&gt;(<span class="built_in">Vec</span>&lt;NumType,<span class="number">2</span>&gt;(box.<span class="built_in">min_corner</span>().<span class="built_in">get</span>&lt;<span class="number">0</span>&gt;(), box.<span class="built_in">min_corner</span>().<span class="built_in">get</span>&lt;<span class="number">1</span>&gt;()),</span><br><span class="line">            <span class="built_in">Vec</span>&lt;NumType, <span class="number">2</span>&gt;(box.<span class="built_in">max_corner</span>().<span class="built_in">get</span>&lt;<span class="number">0</span>&gt;(), box.<span class="built_in">max_corner</span>().<span class="built_in">get</span>&lt;<span class="number">1</span>&gt;()));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
 <p>这段代码在 VS2019 C++17 的标准下能编译过了，但是在 Apple Clang 下检查时，<code>box.min_corner().get&lt;0&gt;()</code> 等函数却报了一个第一次见的错误</p>
 <span id="more"></span>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">missing &#x27;template&#x27; keyword prior to dependent template name &#x27;get&#x27;</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">missing &#x27;template&#x27; keyword prior to dependent template name &#x27;get&#x27;</span><br></pre></td></tr></table></figure>
 
 <p>查询了一下，发现是 C++ 模板里面的内容<a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/language/dependent_name">Dependent names</a>，内容有不少，大致的概括下就是代码在语法解析时，有时候可以同时表示多种意思，这时候编译器需要手工添加的一些标识来确认需要的是什么意思（特别是在模板中）。例如下面模板代码中</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T * t</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T * t</span><br></pre></td></tr></table></figure>
 
 <p>如果T是一个类型名，那则声明了一个指针，如果T是一个变量则进行operator*()，所以T是并不是一个明确的声明，这时候就是一个 dependent name，依赖于上下文才能明确表明它是什么。<br>所以一开始的代码要改为  </p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> NumType = <span class="keyword">double</span>&gt;</span><br><span class="line">Boundary&lt;NumType, <span class="number">2</span>&gt; <span class="built_in">fromBoost</span>(</span><br><span class="line">    <span class="keyword">const</span> boost::geometry::model::box&lt;boost::geometry::model::point&lt;NumType, <span class="number">2</span>,boost::geometry::cs::cartesian&gt;&gt;&amp; box)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">using</span> point = boost::geometry::model::point&lt;NumType, <span class="number">2</span>,boost::geometry::cs::cartesian&gt;;</span><br><span class="line">    <span class="keyword">return</span> Boundary&lt;NumType, <span class="number">2</span>&gt;(Vec&lt;NumType,<span class="number">2</span>&gt;(box.<span class="built_in">min_corner</span>().<span class="keyword">template</span> get&lt;<span class="number">0</span>&gt;(), box.<span class="built_in">min_corner</span>().<span class="keyword">template</span> get&lt;<span class="number">1</span>&gt;()),</span><br><span class="line">        Vec&lt;NumType, <span class="number">2</span>&gt;(box.<span class="built_in">max_corner</span>().<span class="keyword">template</span> get&lt;<span class="number">0</span>&gt;(), box.<span class="built_in">max_corner</span>().<span class="keyword">template</span> get&lt;<span class="number">1</span>&gt;()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> NumType = <span class="type">double</span>&gt;</span><br><span class="line">Boundary&lt;NumType, <span class="number">2</span>&gt; <span class="built_in">fromBoost</span>(</span><br><span class="line">    <span class="type">const</span> boost::geometry::model::box&lt;boost::geometry::model::point&lt;NumType, <span class="number">2</span>,boost::geometry::cs::cartesian&gt;&gt;&amp; box)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">using</span> point = boost::geometry::model::point&lt;NumType, <span class="number">2</span>,boost::geometry::cs::cartesian&gt;;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Boundary</span>&lt;NumType, <span class="number">2</span>&gt;(<span class="built_in">Vec</span>&lt;NumType,<span class="number">2</span>&gt;(box.<span class="built_in">min_corner</span>().<span class="keyword">template</span> <span class="built_in">get</span>&lt;<span class="number">0</span>&gt;(), box.<span class="built_in">min_corner</span>().<span class="keyword">template</span> <span class="built_in">get</span>&lt;<span class="number">1</span>&gt;()),</span><br><span class="line">        <span class="built_in">Vec</span>&lt;NumType, <span class="number">2</span>&gt;(box.<span class="built_in">max_corner</span>().<span class="keyword">template</span> <span class="built_in">get</span>&lt;<span class="number">0</span>&gt;(), box.<span class="built_in">max_corner</span>().<span class="keyword">template</span> <span class="built_in">get</span>&lt;<span class="number">1</span>&gt;()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>还是第一次知道<code>.</code>的和<code>-&gt;</code>操作符后面是可以接<code>template</code>的  </p>
 
@@ -356,6 +358,12 @@
   
 
 
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 
