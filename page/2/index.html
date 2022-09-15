@@ -154,7 +154,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -165,7 +165,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -202,6 +202,85 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://drink-crow.github.io/UE4_Object_Init/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon.ico">
+      <meta itemprop="name" content="drink-crow">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="drink-crow Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | drink-crow Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/UE4_Object_Init/" class="post-title-link" itemprop="url">UObject PostInit 问题</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-04-14 10:28:00" itemprop="dateCreated datePublished" datetime="2022-04-14T10:28:00+08:00">2022-04-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programing/" itemprop="url" rel="index"><span itemprop="name">Programing</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">记录UE4中UObject初始化注意的问题</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>由于UE4的反射系统，应当慎重把握UObject对象的游戏性初始化时机。例如一个UObject对象，需要创建另一个UObject并持续引用时，则不应再PostInit中创建。这样会导致继承该UObject的蓝图，在保存时会运行一次PostInit，从而试图保存一个动态创建的UObject。<br>从另外一个角度来说，在UE4 editor中，由于代码热加载&#x2F;编辑器多次运行地图，对象有可能在任何时候进行调用设置的游戏性初始化设置。而一般的设想中，这些游戏性初始化的顺序都是按照编写的逻辑线性运行，而这里由于为了实现编辑器的动态加载功能，有很多初始化将会被多次运行，但UOBject并不是完全重新初始化。所以需要仔细安排进入和退出代码。同时在网络环境，也会出现这种时序不对的问题，所以代码逻辑不能按照一般的线性逻辑去编写</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1040,99 +1119,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://drink-crow.github.io/Rectangle_Packing_Algorithm/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/favicon.ico">
-      <meta itemprop="name" content="drink-crow">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="drink-crow Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | drink-crow Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Rectangle_Packing_Algorithm/" class="post-title-link" itemprop="url">二维矩形排样/Rectangle Packing</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-01-13 16:46:00" itemprop="dateCreated datePublished" datetime="2021-01-13T16:46:00+08:00">2021-01-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-            <div class="post-description">研究矩形打包算法</div>
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><em><strong><u>现在的确是没时间研究。先把项目的进度推进了。记录研究过程回过头有时间再看看</u></strong></em></p>
-<p>研究的起因在做图形引擎里的文字绘制功能，准备把字符纹理填充到一张、多张纹理，以减少drawcall。搜索了一番，发现事情并不简单，这个关于空间利用效率的算法有很多应用场所————计算机纹理打包，板材切割，集装箱打包货物等等。</p>
-<p>简单的搜索了下，用中文基本没搜出啥有用的信息，用的关键字————矩形打包算法、排料算法<br>知网找了写有关的，比较新的论文看了下</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://kns.cnki.net/kcms/detail/detail.aspx?dbcode=CJFD&dbname=CJFDAUTO&filename=DYJE202012011&v=w1jssesbP2jiFm3%25mmd2BrHJJuxe5mFZEgs4YZnsboPjSMgzSr%25mmd2BTqlZ0H%25mmd2Fwwt51KVRCGg">曾晓亮,吴琼,袁旭华.二维矩形件排样问题的自适应多岛遗传算法优化[J].锻压技术,2020,45(12):53-58.</a><br><a href="%E4%BA%8C%E7%BB%B4%E7%9F%A9%E5%BD%A2%E4%BB%B6%E6%8E%92%E6%A0%B7%E9%97%AE%E9%A2%98%E7%9A%84%E8%87%AA%E9%80%82%E5%BA%94%E5%A4%9A%E5%B2%9B%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95%E4%BC%98%E5%8C%96_%E6%9B%BE%E6%99%93%E4%BA%AE.pdf">直接下载</a></li>
-</ul>
-<p><em><strong><u>中文基本确定只有知网里没看过的文章值得再看看，搜索引擎的不用浪费时间</u></strong></em></p>
-<p>英文搜索了下，关键字基本可以锁定在<code>packing</code>、<code>nesting</code>。先找了写有关的页面看了下</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.david-colson.com/2020/03/10/exploring-rect-packing.html">David Colson, Exploring rectangle packing algorithms</a><br> 这篇博文的作者的研究动机和我非常像，打包字符的纹理到同一张贴图中</li>
-</ul>
-<p><em><strong><u>英文的没怎么细看，随便搜搜看了下，有用的信息不少，可以花时间搜索细看</u></strong></em></p>
-<h2 id="一步到胃"><a href="#一步到胃" class="headerlink" title="一步到胃"></a>一步到胃</h2><p>知名的C算法库<a target="_blank" rel="noopener" href="https://github.com/nothings/stb">stb</a>&#x2F;<code>stb_rect_pack.h</code>，无私奉献的公共领域许可。<br>看了下介绍，效果不太好。不过现在只需要一个大概能用的就行。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 </div>
