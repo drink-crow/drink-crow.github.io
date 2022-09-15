@@ -145,7 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-x2F-View-Framework"><span class="nav-number">1.</span> <span class="nav-text">Model&#x2F;View Framework</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ModelIndex"><span class="nav-number">2.</span> <span class="nav-text">ModelIndex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Solution"><span class="nav-number">3.</span> <span class="nav-text">Solution</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#modelview-framework"><span class="nav-number">1.</span> <span class="nav-text"> Model&#x2F;View Framework</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#modelindex"><span class="nav-number">2.</span> <span class="nav-text"> ModelIndex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#solution"><span class="nav-number">3.</span> <span class="nav-text"> Solution</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -270,9 +270,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="Model-x2F-View-Framework"><a href="#Model-x2F-View-Framework" class="headerlink" title="Model&#x2F;View Framework"></a>Model&#x2F;View Framework</h2><p>Qt中的<code>QTableWidget</code>、<code>QListWidget</code>、<code>QTreeWidge</code>等背后都是一套常见的<code>Model/View</code>架构用户分离显示和数据。一般的自定义<code>View/Model</code>都可以通过继承<code>QAbstractItemView</code>和<code>QAbstractItemModel</code>来快速实现。</p>
-<h2 id="ModelIndex"><a href="#ModelIndex" class="headerlink" title="ModelIndex"></a>ModelIndex</h2><p><code>View/Model</code>中通过<code>ModelIndex</code>来索引，<code>ModelIndex</code>中通过<code>row</code>、<code>col</code>和<code>internalPointer</code>来索引到具体的数据。能够适配到绝大分数据结构。<br>但是也存在很大的问题，就在于<code>internalPointer</code>的类型是一个<code>const void *</code>，会丢失原有类型信息，这就要求<code>internalPointer</code>指向统一中数据结构。但是很多时候是无法把要显示的数据的数据结构都做成同一个虚基类（比如是修改不了的不同的外部连接库的类）。<br>通过传入类型擦除后的数据结构的指针，或者建立一个map表来索引<code>internalPointer</code>到具体的类型信息可以解决一部分问题，但是还有一些致命的问题————无法自动释放<code>internalPointer</code>指向类型擦除数据结构或者即使的清空map表，随着时间的迁移，内存占用会越来越庞大，或者引入了非常复杂的自动释放机制。</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>解决的办法很简单，将<code>internalPointer</code>的类型从<code>const void *</code>替换为<code>QVariant</code>等即可，以<code>QVariant</code>储存类型擦除后的数据结构，不需要修改任何逻辑。<br>不过这样则需要复制下<code>QAbstractItemView</code>、<code>QAbstractItemModel</code>、<code>ModelIndex</code>的源代码，重新构建下应用<code>QVariant</code>的<code>ModelIndex</code>的<code>Model/View</code>框架。</p>
+        <h2 id="modelview-framework"><a class="markdownIt-Anchor" href="#modelview-framework"></a> Model/View Framework</h2>
+<p>Qt中的<code>QTableWidget</code>、<code>QListWidget</code>、<code>QTreeWidge</code>等背后都是一套常见的<code>Model/View</code>架构用户分离显示和数据。一般的自定义<code>View/Model</code>都可以通过继承<code>QAbstractItemView</code>和<code>QAbstractItemModel</code>来快速实现。</p>
+<h2 id="modelindex"><a class="markdownIt-Anchor" href="#modelindex"></a> ModelIndex</h2>
+<p><code>View/Model</code>中通过<code>ModelIndex</code>来索引，<code>ModelIndex</code>中通过<code>row</code>、<code>col</code>和<code>internalPointer</code>来索引到具体的数据。能够适配到绝大分数据结构。<br />
+但是也存在很大的问题，就在于<code>internalPointer</code>的类型是一个<code>const void *</code>，会丢失原有类型信息，这就要求<code>internalPointer</code>指向统一中数据结构。但是很多时候是无法把要显示的数据的数据结构都做成同一个虚基类（比如是修改不了的不同的外部连接库的类）。<br />
+通过传入类型擦除后的数据结构的指针，或者建立一个map表来索引<code>internalPointer</code>到具体的类型信息可以解决一部分问题，但是还有一些致命的问题————无法自动释放<code>internalPointer</code>指向类型擦除数据结构或者即使的清空map表，随着时间的迁移，内存占用会越来越庞大，或者引入了非常复杂的自动释放机制。</p>
+<h2 id="solution"><a class="markdownIt-Anchor" href="#solution"></a> Solution</h2>
+<p>解决的办法很简单，将<code>internalPointer</code>的类型从<code>const void *</code>替换为<code>QVariant</code>等即可，以<code>QVariant</code>储存类型擦除后的数据结构，不需要修改任何逻辑。<br />
+不过这样则需要复制下<code>QAbstractItemView</code>、<code>QAbstractItemModel</code>、<code>ModelIndex</code>的源代码，重新构建下应用<code>QVariant</code>的<code>ModelIndex</code>的<code>Model/View</code>框架。</p>
 
     </div>
 
@@ -349,8 +355,9 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
-<script src="/js/third-party/math/mathjax.js"></script>
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha256-uik/hNqHWZldXh/0K35nqOSCff9F61/ZOFReqNOBgB0=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
 
 
 

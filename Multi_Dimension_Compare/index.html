@@ -144,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#TODO"><span class="nav-number">1.</span> <span class="nav-text">TODO</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#todo"><span class="nav-number">1.</span> <span class="nav-text"> TODO</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -269,16 +269,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>使用set&#x2F;map需要一个对储存元素比较大小的算法，很多时候会用上向量、矩阵的储存。一般来说是这样  </p>
+        <p>使用set/map需要一个对储存元素比较大小的算法，很多时候会用上向量、矩阵的储存。一般来说是这样</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">vec4</span> &#123;</span><br><span class="line">    <span class="type">double</span> x,y,z,w;</span><br><span class="line"></span><br><span class="line">    <span class="type">bool</span> <span class="keyword">operator</span>&lt;(cosnt vec4&amp; r) <span class="type">const</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(x &lt; r.x) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(x &gt; r.x) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(y &lt; r.y) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(y &gt; r.y) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(z &lt; r.z) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(z &gt; r.z) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(w &lt; r.x) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>需要多次比较，对CPU来说不够友好，特别是通常来说一次查找需要多次比较<br><code>Boost</code>里面给出的方法是<a target="_blank" rel="noopener" href="https://www.boost.org/doc/libs/1_76_0/doc/html/hash/reference.html">多次hash</a>，而且不保证严格正确  </p>
+<p>需要多次比较，对CPU来说不够友好，特别是通常来说一次查找需要多次比较<br />
+<code>Boost</code>里面给出的方法是<a target="_blank" rel="noopener" href="https://www.boost.org/doc/libs/1_76_0/doc/html/hash/reference.html">多次hash</a>，而且不保证严格正确</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">size_t</span> seed = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(; first != last; ++first)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">hash_combine</span>(seed, *first);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> seed;</span><br></pre></td></tr></table></figure>
 <span id="more"></span>
-<p>自己想了一个算法。大概就是每一个维度，抽象的视为一位数，vec4就是一个4位数，vec5就是一个5位数，而比较大小，则可以两个对象抽象成的两个数字，逐位比较大小，当小于的情况出现比大于早时，就是A小于B。其实和最上面的方法很像，但是不立刻放回，而是储存所有的结果，再一次性比较返回，主要优化的地方在减少了分支预测（未测试）  </p>
+<p>自己想了一个算法。大概就是每一个维度，抽象的视为一位数，vec4就是一个4位数，vec5就是一个5位数，而比较大小，则可以两个对象抽象成的两个数字，逐位比较大小，当小于的情况出现比大于早时，就是A小于B。其实和最上面的方法很像，但是不立刻放回，而是储存所有的结果，再一次性比较返回，主要优化的地方在减少了分支预测（未测试）</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="type">size_t</span> D&gt;</span><br><span class="line"><span class="type">bool</span> <span class="keyword">operator</span>&lt;(<span class="type">const</span> vec&lt;D&gt;&amp; A, <span class="type">const</span> vec&lt;D&gt;&amp; B)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">size_t</span> min = <span class="number">0</span>, max = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">size_t</span> i = <span class="number">0</span>; i != D; ++i) <span class="comment">// 由编译器做展开优化</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 用三元操作符消去分支预测的影响</span></span><br><span class="line">        min = A[i] &lt; B[i] ? min | (<span class="number">1</span> &lt; i) : min;</span><br><span class="line">        max = A[i] &gt; B[i] ? max | (<span class="number">1</span> &lt; i) : max;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> min &gt; max;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><p>上面代码未经测试，应该找个时间测试下</p>
+<h2 id="todo"><a class="markdownIt-Anchor" href="#todo"></a> TODO</h2>
+<p>上面代码未经测试，应该找个时间测试下</p>
 
     </div>
 
@@ -354,8 +354,9 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
-<script src="/js/third-party/math/mathjax.js"></script>
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha256-uik/hNqHWZldXh/0K35nqOSCff9F61/ZOFReqNOBgB0=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
 
 
 

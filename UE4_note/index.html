@@ -145,7 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#UE4-attach-%E8%B0%83%E8%AF%95%E6%B5%81%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">UE4 attach 调试流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E8%AF%BB%E5%8F%96%E8%93%9D%E5%9B%BE%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">C++ 读取蓝图类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A5C-%E4%B8%BA%E5%9F%BA%E7%B1%BB%E7%9A%84%E8%93%9D%E5%9B%BE%E7%B1%BB"><span class="nav-number">3.</span> <span class="nav-text">以C++为基类的蓝图类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%83%AD%E6%9B%B4%E6%96%B0%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">代码热更新问题</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ue4-attach-%E8%B0%83%E8%AF%95%E6%B5%81%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text"> UE4 attach 调试流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#c-%E8%AF%BB%E5%8F%96%E8%93%9D%E5%9B%BE%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text"> C++ 读取蓝图类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A5c%E4%B8%BA%E5%9F%BA%E7%B1%BB%E7%9A%84%E8%93%9D%E5%9B%BE%E7%B1%BB"><span class="nav-number">3.</span> <span class="nav-text"> 以C++为基类的蓝图类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%83%AD%E6%9B%B4%E6%96%B0%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text"> 代码热更新问题</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -280,22 +280,25 @@
         <ul>
 <li>Charactor 中开启物理模拟(Simulate Physics)后会使Movement component失效</li>
 </ul>
-<h2 id="UE4-attach-调试流程"><a href="#UE4-attach-调试流程" class="headerlink" title="UE4 attach 调试流程"></a>UE4 attach 调试流程</h2><ol>
+<h2 id="ue4-attach-调试流程"><a class="markdownIt-Anchor" href="#ue4-attach-调试流程"></a> UE4 attach 调试流程</h2>
+<ol>
 <li>VS IDE中选择的工程配置要和Editor中要一直，鼠标在UE Editor左上角项目名字悬停看弹出的配置信息，一般都是Development</li>
 <li>VS中不用编译，直接attach到UE Editor</li>
 <li>在UE Editor中点编译，多点几次，有时候代码可能会没有热更新上去</li>
 <li>运行时就能命中VS中设置的断点了</li>
 <li>如果还是无法命中代码，尝试在无法命中的地方随便修改下代码，然后再在UE编辑器里编译</li>
 </ol>
-<h2 id="C-读取蓝图类"><a href="#C-读取蓝图类" class="headerlink" title="C++ 读取蓝图类"></a>C++ 读取蓝图类</h2><ul>
+<h2 id="c-读取蓝图类"><a class="markdownIt-Anchor" href="#c-读取蓝图类"></a> C++ 读取蓝图类</h2>
+<ul>
 <li>非静态加载</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//GameplayAbilityBlueprint&#x27;/Game/Ability/MeleeBase_BP.MeleeBase_BP是在UE Editor中对对应蓝图类右键选择copy reference获得的，还需要强制加上 &quot;_C&quot;后缀</span></span><br><span class="line"><span class="keyword">auto</span> ability = <span class="built_in">LoadClass</span>&lt;UGameplayAbility&gt;(<span class="literal">NULL</span>, <span class="built_in">TEXT</span>(<span class="string">&quot;GameplayAbilityBlueprint&#x27;/Game/Ability/MeleeBase_BP.MeleeBase_BP_C&#x27;&quot;</span>));</span><br></pre></td></tr></table></figure>
-
-<h2 id="以C-为基类的蓝图类"><a href="#以C-为基类的蓝图类" class="headerlink" title="以C++为基类的蓝图类"></a>以C++为基类的蓝图类</h2><ul>
+<h2 id="以c为基类的蓝图类"><a class="markdownIt-Anchor" href="#以c为基类的蓝图类"></a> 以C++为基类的蓝图类</h2>
+<ul>
 <li>当C++基类发生改变时，切记要把对应得蓝图子类切换下父类再切换回来才能应用到正确的数据</li>
 </ul>
-<h2 id="代码热更新问题"><a href="#代码热更新问题" class="headerlink" title="代码热更新问题"></a>代码热更新问题</h2><p>有很多类别都不能在C++代码编译后与立刻而更新到编辑器，比如Enum，函数返回参数等，在代码接口改变后，推荐关闭编辑器重新编译代码再打开</p>
+<h2 id="代码热更新问题"><a class="markdownIt-Anchor" href="#代码热更新问题"></a> 代码热更新问题</h2>
+<p>有很多类别都不能在C++代码编译后与立刻而更新到编辑器，比如Enum，函数返回参数等，在代码接口改变后，推荐关闭编辑器重新编译代码再打开</p>
 
     </div>
 
@@ -372,8 +375,9 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
-<script src="/js/third-party/math/mathjax.js"></script>
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha256-uik/hNqHWZldXh/0K35nqOSCff9F61/ZOFReqNOBgB0=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
 
 
 

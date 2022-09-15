@@ -144,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Solution"><span class="nav-number">1.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis"><span class="nav-number">2.</span> <span class="nav-text">Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Updated-2022-01-06"><span class="nav-number">2.1.</span> <span class="nav-text">Updated 2022-01-06</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#solution"><span class="nav-number">1.</span> <span class="nav-text"> Solution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#analysis"><span class="nav-number">2.</span> <span class="nav-text"> Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#updated-2022-01-06"><span class="nav-number">2.1.</span> <span class="nav-text"> Updated 2022-01-06</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -276,37 +276,48 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p><del>示例代码里的<code>struct transition_table : mpl::vector</code>改为继承<code>boost::fusion::vector</code></del><br><del>在C++11的标准下就能解放vector容量上限</del><br><a target="_blank" rel="noopener" href="https://www.boost.org/doc/libs/1_78_0/libs/msm/doc/HTML/ch05.html">根据Boost中的解释</a>  </p>
+        <h2 id="solution"><a class="markdownIt-Anchor" href="#solution"></a> Solution</h2>
+<p><s>示例代码里的<code>struct transition_table : mpl::vector</code>改为继承<code>boost::fusion::vector</code></s><br />
+<s>在C++11的标准下就能解放vector容量上限</s><br />
+<a target="_blank" rel="noopener" href="https://www.boost.org/doc/libs/1_78_0/libs/msm/doc/HTML/ch05.html">根据Boost中的解释</a></p>
 <blockquote>
-<p>Question: Why do I get a very long compile error when I define more than 20 rows in the transition table?  </p>
-<p>Answer: MSM uses Boost.MPL under the hood and this is the default maximum size. Please define the following 3 macros before including any MSM headers:  </p>
+<p>Question: Why do I get a very long compile error when I define more than 20 rows in the transition table?</p>
+<p>Answer: MSM uses Boost.MPL under the hood and this is the default maximum size. Please define the following 3 macros before including any MSM headers:</p>
 <pre><code>#define BOOST_MPL_CFG_NO_PREPROCESSED_HEADERS  
 #define BOOST_MPL_LIMIT_VECTOR_SIZE 30 // or whatever you need  
 #define BOOST_MPL_LIMIT_MAP_SIZE 30 // or whatever you need  
 </code></pre>
-<p>Question: Why do I get this error: ”error C2977: ‘boost::mpl::vector’ : too many template arguments”?  </p>
-<p>Answer: The first possibility is that you defined a transition table as, say, vector17 and have 18 entries. The second is that you have 17 entries and have a composite state. Under the hood, MSM adds a row for every event in the composite transition table. The third one is that you used a mpl::vector without the number of entries but are close to the MPL default of 50 and have a composite, thus pushing you above 50. Then you need mpl&#x2F;vector60&#x2F;70….hpp and a mpl&#x2F;map60&#x2F;70….hpp  </p>
-<p>Question: Why do I get a very long compile error when I define more than 10 states in a state machine?  </p>
-<p>Answer: MSM uses Boost.Fusion under the hood and this is the default maximum size. Please define the following macro before including any MSM headers:  </p>
+<p>Question: Why do I get this error: ”error C2977: ‘boost::mpl::vector’ : too many template arguments”?</p>
+<p>Answer: The first possibility is that you defined a transition table as, say, vector17 and have 18 entries. The second is that you have 17 entries and have a composite state. Under the hood, MSM adds a row for every event in the composite transition table. The third one is that you used a mpl::vector without the number of entries but are close to the MPL default of 50 and have a composite, thus pushing you above 50. Then you need mpl/vector60/70….hpp and a mpl/map60/70….hpp</p>
+<p>Question: Why do I get a very long compile error when I define more than 10 states in a state machine?</p>
+<p>Answer: MSM uses Boost.Fusion under the hood and this is the default maximum size. Please define the following macro before including any MSM headers:</p>
 <pre><code>#define FUSION_MAX_VECTOR_SIZE 20 // or whatever you need 
 </code></pre>
 </blockquote>
-<p>在不预定义宏的情况下无法修改。而且哪怕定义了，也是支撑不起大规模的状态机的（需要自己实现mpl&#x2F;map60等等）  </p>
+<p>在不预定义宏的情况下无法修改。而且哪怕定义了，也是支撑不起大规模的状态机的（需要自己实现mpl/map60等等）</p>
 <span id="more"></span>
-
 <ul>
-<li><del><strong>或许可以用<code>fusion.C++11</code>快速实现？</strong></del><br>仍然需要使用上述宏定义，修改超出预定义的上限(50)后, 会访问例如<code>&quot;boost/mpl/vector/vector90.hpp&quot;</code>目录，不修改Boost工程的情况下无法实现，不利于团队代码协作</li>
+<li><s><strong>或许可以用<code>fusion.C++11</code>快速实现？</strong></s><br />
+仍然需要使用上述宏定义，修改超出预定义的上限(50)后, 会访问例如<code>&quot;boost/mpl/vector/vector90.hpp&quot;</code>目录，不修改Boost工程的情况下无法实现，不利于团队代码协作</li>
 </ul>
-<h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><p>近来项目里大量的用到了状态机，Boost里面有两个状态机库，一个是<code>StateChart</code>，一个是<code>Meta State Machine</code>。<code>StateChart</code>没怎么了解过，主要用的是MSM。实践下来还是比较好用的，能够比较直观的组织代码和提高稳定性。<br>到后面写得状态机越来越复杂时，发现示例代码里面<code>transition_table</code>所继承的<code>mpl::vector</code>容量非常有限。Boost.MPL是个很早版本的元编程库（C++03年代），这个mpl里的vector能够承载的数量是靠手写模板一个个实现的。<br>查阅了下，MSM的文档里面提到了用了<code>Fusion</code>（另一个Boost模板库，同样的库还有Boost.Hana)来保存表  </p>
+<h2 id="analysis"><a class="markdownIt-Anchor" href="#analysis"></a> Analysis</h2>
+<p>近来项目里大量的用到了状态机，Boost里面有两个状态机库，一个是<code>StateChart</code>，一个是<code>Meta State Machine</code>。<code>StateChart</code>没怎么了解过，主要用的是MSM。实践下来还是比较好用的，能够比较直观的组织代码和提高稳定性。<br />
+到后面写得状态机越来越复杂时，发现示例代码里面<code>transition_table</code>所继承的<code>mpl::vector</code>容量非常有限。Boost.MPL是个很早版本的元编程库（C++03年代），这个mpl里的vector能够承载的数量是靠手写模板一个个实现的。<br />
+查阅了下，MSM的文档里面提到了用了<code>Fusion</code>（另一个Boost模板库，同样的库还有Boost.Hana)来保存表</p>
 <blockquote>
-<p>State objects are built automatically with the state machine. They will exist until state machine destruction. MSM is using Boost.Fusion behind the hood. This unfortunately means that if you define more than 10 states, you will need to extend the default  </p>
+<p>State objects are built automatically with the state machine. They will exist until state machine destruction. MSM is using Boost.Fusion behind the hood. This unfortunately means that if you define more than 10 states, you will need to extend the default</p>
 </blockquote>
-<p>而<code>Fusion::vector</code>中提到  </p>
+<p>而<code>Fusion::vector</code>中提到</p>
 <blockquote>
-<p>For C++11 compilers, the variadic function interface has no upper bound.<br>For C++03 compilers, the The variadic form accepts 0 to FUSION_MAX_VECTOR_SIZE elements, where FUSION_MAX_VECTOR_SIZE is a user definable predefined maximum that defaults to 10. Example:  </p>
+<p>For C<ins>11 compilers, the variadic function interface has no upper bound.<br />
+For C</ins>03 compilers, the The variadic form accepts 0 to FUSION_MAX_VECTOR_SIZE elements, where FUSION_MAX_VECTOR_SIZE is a user definable predefined maximum that defaults to 10. Example:</p>
 </blockquote>
-<p>C++11中扩展了可变参数模板，可以解放以前手动定义n个模板参数的重复劳动。<br>唯一疑惑的是MSM使用了Fusion，示例代码里面却用了旧的mpl库，使用Fusion能够无缝替换</p>
-<h3 id="Updated-2022-01-06"><a href="#Updated-2022-01-06" class="headerlink" title="Updated 2022-01-06"></a>Updated 2022-01-06</h3><p>从<a target="_blank" rel="noopener" href="https://www.boost.org/doc/libs/1_78_0/libs/msm/doc/HTML/ch08.html#d0e3355">Boost文档</a>里可以看到<code>MSM.v2</code>推出的时候是<code>Boost 1.44</code>，<a target="_blank" rel="noopener" href="https://www.boost.org/users/history/version_1_44_0.html">August 13th, 2010 17:00 GMT</a>，那时候<code>C++11</code>还没正式推出，使用了大量的MPL代码，这部分无法修改。<br>而MPL呢，则更老了, <code>Boost 1.32</code>，时间是<a target="_blank" rel="noopener" href="https://www.boost.org/users/history/version_1_32_0.html">November 19th, 2004 12:00 GMT</a>，是<code>c++03</code>的版本<br>这两个库都是在<code>C++11</code>正式推出之前就已经发布了，采用了大量<code>c++03</code>模板元编程代码，有一定的局限性（正上文已经提到过）  </p>
+<p>C++11中扩展了可变参数模板，可以解放以前手动定义n个模板参数的重复劳动。<br />
+唯一疑惑的是MSM使用了Fusion，示例代码里面却用了旧的mpl库，使用Fusion能够无缝替换</p>
+<h3 id="updated-2022-01-06"><a class="markdownIt-Anchor" href="#updated-2022-01-06"></a> Updated 2022-01-06</h3>
+<p>从<a target="_blank" rel="noopener" href="https://www.boost.org/doc/libs/1_78_0/libs/msm/doc/HTML/ch08.html#d0e3355">Boost文档</a>里可以看到<code>MSM.v2</code>推出的时候是<code>Boost 1.44</code>，<a target="_blank" rel="noopener" href="https://www.boost.org/users/history/version_1_44_0.html">August 13th, 2010 17:00 GMT</a>，那时候<code>C++11</code>还没正式推出，使用了大量的MPL代码，这部分无法修改。<br />
+而MPL呢，则更老了, <code>Boost 1.32</code>，时间是<a target="_blank" rel="noopener" href="https://www.boost.org/users/history/version_1_32_0.html">November 19th, 2004 12:00 GMT</a>，是<code>c++03</code>的版本<br />
+这两个库都是在<code>C++11</code>正式推出之前就已经发布了，采用了大量<code>c++03</code>模板元编程代码，有一定的局限性（正上文已经提到过）</p>
 
     </div>
 
@@ -379,8 +390,9 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
-<script src="/js/third-party/math/mathjax.js"></script>
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha256-uik/hNqHWZldXh/0K35nqOSCff9F61/ZOFReqNOBgB0=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
 
 
 

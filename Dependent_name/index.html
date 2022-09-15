@@ -270,21 +270,17 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>编译下述代码时遇到了第一次遇到的问题  </p>
+        <p>编译下述代码时遇到了第一次遇到的问题</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将boost::geometry中的box转换成自定义的Boundary</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> NumType = <span class="type">double</span>&gt;</span><br><span class="line">    Boundary&lt;NumType, <span class="number">2</span>&gt; <span class="built_in">fromBoost</span>(</span><br><span class="line">        <span class="type">const</span> boost::geometry::model::box&lt;boost::geometry::model::point&lt;NumType, <span class="number">2</span>,boost::geometry::cs::cartesian&gt;&gt;&amp; box)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Boundary</span>&lt;NumType, <span class="number">2</span>&gt;(<span class="built_in">Vec</span>&lt;NumType,<span class="number">2</span>&gt;(box.<span class="built_in">min_corner</span>().<span class="built_in">get</span>&lt;<span class="number">0</span>&gt;(), box.<span class="built_in">min_corner</span>().<span class="built_in">get</span>&lt;<span class="number">1</span>&gt;()),</span><br><span class="line">            <span class="built_in">Vec</span>&lt;NumType, <span class="number">2</span>&gt;(box.<span class="built_in">max_corner</span>().<span class="built_in">get</span>&lt;<span class="number">0</span>&gt;(), box.<span class="built_in">max_corner</span>().<span class="built_in">get</span>&lt;<span class="number">1</span>&gt;()));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
 <p>这段代码在 VS2019 C++17 的标准下能编译过了，但是在 Apple Clang 下检查时，<code>box.min_corner().get&lt;0&gt;()</code> 等函数却报了一个第一次见的错误</p>
 <span id="more"></span>
-
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">missing &#x27;template&#x27; keyword prior to dependent template name &#x27;get&#x27;</span><br></pre></td></tr></table></figure>
-
 <p>查询了一下，发现是 C++ 模板里面的内容<a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/language/dependent_name">Dependent names</a>，内容有不少，大致的概括下就是代码在语法解析时，有时候可以同时表示多种意思，这时候编译器需要手工添加的一些标识来确认需要的是什么意思（特别是在模板中）。例如下面模板代码中</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T * t</span><br></pre></td></tr></table></figure>
-
-<p>如果T是一个类型名，那则声明了一个指针，如果T是一个变量则进行operator*()，所以T是并不是一个明确的声明，这时候就是一个 dependent name，依赖于上下文才能明确表明它是什么。<br>所以一开始的代码要改为  </p>
+<p>如果T是一个类型名，那则声明了一个指针，如果T是一个变量则进行operator*()，所以T是并不是一个明确的声明，这时候就是一个 dependent name，依赖于上下文才能明确表明它是什么。<br />
+所以一开始的代码要改为</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> NumType = <span class="type">double</span>&gt;</span><br><span class="line">Boundary&lt;NumType, <span class="number">2</span>&gt; <span class="built_in">fromBoost</span>(</span><br><span class="line">    <span class="type">const</span> boost::geometry::model::box&lt;boost::geometry::model::point&lt;NumType, <span class="number">2</span>,boost::geometry::cs::cartesian&gt;&gt;&amp; box)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">using</span> point = boost::geometry::model::point&lt;NumType, <span class="number">2</span>,boost::geometry::cs::cartesian&gt;;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Boundary</span>&lt;NumType, <span class="number">2</span>&gt;(<span class="built_in">Vec</span>&lt;NumType,<span class="number">2</span>&gt;(box.<span class="built_in">min_corner</span>().<span class="keyword">template</span> <span class="built_in">get</span>&lt;<span class="number">0</span>&gt;(), box.<span class="built_in">min_corner</span>().<span class="keyword">template</span> <span class="built_in">get</span>&lt;<span class="number">1</span>&gt;()),</span><br><span class="line">        <span class="built_in">Vec</span>&lt;NumType, <span class="number">2</span>&gt;(box.<span class="built_in">max_corner</span>().<span class="keyword">template</span> <span class="built_in">get</span>&lt;<span class="number">0</span>&gt;(), box.<span class="built_in">max_corner</span>().<span class="keyword">template</span> <span class="built_in">get</span>&lt;<span class="number">1</span>&gt;()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>还是第一次知道<code>.</code>的和<code>-&gt;</code>操作符后面是可以接<code>template</code>的  </p>
+<p>还是第一次知道<code>.</code>的和<code>-&gt;</code>操作符后面是可以接<code>template</code>的</p>
 
     </div>
 
@@ -362,8 +358,9 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
-<script src="/js/third-party/math/mathjax.js"></script>
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha256-uik/hNqHWZldXh/0K35nqOSCff9F61/ZOFReqNOBgB0=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
 
 
 

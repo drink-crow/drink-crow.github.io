@@ -273,8 +273,14 @@
         <p>vscode配置clangd注意事项</p>
 <ul>
 <li>需要clang++和安装clangd，可以让vscode 拓展自动下载</li>
-<li>无法找到 qt 目录<br>搭配 CMake 使用会省去很多麻烦,在 clangd.arguments 里面增加 <code>&quot;--compile-commands-dir=$&#123;workspaceFolder&#125;/build&quot;</code><br>具体的目录是配置的compile_commands.json所在的目录，这样就可以自动的配置好qt目录<br>CMake 有些输出目标不会生成 compile_commands.json，可以手动制定</li>
-<li>无法找到stl目录<br>clangd.arguments 增加 <code>&quot;--query-driver=/usr/bin/clang++&quot;</code> 手动置顶编译器目录来解决<br><a target="_blank" rel="noopener" href="https://clangd.llvm.org/troubleshooting.html">官网相关链接</a><br>有些bug，好像需要编译一次才能找到标准库目录</li>
+<li>无法找到 qt 目录<br />
+搭配 CMake 使用会省去很多麻烦,在 clangd.arguments 里面增加 <code>&quot;--compile-commands-dir=$&#123;workspaceFolder&#125;/build&quot;</code><br />
+具体的目录是配置的compile_commands.json所在的目录，这样就可以自动的配置好qt目录<br />
+CMake 有些输出目标不会生成 compile_commands.json，可以手动制定</li>
+<li>无法找到stl目录<br />
+clangd.arguments 增加 <code>&quot;--query-driver=/usr/bin/clang++&quot;</code> 手动置顶编译器目录来解决<br />
+<a target="_blank" rel="noopener" href="https://clangd.llvm.org/troubleshooting.html">官网相关链接</a><br />
+有些bug，好像需要编译一次才能找到标准库目录</li>
 </ul>
 
     </div>
@@ -353,8 +359,9 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
-<script src="/js/third-party/math/mathjax.js"></script>
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha256-uik/hNqHWZldXh/0K35nqOSCff9F61/ZOFReqNOBgB0=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
 
 
 

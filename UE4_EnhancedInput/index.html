@@ -145,7 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">问题:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">解决方法:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0"><span class="nav-number">4.</span> <span class="nav-text">原因:</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text"> 环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text"> 问题:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text"> 解决方法:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0"><span class="nav-number">4.</span> <span class="nav-text"> 原因:</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -270,10 +270,14 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>  UE4.27.2 win10 x64 VS2019</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题:"></a>问题:</h2><p>  EnhancedInput在首次使用中会失效, 如果是在编辑器中运行, 第二次运行后就可以使用. 在打包的程序, 或以独立窗口运行都会失效. 奇怪的是, 在EnhancedInput失效的时候,是能正常访问EnhancedInput System Interface 的, 而且绑定也没有出问题  </p>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法:"></a>解决方法:</h2><p>在角色蓝图中应用 EnhancedInput System Interface, EnhancedInput的代码里写到蓝图里的函数很多都是只有外表接口,没有实际作用的.但是在蓝图里显式引用了下EnhancedInput System Local Player Interface后的确在首次运行了也可以正常使用EnhancedInput了.</p>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因:"></a>原因:</h2><p>  尚未找到确切原因, 推测是UObject的引用问题, 或者首次运行,在设置了EnhancedInput之后, 引擎有部分逻辑错误又将InputSystem初始化了</p>
+        <h2 id="环境"><a class="markdownIt-Anchor" href="#环境"></a> 环境</h2>
+<p>UE4.27.2 win10 x64 VS2019</p>
+<h2 id="问题"><a class="markdownIt-Anchor" href="#问题"></a> 问题:</h2>
+<p>EnhancedInput在首次使用中会失效, 如果是在编辑器中运行, 第二次运行后就可以使用. 在打包的程序, 或以独立窗口运行都会失效. 奇怪的是, 在EnhancedInput失效的时候,是能正常访问EnhancedInput System Interface 的, 而且绑定也没有出问题</p>
+<h2 id="解决方法"><a class="markdownIt-Anchor" href="#解决方法"></a> 解决方法:</h2>
+<p>在角色蓝图中应用 EnhancedInput System Interface, EnhancedInput的代码里写到蓝图里的函数很多都是只有外表接口,没有实际作用的.但是在蓝图里显式引用了下EnhancedInput System Local Player Interface后的确在首次运行了也可以正常使用EnhancedInput了.</p>
+<h2 id="原因"><a class="markdownIt-Anchor" href="#原因"></a> 原因:</h2>
+<p>尚未找到确切原因, 推测是UObject的引用问题, 或者首次运行,在设置了EnhancedInput之后, 引擎有部分逻辑错误又将InputSystem初始化了</p>
 
     </div>
 
@@ -350,8 +354,9 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
-<script src="/js/third-party/math/mathjax.js"></script>
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha256-uik/hNqHWZldXh/0K35nqOSCff9F61/ZOFReqNOBgB0=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
 
 
 

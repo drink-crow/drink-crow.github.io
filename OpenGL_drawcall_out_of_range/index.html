@@ -147,7 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#buffer%E6%95%B0%E6%8D%AE%E6%97%B6size%E7%9A%84%E5%A4%A7%E5%B0%8F"><span class="nav-number">1.</span> <span class="nav-text">buffer数据时size的大小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#drawcall%E6%97%B6count%E7%9A%84%E5%A4%A7%E5%B0%8F"><span class="nav-number">2.</span> <span class="nav-text">drawcall时count的大小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#drawcall%E8%B6%85%E5%87%BA%E8%BE%B9%E7%95%8C%E6%97%B6%E4%BC%9A%E5%8F%91%E7%94%9F%E6%83%85%E5%86%B5"><span class="nav-number">3.</span> <span class="nav-text">drawcall超出边界时会发生情况</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#buffer%E6%95%B0%E6%8D%AE%E6%97%B6size%E7%9A%84%E5%A4%A7%E5%B0%8F"><span class="nav-number">1.</span> <span class="nav-text"> buffer数据时size的大小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#drawcall%E6%97%B6count%E7%9A%84%E5%A4%A7%E5%B0%8F"><span class="nav-number">2.</span> <span class="nav-text"> drawcall时count的大小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#drawcall%E8%B6%85%E5%87%BA%E8%BE%B9%E7%95%8C%E6%97%B6%E4%BC%9A%E5%8F%91%E7%94%9F%E6%83%85%E5%86%B5"><span class="nav-number">3.</span> <span class="nav-text"> drawcall超出边界时会发生情况</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -279,21 +279,32 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="buffer数据时size的大小"><a href="#buffer数据时size的大小" class="headerlink" title="buffer数据时size的大小"></a>buffer数据时size的大小</h2><p>在 OpenGL buffer数据一般都是以const void *加size的C语言风格传递数据。例如下面非常经典的<br><a target="_blank" rel="noopener" href="https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glBufferData.xhtml">void glBufferData( GLenum target, GLsizeiptr size, const void * data, GLenum usage)</a><br>有下面用法</p>
+        <h2 id="buffer数据时size的大小"><a class="markdownIt-Anchor" href="#buffer数据时size的大小"></a> buffer数据时size的大小</h2>
+<p>在 OpenGL buffer数据一般都是以const void *加size的C语言风格传递数据。例如下面非常经典的<br />
+<a target="_blank" rel="noopener" href="https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glBufferData.xhtml">void glBufferData( GLenum target, GLsizeiptr size, const void * data, GLenum usage)</a><br />
+有下面用法</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数据来源</span></span><br><span class="line">std::vector&lt;<span class="type">float</span>&gt; dataContainer &#123;···&#125;;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 也就是 dataContainer.size() * sizeof (float)</span></span><br><span class="line">GLsizeiptr size = dataContainer.<span class="built_in">size</span>() * <span class="built_in">sizeof</span>(<span class="keyword">decltype</span> (dataContainer)::value_type);</span><br><span class="line"><span class="type">const</span> <span class="type">void</span>* data = <span class="built_in">static_cast</span>&lt;<span class="type">const</span> <span class="type">void</span>*&gt;(dataContainer.<span class="built_in">data</span>());</span><br></pre></td></tr></table></figure>
-
 <p>可以看到，这里的<code>size</code>是以字节为单位，而且<code>size</code>的类型为 <code>GLsizeiptr</code> 。</p>
-<h2 id="drawcall时count的大小"><a href="#drawcall时count的大小" class="headerlink" title="drawcall时count的大小"></a>drawcall时count的大小</h2><p>同样是非常经典的<br><a target="_blank" rel="noopener" href="https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glDrawArrays.xhtml">void glDrawArrays( GLenum mode, GLint first, GLsizei count);</a></p>
+<h2 id="drawcall时count的大小"><a class="markdownIt-Anchor" href="#drawcall时count的大小"></a> drawcall时count的大小</h2>
+<p>同样是非常经典的<br />
+<a target="_blank" rel="noopener" href="https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glDrawArrays.xhtml">void glDrawArrays( GLenum mode, GLint first, GLsizei count);</a></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;<span class="type">float</span>&gt; dataContainer &#123;···&#125;;</span><br><span class="line">GLsizeiptr size = dataContainer.<span class="built_in">size</span>() * <span class="built_in">sizeof</span>(<span class="keyword">decltype</span> (dataContainer)::value_type);</span><br><span class="line"><span class="type">const</span> <span class="type">void</span>* data = <span class="built_in">static_cast</span>&lt;<span class="type">const</span> <span class="type">void</span>*&gt;(dataContainer.<span class="built_in">data</span>());</span><br><span class="line"></span><br><span class="line">GLuint vbo;</span><br><span class="line"><span class="built_in">glGenBuffers</span>(<span class="number">1</span>, &amp;vbo);</span><br><span class="line"><span class="built_in">glBindBuffer</span>(GL_ARRAY_BUFFER, vbo);</span><br><span class="line"><span class="built_in">glBufferData</span>(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);</span><br><span class="line"><span class="built_in">glVertexAttribPointer</span>(<span class="number">0</span>, <span class="number">2</span>, GL_FLOAT, GL_FALSE, <span class="number">2</span>*<span class="built_in">sizeof</span>(GLfloat), <span class="literal">nullptr</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">GLsizei counts = size / (<span class="number">2</span>*<span class="built_in">sizeof</span>(GLfloat));</span><br><span class="line"><span class="built_in">glDrawArrays</span>(GL_LINES, <span class="number">0</span>, counts);</span><br></pre></td></tr></table></figure>
-
 <p>此时count中每一个的大小是由<a target="_blank" rel="noopener" href="https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glVertexAttribPointer.xhtml">glVertexAttribPointer</a>中的<code>size</code>，<code>type</code>和<code>stride</code>共同决定。如上例中，一个点的大小就是<code>2</code>个<code>float</code>的大小。要绘制完buffer中的所有内容需要<code>size / (2*sizeof(GLfloat))</code>。</p>
-<h2 id="drawcall超出边界时会发生情况"><a href="#drawcall超出边界时会发生情况" class="headerlink" title="drawcall超出边界时会发生情况"></a>drawcall超出边界时会发生情况</h2><p>数组越界是一个比较常见的错误。有些语言会直接抛出异常，如C&#x2F;C++，有些语言则会直接访问到对应的内容，返回不确定的结果。在OpenGL里，drawcall中的越界——如<code>glDrawArrays()</code>中的<code>first</code>和<code>counts</code>指向的显存段超过当前绑定的vbo则是未定义的行为。（至少我在<a target="_blank" rel="noopener" href="https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glDrawArrays.xhtml">OpenGL-Refpages</a>中没看到对应的规范）<br>实际上在具体应用中，同样的越界drawcall在不同显卡和操作系统表现出来的行为也是不一样。应该是由显卡驱动厂商决定越界行为的。</p>
+<h2 id="drawcall超出边界时会发生情况"><a class="markdownIt-Anchor" href="#drawcall超出边界时会发生情况"></a> drawcall超出边界时会发生情况</h2>
+<p>数组越界是一个比较常见的错误。有些语言会直接抛出异常，如C/C++，有些语言则会直接访问到对应的内容，返回不确定的结果。在OpenGL里，drawcall中的越界——如<code>glDrawArrays()</code>中的<code>first</code>和<code>counts</code>指向的显存段超过当前绑定的vbo则是未定义的行为。（至少我在<a target="_blank" rel="noopener" href="https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glDrawArrays.xhtml">OpenGL-Refpages</a>中没看到对应的规范）<br />
+实际上在具体应用中，同样的越界drawcall在不同显卡和操作系统表现出来的行为也是不一样。应该是由显卡驱动厂商决定越界行为的。</p>
 <ul>
-<li><p>macOS OpenGL ES2.0 Intel Iris Plus 645<br>在macOS下，drawcall越界了后，越界的部分的内存的默认值通常是0，在显存使用量不高的情况下，通常不会绘制出奇怪的内容。也不会引发OpenGL错误。这和Apple下Clang编译器的行为也一致，变量默认值为0</p>
+<li>
+<p>macOS OpenGL ES2.0 Intel Iris Plus 645<br />
+在macOS下，drawcall越界了后，越界的部分的内存的默认值通常是0，在显存使用量不高的情况下，通常不会绘制出奇怪的内容。也不会引发OpenGL错误。这和Apple下Clang编译器的行为也一致，变量默认值为0</p>
 </li>
-<li><p>Windows OpenGL ES2.0 Intel UHD 630<br>在Windows下drawcall越界同样也不会引发OpenGL错误，但是很容易绘制出奇怪的东西出来。</p>
+<li>
+<p>Windows OpenGL ES2.0 Intel UHD 630<br />
+在Windows下drawcall越界同样也不会引发OpenGL错误，但是很容易绘制出奇怪的东西出来。</p>
 </li>
-<li><p><em><strong>Windows Angle</strong></em><br><em><strong>Windows下使用Angle转译glES到Dx值得特别提一下。使用Angle时，如果drawcall越界了，则会直接跳过，什么效果都没有。用RenderDoc截取帧分析会找不到越界的drawcall，显示上也没有效果。推测可能时Dx引发错误或者Angel内部记录到会有越界行为发生。</strong></em></p>
+<li>
+<p><em><strong>Windows Angle</strong></em><br />
+<em><strong>Windows下使用Angle转译glES到Dx值得特别提一下。使用Angle时，如果drawcall越界了，则会直接跳过，什么效果都没有。用RenderDoc截取帧分析会找不到越界的drawcall，显示上也没有效果。推测可能时Dx引发错误或者Angel内部记录到会有越界行为发生。</strong></em></p>
 </li>
 </ul>
 
@@ -374,8 +385,9 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
-<script src="/js/third-party/math/mathjax.js"></script>
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha256-uik/hNqHWZldXh/0K35nqOSCff9F61/ZOFReqNOBgB0=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
 
 
 
