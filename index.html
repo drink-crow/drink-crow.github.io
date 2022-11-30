@@ -351,9 +351,15 @@ mjx-container[display="true"] + br {
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-11-29 14:22:00 / 修改时间：14:28:00" itemprop="dateCreated datePublished" datetime="2022-11-29T14:22:00+08:00">2022-11-29</time>
+      <time title="创建时间：2022-11-29 14:22:00" itemprop="dateCreated datePublished" datetime="2022-11-29T14:22:00+08:00">2022-11-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-11-30 14:37:00" itemprop="dateModified" datetime="2022-11-30T14:37:00+08:00">2022-11-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -410,22 +416,36 @@ mjx-container[display="true"] + br {
 <p>代码中看样子是有做多线程渲染，但是并没有真正的实现，从残余的代码来看是通过排序后，按序划分到各个 QPainter</p>
 <p>能够满足各种线型、不同缩放下的细分。但是感觉效率不会太高，内容少时还凑合，东西多点就会很卡。</p>
 <h3 id="绘制流程"><a class="markdownIt-Anchor" href="#绘制流程"></a> 绘制流程</h3>
-<p>paintEntitiesMulti -&gt; 绘制制定区域内的实体<br />
-获取一些颜色有关的配置<br />
-查询区域内的实体，并且按 Z 轴排序<br />
-遍历排序后的实体，获取所有 drawable 且遍历<br />
-检查是否需要重新生成 drawable 绘制的内容，判定的属性有 AlwaysRegen、AutoRegen 和 PixelSizeHint 和当前不符。包括一些射线，细分过大过小的曲线等<br />
-只要有一个 drawable 需要重新生成绘制内容则该 entity 重新生成全部内容<br />
-经过一系列的判断<br />
-sceneQt-&gt;exportEntity(entityId:id, allBlocks:bool)<br />
-这里 sceneQt 算是一个 RExporter，可以看出无论是显示，还是打印或者导出文件，都算 RExporter 子类的动作<br />
-entity-&gt;exportEntity()<br />
-RExporter 基类定义了各种设置数据的接口，以 RArcEntity::exportEntity 为例就可以看到使用了 RExporter::setBrush 和 RExporter::exportArc, 将圆弧的数据写入到了 sceneQt 中<br />
-注意这里只是设置了数据，并没有真正的绘制<br />
-然后开始通过多线程绘制 entity list, 但是这里把多线程的代码注释了，实际还是单线程<br />
-paintEntitiesThread(threadId, list, start, end)<br />
-这里值得注意的是，drawable 是和 entity 对象分开的。也就是说 entity 只拥有抽象的数据，drawable 由 RGraphicsScene 管理，感觉没什么必要，基本每个 entity 都有自己的 drawable，当 entity 的数量多起来时，通过 id 在 drawable map 中查找还是挺耗时间和内存的。<br />
-然后就针对各种不同 RGraphicsSceneDrawable::Type 进行绘制，粗略过了一下各种类型绘制的代码，都是使用 Qt 的绘制系统。感觉性能可能不会很高。感觉有点不一样的地方是，绘制变换内容需要使用 Transform 和 EndTransform 的 drawable 向 transform stack 中压入和弹出变换矩阵。</p>
+<ul>
+<li>paintEntitiesMulti -&gt; 绘制制定区域内的实体
+<ul>
+<li>获取一些颜色有关的配置</li>
+<li>查询区域内的实体，并且按 Z 轴排序</li>
+<li>遍历排序后的实体，获取所有 drawable 且遍历
+<ul>
+<li>检查是否需要重新生成 drawable 绘制的内容，判定的属性有 AlwaysRegen、AutoRegen 和 PixelSizeHint 和当前不符。包括一些射线，细分过大过小的曲线等</li>
+<li>只要有一个 drawable 需要重新生成绘制内容则该 entity 重新生成全部内容
+<ul>
+<li>经过一系列的判断</li>
+<li>sceneQt-&gt;exportEntity(entityId:id, allBlocks:bool)</li>
+<li>这里 sceneQt 算是一个 RExporter，可以看出无论是显示，还是打印或者导出文件，都算 RExporter 子类的动作
+<ul>
+<li>entity-&gt;exportEntity()</li>
+<li>RExporter 基类定义了各种设置数据的接口，以 RArcEntity::exportEntity 为例就可以看到使用了 RExporter::setBrush 和 RExporter::exportArc, 将圆弧的数据写入到了 sceneQt 中</li>
+<li>注意这里只是设置了数据，并没有真正的绘制</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>然后开始通过多线程绘制 entity list, 但是这里把多线程的代码注释了，实际还是单线程</li>
+<li>paintEntitiesThread(threadId, list, start, end)</li>
+<li>这里值得注意的是，drawable 是和 entity 对象分开的。也就是说 entity 只拥有抽象的数据，drawable 由 RGraphicsScene 管理，感觉没什么必要，基本每个 entity 都有自己的 drawable，当 entity 的数量多起来时，通过 id 在 drawable map 中查找还是挺耗时间和内存的。</li>
+<li>然后就针对各种不同 RGraphicsSceneDrawable::Type 进行绘制，粗略过了一下各种类型绘制的代码，都是使用 Qt 的绘制系统。感觉性能可能不会很高。感觉有点不一样的地方是，绘制变换内容需要使用 Transform 和 EndTransform 的 drawable 向 transform stack 中压入和弹出变换矩阵。</li>
+</ul>
+</li>
+</ul>
 <h3 id="rgraphicsscenedrawable-划分"><a class="markdownIt-Anchor" href="#rgraphicsscenedrawable-划分"></a> RGraphicsSceneDrawable 划分</h3>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// in class</span></span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">Type</span> &#123;</span><br><span class="line">        Invalid,</span><br><span class="line">        PainterPath,</span><br><span class="line">        PainterPathRay,</span><br><span class="line">        PainterPathXLine,</span><br><span class="line">        Image,</span><br><span class="line">        Text,</span><br><span class="line">        Transform,</span><br><span class="line">        EndTransform</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">enum</span> <span class="title class_">Mode</span> &#123;</span><br><span class="line">        NoMode = <span class="number">0x0000</span>,</span><br><span class="line">        NoPlot = <span class="number">0x0001</span>,               <span class="comment">//!&lt; not plotted (from not plottable layers)</span></span><br><span class="line">        PixelUnit = <span class="number">0x0002</span>,            <span class="comment">//!&lt; unit interpreted as pixels</span></span><br><span class="line">        WorkingSet = <span class="number">0x0004</span>            <span class="comment">//!&lt; in current working set</span></span><br><span class="line">    &#125;;</span><br><span class="line"><span class="comment">// in class</span></span><br></pre></td></tr></table></figure>
 <p>Type 是用于表示绘制的内容————路径、图像、文字之类的。Mode 用于表示属于范围，比如说是辅助对象还是绘制对象等。感觉划分得比较粗，有挺多内容其实不太好实现————例如填充的内容该属于哪类，归属于 PainterPath ？</p>
@@ -435,11 +455,17 @@ paintEntitiesThread(threadId, list, start, end)<br />
 <p>RShape 拥有的类型如下</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// in class</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">enum</span> <span class="title class_">Type</span> &#123;</span><br><span class="line">        Unknown = <span class="number">-1</span>,</span><br><span class="line">        Point = <span class="number">0</span>,</span><br><span class="line">        Line = <span class="number">1</span>,</span><br><span class="line">        Arc = <span class="number">2</span>,</span><br><span class="line">        Circle = <span class="number">3</span>,</span><br><span class="line">        Ellipse = <span class="number">4</span>,</span><br><span class="line">        Polyline = <span class="number">5</span>,</span><br><span class="line">        Spline = <span class="number">6</span>,</span><br><span class="line">        Triangle = <span class="number">7</span>,</span><br><span class="line">        XLine = <span class="number">8</span>,</span><br><span class="line">        Ray = <span class="number">9</span></span><br><span class="line">    &#125;;</span><br><span class="line"><span class="comment">// in class</span></span><br></pre></td></tr></table></figure>
 <p>比较常见的设计，只是类型上多了一些 XLine、Ray 等一般 CAD 会有，而平面绘制引擎没有的东西。</p>
+<h2 id="对象系统"><a class="markdownIt-Anchor" href="#对象系统"></a> 对象系统</h2>
+<p>基类是 RObject，使用 Id:int objectId作为索引。这里的 id 并不是全局唯一的。两个 entity 可以拥有同一个 id，具体会访问到哪个对象，要看 RDocument 中记录的是哪个。</p>
+<p>属性储存使用的是一个 <code>customProperties:QMap&lt;QString, QVariantMap&gt;</code> 低属性时有一定的好出，占用空间小。极限情况可能会比较吃力。另外就是使用 QString 作为索引，可能会产生冲突。</p>
+<p>另外对象系统管理得比较散乱，虽然有指定 document 的函数，但是没有和 RDocument 中联系起来，两边数据能否对应起来全看编码有没有出 bug。</p>
+<p>RTTI 使用 enum 作为识别和区分。简单的设置。</p>
 <h2 id="杂项"><a class="markdownIt-Anchor" href="#杂项"></a> 杂项</h2>
 <ul>
-<li>对象系统使用的是 id，为 REntity::Id -&gt; int</li>
 <li>使用 id 查询返回到具体的对象是智能指针类型</li>
 <li>同样使用了空间索引进行包围框查询</li>
+<li>entity 属性的设置直接使用了 RPropertyTypeId 和 QVariant。感觉编码上挺省事的，但是使用起来不太方便，没有类型提示的接口用起来很麻烦</li>
+<li>注释里写了一些和没写没什么区别的 doxygen 格式的文档</li>
 </ul>
 
       
