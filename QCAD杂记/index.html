@@ -282,7 +282,7 @@
 <p>url:<a target="_blank" rel="noopener" href="https://github.com/qcad/qcad">https://github.com/qcad/qcad</a> branch:master tag:v3.27.8.4 sha:13c1383e83828fc7120f1acc697e76bd201bdeba</p>
 <p>Win10 MSVC15 Qt5.15.2 Qt6.4.1</p>
 <h2 id="配置编译"><a class="markdownIt-Anchor" href="#配置编译"></a> 配置编译</h2>
-<p>文档几乎为零，网络上讨论的内容也很少。当然，商业化的项目多少会在开源代码上些障碍以保证商业利益，也不是不能理解厂家对开源代码放羊的做法。Qt 从源代码编译也是十分困难的事情，需要对 Qt 有长时间的研究才能做到。</p>
+<p>文档几乎为零，网络上讨论的内容也很少。当然，商业化的项目多少会在开源代码上些障碍以保证商业利益，开源代码开源部分基本处于放羊状态。Qt 从源代码编译也是十分困难的事情，需要对 Qt 有长时间的研究才能做到。</p>
 <h3 id="qt5"><a class="markdownIt-Anchor" href="#qt5"></a> Qt5</h3>
 <p>Qt5 的配置只有 pro 文件，没有编写对应的 CMake 文件</p>
 <p>QCAD <a target="_blank" rel="noopener" href="https://www.qcad.org/en/component/content/article/78-qcad/111-qcad-compilation-from-sources">官网</a>给的是用 qt5.13.2, 然而由于 qt 强推新版本，没有办法直接获取到旧版本，而手动编译旧版本不太可能，qt 的编译相当困难。使用目前还能获取到的 5.15.2 版本，官网记录的使用 qmake 的方法无法正常输出。qtcreator 可以正常配置，但是只能构建 src 下的目录，无法在 qtcreator 中运行或调试，会陷入无限循环的 pre-build 事件。</p>
@@ -291,7 +291,7 @@
 <h3 id="qt6"><a class="markdownIt-Anchor" href="#qt6"></a> Qt6</h3>
 <p>Qt6 提供了 CMake 文件，但是有很多问题，项目依赖，代码，环境设置，宏定义均有问题。这个CMake 看起来像是使用某种工具将 pro 文件自动转化得来的。</p>
 <p>代码制定的是 C++17，然而使用的第三方库里却有 binary_function 这种早就被弃用的内容。</p>
-<p>耗了不少功夫才成功的将代码编译运行调试起来。然而存在一个致命的问题————QCAD 使用了 qt 旧版的 jsEngine，这部分的内容还没在 Qt6 上解决，导致 QCAD 核心的脚本引擎没有办法运行起来，程序无法初始化该部分内容。</p>
+<p>耗了不少功夫才成功的将代码编译运行调试起来。然而存在一个致命的问题——QCAD 使用了 qt 旧版的 jsEngine，这部分的内容还没在 Qt6 上解决，导致 QCAD 核心的脚本引擎没有办法运行起来，程序无法初始化该部分内容。</p>
 <h2 id="代码分析"><a class="markdownIt-Anchor" href="#代码分析"></a> 代码分析</h2>
 <h3 id="公共静态成员变量"><a class="markdownIt-Anchor" href="#公共静态成员变量"></a> 公共静态成员变量</h3>
 <p>在 RVector 类中发现了个没见过的写法</p>
@@ -345,7 +345,7 @@
 </ul>
 <h3 id="rgraphicsscenedrawable-划分"><a class="markdownIt-Anchor" href="#rgraphicsscenedrawable-划分"></a> RGraphicsSceneDrawable 划分</h3>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// in class</span></span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">Type</span> &#123;</span><br><span class="line">        Invalid,</span><br><span class="line">        PainterPath,</span><br><span class="line">        PainterPathRay,</span><br><span class="line">        PainterPathXLine,</span><br><span class="line">        Image,</span><br><span class="line">        Text,</span><br><span class="line">        Transform,</span><br><span class="line">        EndTransform</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">enum</span> <span class="title class_">Mode</span> &#123;</span><br><span class="line">        NoMode = <span class="number">0x0000</span>,</span><br><span class="line">        NoPlot = <span class="number">0x0001</span>,               <span class="comment">//!&lt; not plotted (from not plottable layers)</span></span><br><span class="line">        PixelUnit = <span class="number">0x0002</span>,            <span class="comment">//!&lt; unit interpreted as pixels</span></span><br><span class="line">        WorkingSet = <span class="number">0x0004</span>            <span class="comment">//!&lt; in current working set</span></span><br><span class="line">    &#125;;</span><br><span class="line"><span class="comment">// in class</span></span><br></pre></td></tr></table></figure>
-<p>Type 是用于表示绘制的内容————路径、图像、文字之类的。Mode 用于表示属于范围，比如说是辅助对象还是绘制对象等。感觉划分得比较粗，有挺多内容其实不太好实现————例如填充的内容该属于哪类，归属于 PainterPath ？</p>
+<p>Type 是用于表示绘制的内容——路径、图像、文字之类的。Mode 用于表示属于范围，比如说是辅助对象还是绘制对象等。感觉划分得比较粗，有挺多内容其实不太好实现——例如填充的内容该属于哪类，归属于 PainterPath ？</p>
 <h3 id="rpainterpath"><a class="markdownIt-Anchor" href="#rpainterpath"></a> RPainterPath</h3>
 <p>继承自 QPainterPath，添加了一些 CAD 系统有关的内容。一部分设置直接使用了 QPen、QBrush，这部分内容确实是挺繁琐的，东西又多又杂，反正最后也是直接使用 QPainterEngine，直接用 Qt 的内容无缝对接也挺省事的。</p>
 <p>数据位于一个 <code>originalShapes:QList&lt;QSharedPointer&lt;RShape&gt;&gt;</code> 关注下 RShape 就好</p>
@@ -365,7 +365,8 @@
 <p>但是这个基本只是个架子，实际没多少代码写在 cpp 里面，只有 RNavigationAction，是关于用鼠标移动页面的操作的。</p>
 <p>大部分操作写在了 js，通过写一个转发事件到 js 的 REcmaAction 子类（REcmaAction 有关的代码是自动生成的）。例如一个三点画圆的功能，写在了 scripts\Draw\Arc\Arc3P.js 里，具体的逻辑看<code>Arc3P.prototype.setState</code>和<code>Arc3P.prototype.pickCoordinate</code>就知道了。挺简单的一个switch分支。</p>
 <p>简单交互功能的代码没什么好看的。本来想看点复杂的，但是好像没有太过复杂的逻辑。倒是有一个 RAction 的栈，一层套一层的 js Action 组成了挺复杂的操作逻辑。这个分层实现倒是有点意思。而且对应的 gui 状态全由 js 脚本里定义</p>
-<p>但是其实灵活度不高。有一些操作，例如编辑对象，通过的是 RRefPoint 这个类去实现的。而相关的管理是写在</p>
+<p>但是其实灵活度不高。有一些操作，例如编辑对象，通过的是 RRefPoint 这个类去实现的。而相关的管理是写在 RStorage 子类中</p>
+<p>默认的 RAction 是 DefaultAction.js，从中可以分析出许多功能具体的实现方式。</p>
 <h3 id="roperation"><a class="markdownIt-Anchor" href="#roperation"></a> ROperation</h3>
 <p>ROperation 则是定义了操作对象动作的基类，例如添加或移除一个 entity。但是这部分的代码比较少，都是些常见的操作，没看到有操作具体对象的代码。可能全放在了它的 ECMA 脚本系统上了。</p>
 <h2 id="事件系统"><a class="markdownIt-Anchor" href="#事件系统"></a> 事件系统</h2>
